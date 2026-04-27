@@ -1,294 +1,300 @@
-import React, { useState, useEffect } from 'react';
-import { Play, Globe, Shield, Handshake, Award, Mail, ArrowRight, ChevronDown, CheckCircle2 } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Art of Oral History | Call for Artists</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Icons (Lucide) -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-const App = () => {
-  // Add custom font styles to the document
-  useEffect(() => {
-    const style = document.createElement('style');
-    style.innerHTML = `
-      @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+  <style>
+    :root {
+      --brand-red: #982E2E;
+      --bg-cream: #F5F3EF;
+      --text-dark: #1A1A1A;
+      --text-muted: #4A4A4A;
+    }
+    
+    .font-garamond {
+      font-family: 'EB Garamond', Garamond, serif;
+    }
+    
+    .font-helvetica {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    /* Custom Selection Color */
+    ::selection {
+      background-color: #982E2E;
+      color: white;
+    }
+
+    /* Animations */
+    .fade-in-up {
+      animation: fadeInUp 0.8s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
       
-      :root {
-        --brand-red: #982E2E;
-        --bg-cream: #F5F3EF;
-        --text-dark: #1A1A1A;
-        --text-muted: #4A4A4A;
-      }
-      
-      .font-garamond {
-        font-family: 'EB Garamond', Garamond, serif;
-      }
-      
-      .font-helvetica {
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      }
+    .stagger-1 { animation-delay: 0.1s; }
+    .stagger-2 { animation-delay: 0.2s; }
+    .stagger-3 { animation-delay: 0.3s; }
+    .stagger-4 { animation-delay: 0.4s; }
+  </style>
+</head>
+<body class="min-h-screen font-helvetica">
 
-      body {
-        background-color: var(--bg-cream);
-        color: var(--text-dark);
-        margin: 0;
-        padding: 0;
-        scroll-behavior: smooth;
-      }
-
-      .fade-in-up {
-        animation: fadeInUp 0.8s ease-out forwards;
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      @keyframes fadeInUp {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-        
-      .stagger-1 { animation-delay: 0.1s; }
-      .stagger-2 { animation-delay: 0.2s; }
-      .stagger-3 { animation-delay: 0.3s; }
-      .stagger-4 { animation-delay: 0.4s; }
-    `;
-    document.head.appendChild(style);
-    return () => document.head.removeChild(style);
-  }, []);
-
-  return (
-    <div className="min-h-screen font-helvetica selection:bg-[#982E2E] selection:text-white">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-[#F5F3EF]/90 backdrop-blur-md z-50 border-b border-[#982E2E]/10">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="font-garamond text-xl font-semibold tracking-wide text-[#982E2E]">
-            The Refuge Archive
-          </div>
-          <div className="flex items-center gap-6">
-            <a href="mailto:contact@therefugeearchive.org" className="text-sm font-medium hover:text-[#982E2E] transition-colors hidden sm:block">
-              contact@therefugeearchive.org
-            </a>
-            <a href="https://www.therefugeearchive.org/the-art-of-oral-history" target="_blank" rel="noopener noreferrer" className="bg-[#982E2E] text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-[#7a2525] transition-all transform hover:scale-105 shadow-md">
-              Apply Now
-            </a>
-          </div>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-        <div className="fade-in-up">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#982E2E]/10 text-[#982E2E] text-sm font-medium mb-6">
-            <span className="w-2 h-2 rounded-full bg-[#982E2E] animate-pulse"></span>
-            From Stories to Action
-          </div>
-          <h1 className="font-garamond text-5xl md:text-7xl font-medium leading-tight mb-6 text-[#1A1A1A]">
-            The Art of <br />
-            <span className="text-[#982E2E] italic">Oral History.</span>
-          </h1>
-          <p className="text-lg md:text-xl text-[#4A4A4A] leading-relaxed mb-8 max-w-lg">
-            We invite artists to visualize oral histories, turning the archive into a vessel for advocacy. Turn lived experiences into powerful global advocacy.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <a href="https://www.therefugeearchive.org/the-art-of-oral-history" target="_blank" rel="noopener noreferrer" className="bg-[#982E2E] text-white px-8 py-4 rounded-full font-medium hover:bg-[#7a2525] transition-all flex items-center gap-2 group shadow-lg shadow-[#982E2E]/20">
-              Submit Portfolio
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
-            <a href="#how-it-works" className="px-8 py-4 rounded-full font-medium border border-[#1A1A1A]/20 hover:border-[#982E2E] hover:text-[#982E2E] transition-all">
-              Learn the Process
-            </a>
-          </div>
-        </div>
-
-        {/* Video Embed */}
-        <div className="fade-in-up stagger-2 relative">
-          <div className="absolute -inset-4 bg-gradient-to-tr from-[#982E2E]/20 to-transparent opacity-50 blur-2xl rounded-full"></div>
-          <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/20 aspect-video bg-black flex items-center justify-center group">
-             <iframe 
-                className="w-full h-full relative z-10" 
-                src="https://www.youtube.com/embed/aU7YNWS2C9g?si=liUu9ROSMbS-gE6E" 
-                title="YouTube video player" 
-                frameBorder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerPolicy="strict-origin-when-cross-origin" 
-                allowFullScreen>
-              </iframe>
-          </div>
-          <p className="text-center mt-4 text-sm font-garamond italic text-[#4A4A4A]">
-            Watch how your work will be featured and experienced globally.
-          </p>
-        </div>
-      </section>
-
-      {/* The Mission Stats */}
-      <section className="bg-[#1A1A1A] text-[#F5F3EF] py-20 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
-          <div className="md:w-1/2">
-            <h2 className="font-garamond text-4xl md:text-5xl mb-4">108 Million <span className="text-[#982E2E] italic">Displaced.</span></h2>
-            <p className="text-lg opacity-80 leading-relaxed font-light">
-              Approximately 50 million are women. Art inspires what statistics alone can't convey. This is your chance to show your art to the world and make a tangible impact.
-            </p>
-          </div>
-          <div className="md:w-1/3 border-l-2 border-[#982E2E] pl-8">
-            <h3 className="font-garamond text-2xl mb-2 text-[#982E2E]">Your Mission</h3>
-            <p className="opacity-80 font-light">
-              Turn the archive into an active advocacy tool, helping the world understand the specific plight of female-headed households.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Interactive Process Section */}
-      <section id="how-it-works" className="py-24 px-6 max-w-7xl mx-auto">
-        <div className="text-center mb-16 fade-in-up">
-          <h2 className="font-garamond text-4xl md:text-5xl text-[#1A1A1A] mb-4">The Process</h2>
-          <p className="text-[#4A4A4A]">How we collaborate to bring stories to life.</p>
-        </div>
-
-        <div className="grid md:grid-cols-4 gap-6">
-          <ProcessCard 
-            num="01" 
-            title="Watch & Apply" 
-            desc="Review our mission and submission guidelines carefully. Submit your application portfolio directly through our website."
-            delay="stagger-1"
-          />
-          <ProcessCard 
-            num="02" 
-            title="Receive a Story" 
-            desc="Once selected, you will gain access to a consent-approved 35 to 45 minutes of unpublished oral history from a single mother."
-            delay="stagger-2"
-          />
-          <ProcessCard 
-            num="03" 
-            title="Create & Collaborate" 
-            desc="Our media team sets the publishing schedule. You maintain total creative freedom to interpret the feeling of the story."
-            delay="stagger-3"
-            highlight
-          />
-          <ProcessCard 
-            num="04" 
-            title="Dual-Row Experience" 
-            desc="The platform presents history in parallel: Transcription (Fact) and your Interpretation (Feeling). A holistic understanding of displacement."
-            delay="stagger-4"
-          />
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section className="bg-white py-24 px-6 border-y border-[#1A1A1A]/10">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-16">
-            <h2 className="font-garamond text-4xl md:text-5xl text-[#1A1A1A] mb-4">
-              Create Art <br/><span className="text-[#982E2E] italic">That Travels.</span>
-            </h2>
-            <div className="w-24 h-1 bg-[#982E2E] mt-6"></div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-12">
-            <BenefitItem 
-              icon={<Shield className="w-8 h-8 text-[#982E2E]" />}
-              title="100% Ownership"
-              desc="You keep full ownership and rights to your work. We only ask for the right to feature it in our parallel timeline experience."
-            />
-            <BenefitItem 
-              icon={<Globe className="w-8 h-8 text-[#982E2E]" />}
-              title="Global Visibility"
-              desc="Your work becomes part of an international advocacy platform, exposed globally in different geolocations and featured across all our platforms."
-            />
-            <BenefitItem 
-              icon={<Handshake className="w-8 h-8 text-[#982E2E]" />}
-              title="Strategic Partnerships"
-              desc="Connect with institutions driving real change worldwide. Open doors for potential partnerships and professional enhancement."
-            />
-            <BenefitItem 
-              icon={<Award className="w-8 h-8 text-[#982E2E]" />}
-              title="Legacy & Recognition"
-              desc="Build a portfolio that stands for human rights and ethical storytelling. Long-term collaboration opportunities await."
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* CTA & Contact Section */}
-      <section id="apply" className="py-24 px-6 bg-[#982E2E] text-white text-center relative overflow-hidden">
-        {/* Decorative background elements */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-          <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[150%] bg-white/5 rounded-full transform rotate-12"></div>
-          <div className="absolute -bottom-[20%] -right-[10%] w-[40%] h-[150%] bg-black/10 rounded-full transform -rotate-12"></div>
-        </div>
-
-        <div className="max-w-3xl mx-auto relative z-10">
-          <h2 className="font-garamond text-5xl md:text-6xl mb-6 font-medium">Call for Artists</h2>
-          <p className="text-xl mb-10 text-white/90 font-light max-w-2xl mx-auto">
-            This is your chance to show your art to the world while advocating for those who need it most. 
-          </p>
-          
-          <div className="bg-white text-[#1A1A1A] p-8 rounded-2xl shadow-2xl max-w-lg mx-auto">
-            <h3 className="text-xl font-bold mb-4 font-garamond text-[#982E2E]">Ready to apply?</h3>
-            <p className="text-sm text-gray-600 mb-6 font-light">Submit your portfolio for review. Selected artists will be contacted directly by our curation team.</p>
-            <a href="https://www.therefugeearchive.org/the-art-of-oral-history" target="_blank" rel="noopener noreferrer" className="w-full bg-[#1A1A1A] text-white py-4 rounded-xl font-medium hover:bg-[#982E2E] transition-colors flex items-center justify-center gap-2 group">
-              Submit Application
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
-            
-            <div className="mt-6 pt-6 border-t border-gray-200 text-sm">
-              <p className="text-gray-500 mb-2">Have specific questions?</p>
-              <a href="mailto:contact@therefugeearchive.org" className="inline-flex items-center gap-2 text-[#982E2E] hover:underline font-medium">
-                <Mail className="w-4 h-4" />
-                contact@therefugeearchive.org
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-[#1A1A1A] text-white/60 py-8 px-6 text-center text-sm font-light">
-        <p>© {new Date().getFullYear()} The Refuge Archive. All rights reserved.</p>
-        <p className="mt-2">Empowering lived experiences through art.</p>
-      </footer>
-    </div>
-  );
-};
-
-// Sub-components
-
-const ProcessCard = ({ num, title, desc, delay, highlight }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <div 
-      className={`fade-in-up ${delay} relative p-8 rounded-2xl transition-all duration-500 ease-out cursor-pointer ${
-        highlight ? 'bg-[#982E2E] text-white shadow-xl transform -translate-y-2' : 'bg-white border border-gray-200 hover:border-[#982E2E] hover:shadow-xl hover:-translate-y-2'
-      }`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div className={`font-garamond text-4xl mb-6 opacity-80 ${highlight ? 'text-white' : 'text-[#982E2E]'}`}>
-        {num}
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full bg-[#F5F3EF]/90 backdrop-blur-md z-50 border-b border-[#982E2E]/10">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="font-garamond text-xl font-semibold tracking-wide text-[#982E2E]">
+        The Refuge Archive
       </div>
-      <h3 className={`font-garamond text-2xl mb-4 ${highlight ? 'text-white' : 'text-[#1A1A1A]'}`}>
-        {title}
-      </h3>
-      <p className={`text-sm leading-relaxed ${highlight ? 'text-white/90' : 'text-[#4A4A4A]'}`}>
-        {desc}
+      <div class="flex items-center gap-6">
+        <a href="mailto:contact@therefugeearchive.org" class="text-sm font-medium hover:text-[#982E2E] transition-colors hidden sm:block">
+          contact@therefugeearchive.org
+        </a>
+        <a href="https://www.therefugeearchive.org/the-art-of-oral-history" target="_blank" rel="noopener noreferrer" class="bg-[#982E2E] text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-[#7a2525] transition-all transform hover:scale-105 shadow-md">
+          Apply Now
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="pt-32 pb-20 px-6 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+    <div class="fade-in-up">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#982E2E]/10 text-[#982E2E] text-sm font-medium mb-6">
+        <span class="w-2 h-2 rounded-full bg-[#982E2E] animate-pulse"></span>
+        From Stories to Action
+      </div>
+      <h1 class="font-garamond text-5xl md:text-7xl font-medium leading-tight mb-6 text-[#1A1A1A]">
+        The Art of <br />
+        <span class="text-[#982E2E] italic">Oral History.</span>
+      </h1>
+      <p class="text-lg md:text-xl text-[#4A4A4A] leading-relaxed mb-8 max-w-lg">
+        We invite artists to visualize oral histories, turning the archive into a vessel for advocacy. Turn lived experiences into powerful global advocacy.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="https://www.therefugeearchive.org/the-art-of-oral-history" target="_blank" rel="noopener noreferrer" class="bg-[#982E2E] text-white px-8 py-4 rounded-full font-medium hover:bg-[#7a2525] transition-all flex items-center gap-2 group shadow-lg shadow-[#982E2E]/20">
+          Submit Portfolio
+          <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+        </a>
+        <a href="#how-it-works" class="px-8 py-4 rounded-full font-medium border border-[#1A1A1A]/20 hover:border-[#982E2E] hover:text-[#982E2E] transition-all">
+          Learn the Process
+        </a>
+      </div>
+    </div>
+
+    <!-- Video Embed -->
+    <div class="fade-in-up stagger-2 relative">
+      <div class="absolute -inset-4 bg-gradient-to-tr from-[#982E2E]/20 to-transparent opacity-50 blur-2xl rounded-full"></div>
+      <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-white/20 aspect-video bg-black flex items-center justify-center group">
+         <iframe 
+            class="w-full h-full relative z-10" 
+            src="https://www.youtube.com/embed/aU7YNWS2C9g?si=liUu9ROSMbS-gE6E" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen>
+          </iframe>
+      </div>
+      <p class="text-center mt-4 text-sm font-garamond italic text-[#4A4A4A]">
+        Watch how your work will be featured and experienced globally.
+      </p>
+    </div>
+  </section>
+
+  <!-- The Mission Stats -->
+  <section class="bg-[#1A1A1A] text-[#F5F3EF] py-20 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+      <div class="md:w-1/2">
+        <h2 class="font-garamond text-4xl md:text-5xl mb-4">108 Million <span class="text-[#982E2E] italic">Displaced.</span></h2>
+        <p class="text-lg opacity-80 leading-relaxed font-light">
+          Approximately 50 million are women. Art inspires what statistics alone can't convey. This is your chance to show your art to the world and make a tangible impact.
+        </p>
+      </div>
+      <div class="md:w-1/3 border-l-2 border-[#982E2E] pl-8">
+        <h3 class="font-garamond text-2xl mb-2 text-[#982E2E]">Your Mission</h3>
+        <p class="opacity-80 font-light">
+          Turn the archive into an active advocacy tool, helping the world understand the specific plight of female-headed households.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Process Section -->
+  <section id="how-it-works" class="py-24 px-6 max-w-7xl mx-auto">
+    <div class="text-center mb-16 fade-in-up">
+      <h2 class="font-garamond text-4xl md:text-5xl text-[#1A1A1A] mb-4">The Process</h2>
+      <p class="text-[#4A4A4A]">How we collaborate to bring stories to life.</p>
+    </div>
+
+    <div class="grid md:grid-cols-4 gap-6">
+      <!-- Card 01 -->
+      <div class="fade-in-up stagger-1 relative p-8 rounded-2xl transition-all duration-500 ease-out cursor-pointer bg-white border border-gray-200 hover:border-[#982E2E] hover:shadow-xl hover:-translate-y-2 group">
+        <div class="font-garamond text-4xl mb-6 opacity-80 text-[#982E2E]">01</div>
+        <h3 class="font-garamond text-2xl mb-4 text-[#1A1A1A]">Watch & Apply</h3>
+        <p class="text-sm leading-relaxed text-[#4A4A4A]">Review our mission and submission guidelines carefully. Submit your application portfolio directly through our website.</p>
+        <div class="absolute bottom-6 right-6 transition-all duration-300 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0">
+           <i data-lucide="arrow-right" class="w-5 h-5 text-[#982E2E]"></i>
+        </div>
+      </div>
+
+      <!-- Card 02 -->
+      <div class="fade-in-up stagger-2 relative p-8 rounded-2xl transition-all duration-500 ease-out cursor-pointer bg-white border border-gray-200 hover:border-[#982E2E] hover:shadow-xl hover:-translate-y-2 group">
+        <div class="font-garamond text-4xl mb-6 opacity-80 text-[#982E2E]">02</div>
+        <h3 class="font-garamond text-2xl mb-4 text-[#1A1A1A]">Receive a Story</h3>
+        <p class="text-sm leading-relaxed text-[#4A4A4A]">Once selected, you will receive a summary of the oral history on [insert specific details/theme here].</p>
+        <div class="absolute bottom-6 right-6 transition-all duration-300 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0">
+           <i data-lucide="arrow-right" class="w-5 h-5 text-[#982E2E]"></i>
+        </div>
+      </div>
+
+      <!-- Card 03 (Highlight) -->
+      <div class="fade-in-up stagger-3 relative p-8 rounded-2xl transition-all duration-500 ease-out cursor-pointer bg-[#982E2E] text-white shadow-xl transform -translate-y-2 group">
+        <div class="font-garamond text-4xl mb-6 opacity-80 text-white">03</div>
+        <h3 class="font-garamond text-2xl mb-4 text-white">Create & Collaborate</h3>
+        <p class="text-sm leading-relaxed text-white/90">Our media team sets the publishing schedule. You maintain total creative freedom to interpret the feeling of the story.</p>
+        <div class="absolute bottom-6 right-6 transition-all duration-300 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0">
+           <i data-lucide="arrow-right" class="w-5 h-5 text-white"></i>
+        </div>
+      </div>
+
+      <!-- Card 04 -->
+      <div class="fade-in-up stagger-4 relative p-8 rounded-2xl transition-all duration-500 ease-out cursor-pointer bg-white border border-gray-200 hover:border-[#982E2E] hover:shadow-xl hover:-translate-y-2 group">
+        <div class="font-garamond text-4xl mb-6 opacity-80 text-[#982E2E]">04</div>
+        <h3 class="font-garamond text-2xl mb-4 text-[#1A1A1A]">Dual-Row Experience</h3>
+        <p class="text-sm leading-relaxed text-[#4A4A4A]">The platform presents history in parallel: Transcription (Fact) and your Interpretation (Feeling). A holistic understanding of displacement.</p>
+        <div class="absolute bottom-6 right-6 transition-all duration-300 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0">
+           <i data-lucide="arrow-right" class="w-5 h-5 text-[#982E2E]"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="bg-white py-24 px-6 border-y border-[#1A1A1A]/10">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-16">
+        <h2 class="font-garamond text-4xl md:text-5xl text-[#1A1A1A] mb-4">
+          Create Art <br/><span class="text-[#982E2E] italic">That Travels.</span>
+        </h2>
+        <div class="w-24 h-1 bg-[#982E2E] mt-6"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12">
+        <div class="flex gap-6 items-start group">
+          <div class="p-4 rounded-full bg-[#F5F3EF] group-hover:bg-[#982E2E]/10 transition-colors shrink-0">
+            <i data-lucide="shield" class="w-8 h-8 text-[#982E2E]"></i>
+          </div>
+          <div>
+            <h3 class="font-garamond text-2xl mb-3 text-[#1A1A1A] group-hover:text-[#982E2E] transition-colors">100% Ownership</h3>
+            <p class="text-[#4A4A4A] leading-relaxed font-light">You keep full ownership and rights to your work. We only ask for the right to feature it in our parallel timeline experience.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-6 items-start group">
+          <div class="p-4 rounded-full bg-[#F5F3EF] group-hover:bg-[#982E2E]/10 transition-colors shrink-0">
+            <i data-lucide="globe" class="w-8 h-8 text-[#982E2E]"></i>
+          </div>
+          <div>
+            <h3 class="font-garamond text-2xl mb-3 text-[#1A1A1A] group-hover:text-[#982E2E] transition-colors">Global Visibility</h3>
+            <p class="text-[#4A4A4A] leading-relaxed font-light">Your work becomes part of an international advocacy platform, exposed globally in different geolocations and featured across all our platforms.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-6 items-start group">
+          <div class="p-4 rounded-full bg-[#F5F3EF] group-hover:bg-[#982E2E]/10 transition-colors shrink-0">
+            <i data-lucide="handshake" class="w-8 h-8 text-[#982E2E]"></i>
+          </div>
+          <div>
+            <h3 class="font-garamond text-2xl mb-3 text-[#1A1A1A] group-hover:text-[#982E2E] transition-colors">Strategic Partnerships</h3>
+            <p class="text-[#4A4A4A] leading-relaxed font-light">Connect with institutions driving real change worldwide. Open doors for potential partnerships and professional enhancement.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-6 items-start group">
+          <div class="p-4 rounded-full bg-[#F5F3EF] group-hover:bg-[#982E2E]/10 transition-colors shrink-0">
+            <i data-lucide="award" class="w-8 h-8 text-[#982E2E]"></i>
+          </div>
+          <div>
+            <h3 class="font-garamond text-2xl mb-3 text-[#1A1A1A] group-hover:text-[#982E2E] transition-colors">Legacy & Recognition</h3>
+            <p class="text-[#4A4A4A] leading-relaxed font-light">Build a portfolio that stands for human rights and ethical storytelling. Long-term collaboration opportunities await.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA & Contact Section -->
+  <section id="apply" class="py-24 px-6 bg-[#982E2E] text-white text-center relative overflow-hidden">
+    <!-- Decorative background elements -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+      <div class="absolute -top-[20%] -left-[10%] w-[50%] h-[150%] bg-white/5 rounded-full transform rotate-12"></div>
+      <div class="absolute -bottom-[20%] -right-[10%] w-[40%] h-[150%] bg-black/10 rounded-full transform -rotate-12"></div>
+    </div>
+
+    <div class="max-w-3xl mx-auto relative z-10">
+      <h2 class="font-garamond text-5xl md:text-6xl mb-6 font-medium">Call for Artists</h2>
+      <p class="text-xl mb-10 text-white/90 font-light max-w-2xl mx-auto">
+        This is your chance to show your art to the world while advocating for those who need it most. 
       </p>
       
-      {/* Interactive hover indicator */}
-      <div className={`absolute bottom-6 right-6 transition-all duration-300 ${isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
-         <ArrowRight className={`w-5 h-5 ${highlight ? 'text-white' : 'text-[#982E2E]'}`} />
+      <div class="bg-white text-[#1A1A1A] p-8 rounded-2xl shadow-2xl max-w-lg mx-auto">
+        <h3 class="text-xl font-bold mb-4 font-garamond text-[#982E2E]">Ready to apply?</h3>
+        <p class="text-sm text-gray-600 mb-6 font-light">Submit your portfolio for review. Selected artists will be contacted directly by our curation team.</p>
+        <a href="https://www.therefugeearchive.org/the-art-of-oral-history" target="_blank" rel="noopener noreferrer" class="w-full bg-[#1A1A1A] text-white py-4 rounded-xl font-medium hover:bg-[#982E2E] transition-colors flex items-center justify-center gap-2 group">
+          Submit Application
+          <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+        </a>
+        
+        <div class="mt-6 pt-6 border-t border-gray-200 text-sm">
+          <p class="text-gray-500 mb-2">Have specific questions?</p>
+          <a href="mailto:contact@therefugeearchive.org" class="inline-flex items-center gap-2 text-[#982E2E] hover:underline font-medium">
+            <i data-lucide="mail" class="w-4 h-4"></i>
+            contact@therefugeearchive.org
+          </a>
+        </div>
       </div>
     </div>
-  );
-};
+  </section>
 
-const BenefitItem = ({ icon, title, desc }) => (
-  <div className="flex gap-6 items-start group">
-    <div className="p-4 rounded-full bg-[#F5F3EF] group-hover:bg-[#982E2E]/10 transition-colors shrink-0">
-      {icon}
-    </div>
-    <div>
-      <h3 className="font-garamond text-2xl mb-3 text-[#1A1A1A] group-hover:text-[#982E2E] transition-colors">{title}</h3>
-      <p className="text-[#4A4A4A] leading-relaxed font-light">{desc}</p>
-    </div>
-  </div>
-);
+  <!-- Footer -->
+  <footer class="bg-[#1A1A1A] text-white/60 py-8 px-6 text-center text-sm font-light">
+    <p>© <span id="current-year"></span> The Refuge Archive. All rights reserved.</p>
+    <p class="mt-2">Empowering lived experiences through art.</p>
+  </footer>
 
-export default App;
+  <!-- Initialize Icons & Year -->
+  <script>
+    lucide.createIcons();
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
