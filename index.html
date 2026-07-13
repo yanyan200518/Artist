@@ -3,282 +3,356 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chapter 1 Reviewer & Quiz — Understanding the Manager's Job</title>
+<title>Ethics Reviewer & Quiz — Minimalist Edition</title>
 <style>
-  :root{
-    --navy:#1c2b4a;
-    --navy-light:#2d4270;
-    --paper:#fafaf8;
-    --card:#ffffff;
-    --border:#dcdfe4;
-    --text:#22262e;
-    --muted:#5b6472;
-    --green:#1e7d3c;
-    --green-bg:#e7f6ec;
-    --red:#b3261e;
-    --red-bg:#fce8e6;
-    --gold:#a3760a;
+  :root {
+    --black: #000000;
+    --dark-gray: #333333;
+    --gray: #777777;
+    --light-gray: #e5e5e5;
+    --white: #ffffff;
   }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    font-family: Georgia, 'Times New Roman', serif;
-    background:var(--paper);
-    color:var(--text);
-    line-height:1.55;
+  
+  /* Reset and sharp borders */
+  * { 
+    box-sizing: border-box; 
+    border-radius: 0 !important; /* Forces sharp corners everywhere */
   }
-  h1,h2,h3,h4{
-    font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
-    color:var(--navy);
-    margin-top:1.4em;
+
+  body {
+    margin: 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
-  a{color:var(--navy-light);}
-  header{
-    background:var(--navy);
-    color:#fff;
-    padding:16px 20px;
-    position:sticky;
-    top:0;
-    z-index:50;
-    box-shadow:0 2px 6px rgba(0,0,0,0.15);
+
+  h1, h2, h3, h4 {
+    font-weight: 700;
+    color: var(--black);
+    margin-top: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
-  header .title{
-    font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
-    font-size:1.05rem;
-    font-weight:bold;
-    margin-bottom:10px;
+  
+  a {
+    color: var(--black);
+    text-decoration: underline;
   }
-  header .title small{
-    display:block;
-    font-weight:normal;
-    font-size:0.78rem;
-    color:#c6cee0;
-    margin-top:2px;
+  
+  a:hover {
+    background: var(--black);
+    color: var(--white);
   }
-  .tabs{
-    display:flex;
-    gap:8px;
+
+  header {
+    background: var(--white);
+    color: var(--black);
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 2px solid var(--black);
   }
-  .tab-btn{
-    background:var(--navy-light);
-    color:#fff;
-    border:none;
-    padding:9px 16px;
-    border-radius:6px;
-    cursor:pointer;
-    font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
-    font-size:0.92rem;
-    font-weight:bold;
+
+  header .title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
-  .tab-btn.active{
-    background:#fff;
-    color:var(--navy);
+
+  header .title small {
+    display: block;
+    font-weight: normal;
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-top: 5px;
   }
-  main{
-    max-width:820px;
-    margin:0 auto;
-    padding:20px 16px 80px;
+
+  .tabs {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--black);
   }
-  .view{display:none;}
-  .view.active{display:block;}
+
+  .tab-btn {
+    flex: 1;
+    background: var(--white);
+    color: var(--black);
+    border: none;
+    border-right: 1px solid var(--black);
+    padding: 12px 16px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    transition: background 0.2s, color 0.2s;
+  }
+  
+  .tab-btn:last-child {
+    border-right: none;
+  }
+
+  .tab-btn:hover {
+    background: var(--light-gray);
+  }
+
+  .tab-btn.active {
+    background: var(--black);
+    color: var(--white);
+  }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px 20px 100px;
+  }
+
+  .view { display: none; }
+  .view.active { display: block; }
 
   /* ---------- Reviewer ---------- */
-  .toc{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:8px;
-    padding:14px 18px;
-    margin-bottom:20px;
+  .toc {
+    background: var(--white);
+    border: 2px solid var(--black);
+    padding: 20px;
+    margin-bottom: 30px;
   }
-  .toc h2{margin-top:0;font-size:1.05rem;}
-  .toc ol{margin:0;padding-left:20px;columns:2;font-size:0.92rem;}
-  .toc a{text-decoration:none;}
-  .toc a:hover{text-decoration:underline;}
 
-  section.rev{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:8px;
-    padding:4px 20px 18px;
-    margin-bottom:16px;
+  .toc h2 { margin-top: 0; font-size: 1.1rem; }
+  .toc ol { margin: 0; padding-left: 20px; columns: 2; font-size: 0.95rem; }
+
+  section.rev {
+    background: var(--white);
+    border: 1px solid var(--black);
+    padding: 10px 25px 25px;
+    margin-bottom: 25px;
   }
-  section.rev h2{
-    font-size:1.15rem;
-    border-bottom:2px solid var(--navy);
-    padding-bottom:6px;
+
+  section.rev h2 {
+    font-size: 1.2rem;
+    border-bottom: 2px solid var(--black);
+    padding-bottom: 8px;
   }
-  section.rev h3{
-    font-size:1rem;
-    color:var(--navy-light);
-    margin-bottom:4px;
+
+  section.rev h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;
   }
-  .term{
-    background:var(--green-bg);
-    border-left:4px solid var(--green);
-    padding:8px 12px;
-    margin:8px 0;
-    border-radius:4px;
-    font-size:0.94rem;
+
+  .term {
+    background: var(--light-gray);
+    border-left: 5px solid var(--black);
+    padding: 12px 15px;
+    margin: 15px 0;
+    font-size: 0.95rem;
   }
-  .term b{color:var(--navy);}
-  ul, ol{padding-left:22px;}
-  li{margin-bottom:4px;}
-  table.facts{
-    width:100%;
-    border-collapse:collapse;
-    margin:10px 0;
-    font-size:0.9rem;
+
+  ul, ol { padding-left: 25px; }
+  li { margin-bottom: 8px; }
+  
+  table.facts {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.95rem;
   }
-  table.facts th, table.facts td{
-    border:1px solid var(--border);
-    padding:6px 8px;
-    text-align:left;
-    vertical-align:top;
+
+  table.facts th, table.facts td {
+    border: 1px solid var(--black);
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
   }
-  table.facts th{background:#eef1f7;color:var(--navy);}
-  .callout{
-    background:#fff8e6;
-    border:1px solid #e8cf8a;
-    border-radius:6px;
-    padding:10px 14px;
-    font-size:0.9rem;
-    margin:10px 0;
+
+  table.facts th { background: var(--black); color: var(--white); }
+
+  .callout {
+    border: 2px dashed var(--black);
+    padding: 15px;
+    font-size: 0.95rem;
+    margin: 20px 0;
+    font-weight: 500;
   }
-  .callout b{color:var(--gold);}
 
   /* ---------- Quiz ---------- */
-  #scoreboard{
-    position:sticky;
-    top:78px;
-    background:#fff;
-    border:1px solid var(--border);
-    border-radius:8px;
-    padding:10px 16px;
-    margin-bottom:16px;
-    z-index:40;
-    box-shadow:0 2px 6px rgba(0,0,0,0.08);
-    font-family:'Trebuchet MS', Helvetica, Arial, sans-serif;
+  #scoreboard {
+    position: sticky;
+    top: 98px;
+    background: var(--white);
+    border: 2px solid var(--black);
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    z-index: 40;
   }
-  #scoreboard .row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:8px;
+
+  #scoreboard .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
   }
-  #scoreboard .stat{font-size:0.85rem;color:var(--muted);}
-  #scoreboard .stat b{font-size:1.1rem;color:var(--navy);}
-  .progress-bar{
-    height:8px;
-    background:#e6e9ee;
-    border-radius:5px;
-    overflow:hidden;
-    margin-top:8px;
+
+  #scoreboard .stat { font-size: 0.85rem; color: var(--gray); text-transform: uppercase;}
+  #scoreboard .stat b { font-size: 1.2rem; color: var(--black); display: block; }
+
+  .progress-bar {
+    height: 10px;
+    background: var(--light-gray);
+    border: 1px solid var(--black);
+    margin-top: 15px;
   }
-  .progress-fill{
-    height:100%;
-    background:var(--navy-light);
-    width:0%;
-    transition:width .3s ease;
+
+  .progress-fill {
+    height: 100%;
+    background: var(--black);
+    width: 0%;
+    transition: width 0.3s ease;
   }
-  #finalBanner{
-    display:none;
-    background:var(--navy);
-    color:#fff;
-    padding:16px 18px;
-    border-radius:8px;
-    margin-bottom:18px;
-    font-family:'Trebuchet MS', Helvetica, Arial, sans-serif;
+
+  #finalBanner {
+    display: none;
+    background: var(--black);
+    color: var(--white);
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 2px solid var(--black);
   }
-  #finalBanner h2{color:#fff;margin-top:0;}
-  #finalBanner .bigscore{font-size:2rem;font-weight:bold;}
-  .qcard{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:8px;
-    padding:14px 16px;
-    margin-bottom:12px;
+
+  #finalBanner h2 { color: var(--white); margin-top: 0; }
+  #finalBanner .bigscore { font-size: 2.5rem; font-weight: bold; margin: 15px 0; }
+
+  .qcard {
+    background: var(--white);
+    border: 1px solid var(--black);
+    padding: 20px;
+    margin-bottom: 20px;
   }
-  .qcard .qsection{
-    font-size:0.72rem;
-    text-transform:uppercase;
-    letter-spacing:.04em;
-    color:var(--muted);
-    font-family:'Trebuchet MS', Helvetica, Arial, sans-serif;
+
+  .qcard .qsection {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--gray);
+    border-bottom: 1px solid var(--light-gray);
+    padding-bottom: 5px;
+    margin-bottom: 15px;
   }
-  .qcard .qtext{
-    font-family:'Trebuchet MS', Helvetica, Arial, sans-serif;
-    font-weight:bold;
-    margin:4px 0 10px;
-    font-size:0.98rem;
+
+  .qcard .qtext {
+    font-weight: bold;
+    margin-bottom: 15px;
+    font-size: 1.05rem;
   }
-  .opt{
-    display:block;
-    width:100%;
-    text-align:left;
-    background:#f6f7f9;
-    border:1px solid var(--border);
-    border-radius:6px;
-    padding:9px 12px;
-    margin-bottom:7px;
-    cursor:pointer;
-    font-family: Georgia, serif;
-    font-size:0.93rem;
-    color:var(--text);
+
+  .opt {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: var(--white);
+    border: 1px solid var(--black);
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: all 0.2s ease;
   }
-  .opt:hover:not(:disabled){background:#eceff3;}
-  .opt:disabled{cursor:default;}
-  .opt.correct{background:var(--green-bg);border-color:var(--green);color:var(--green);font-weight:bold;}
-  .opt.incorrect{background:var(--red-bg);border-color:var(--red);color:var(--red);font-weight:bold;}
-  .opt.dim{opacity:0.55;}
-  .explain{
-    margin-top:8px;
-    padding:10px 12px;
-    border-radius:6px;
-    font-size:0.9rem;
-    display:none;
+
+  .opt:hover:not(:disabled) { 
+    background: var(--black); 
+    color: var(--white); 
   }
-  .explain.show{display:block;}
-  .explain.right{background:var(--green-bg);border-left:4px solid var(--green);}
-  .explain.wrong{background:var(--red-bg);border-left:4px solid var(--red);}
-  .explain b{color:var(--navy);}
-  #quizControls{
-    display:flex;
-    gap:10px;
-    margin:10px 0 20px;
-    flex-wrap:wrap;
+
+  .opt:disabled { cursor: default; }
+  
+  .opt.correct { 
+    background: var(--black); 
+    color: var(--white); 
+    font-weight: bold; 
+    border: 2px solid var(--black); 
   }
-  button.ctrl{
-    background:var(--navy);
-    color:#fff;
-    border:none;
-    padding:9px 16px;
-    border-radius:6px;
-    cursor:pointer;
-    font-family:'Trebuchet MS', Helvetica, Arial, sans-serif;
-    font-size:0.88rem;
+  
+  .opt.incorrect { 
+    background: var(--light-gray); 
+    color: var(--gray); 
+    border: 1px dashed var(--gray); 
   }
-  button.ctrl.secondary{background:#8a8f99;}
-  footer{
-    text-align:center;
-    color:var(--muted);
-    font-size:0.8rem;
-    padding:20px;
+  
+  .opt.dim { opacity: 0.5; }
+
+  .explain {
+    margin-top: 15px;
+    padding: 15px;
+    font-size: 0.95rem;
+    display: none;
+    border: 1px solid var(--black);
   }
-  @media (max-width:600px){
-    .toc ol{columns:1;}
+
+  .explain.show { display: block; }
+  .explain.right { background: var(--white); border-left: 5px solid var(--black); }
+  .explain.wrong { background: var(--light-gray); border-left: 5px solid var(--gray); color: var(--dark-gray); }
+
+  #quizControls {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0 30px;
+    flex-wrap: wrap;
+  }
+
+  button.ctrl {
+    background: var(--white);
+    color: var(--black);
+    border: 2px solid var(--black);
+    padding: 12px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+  }
+
+  button.ctrl:hover {
+    background: var(--black);
+    color: var(--white);
+  }
+
+  button.ctrl.secondary {
+    border-style: dashed;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--black);
+    font-size: 0.85rem;
+    padding: 30px 20px;
+    border-top: 1px solid var(--black);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 600px) {
+    .toc ol { columns: 1; }
+    .tabs { flex-direction: column; }
+    .tab-btn { border-right: none; border-bottom: 1px solid var(--black); }
+    .tab-btn:last-child { border-bottom: none; }
+    #scoreboard { top: 120px; }
   }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="title">Chapter 1 — Understanding the Manager's Job
-    <small>Fundamentals of Management, 8th ed. (Griffin) · Reviewer + 50-item Quiz</small>
+  <div class="title">Ethics — Moral Dilemma, Freedom, Culture, Kohlberg, Emotions & Aquinas
+    <small>Weeks 2–5 Reviewer + 50-item Quiz</small>
   </div>
   <div class="tabs">
-    <button class="tab-btn active" id="tabRevBtn" onclick="showView('reviewer')">📖 Reviewer</button>
-    <button class="tab-btn" id="tabQuizBtn" onclick="showView('quiz')">📝 Quiz (50 items)</button>
+    <button class="tab-btn active" id="tabRevBtn" onclick="showView('reviewer')">Reviewer</button>
+    <button class="tab-btn" id="tabQuizBtn" onclick="showView('quiz')">Quiz (50 items)</button>
   </div>
 </header>
 
@@ -290,213 +364,154 @@
   <div class="toc">
     <h2>Jump to a section</h2>
     <ol>
-      <li><a href="#s1">Intro to Management</a></li>
-      <li><a href="#s2">Kinds of Managers</a></li>
-      <li><a href="#s3">Basic Management Functions</a></li>
-      <li><a href="#s4">Fundamental Skills</a></li>
-      <li><a href="#s5">Science & Art of Management</a></li>
-      <li><a href="#s6">Historical Context</a></li>
-      <li><a href="#s7">Classical Perspective</a></li>
-      <li><a href="#s8">Behavioral Perspective</a></li>
-      <li><a href="#s9">Quantitative Perspective</a></li>
-      <li><a href="#s10">Systems Perspective</a></li>
-      <li><a href="#s11">Contingency Perspective</a></li>
-      <li><a href="#s12">Contemporary Challenges</a></li>
-      <li><a href="#s13">Rapid-Fire Facts (details profs love)</a></li>
+      <li><a href="#s1">Moral Dilemma — Basics</a></li>
+      <li><a href="#s2">Types of Moral Dilemmas</a></li>
+      <li><a href="#s3">Freedom as Foundation of Moral Acts</a></li>
+      <li><a href="#s4">Culture & Moral Behavior</a></li>
+      <li><a href="#s5">Cultural Relativism</a></li>
+      <li><a href="#s6">The Filipino Way</a></li>
+      <li><a href="#s7">Kohlberg's Stages of Moral Development</a></li>
+      <li><a href="#s8">Feelings & Moral Decision Making</a></li>
+      <li><a href="#s9">The Moral Psychology of Thomas Aquinas</a></li>
+      <li><a href="#s10">Rapid-Fire Facts</a></li>
     </ol>
   </div>
 
   <section class="rev" id="s1">
-    <h2>1. Introduction to Management</h2>
-    <div class="term"><b>Organization</b> — a group of people working together in a structured and coordinated fashion to achieve a set of goals (profit, knowledge, defense, coordination, social satisfaction, etc.)</div>
-    <div class="term"><b>Management</b> — a set of activities (planning & decision making, organizing, leading, controlling) directed at an organization's <b>resources</b> (human, financial, physical, information) to achieve organizational goals in an efficient and effective manner.</div>
-    <div class="term"><b>Manager</b> — someone whose primary responsibility is to carry out the management process.</div>
-    <div class="term"><b>Efficient</b> = using resources wisely, in a cost-effective way. &nbsp; <b>Effective</b> = making the right decisions and successfully implementing them. Successful orgs are usually <i>both</i>.</div>
-    <p>The average executive works about <b>60 hours/week</b>, facing globalization, competition, regulation, shareholder pressure, new tech, and social media.</p>
+    <h2>1. Moral Dilemma — The Basics</h2>
+    <div class="term"><b>Dilemma</b> — a situation where a person is forced to choose between two or more conflicting options, neither of which is acceptable.</div>
+    <div class="term"><b>Moral (ethical) dilemma</b> — a dilemma involving human actions with moral implications; a "moral agent" is forced to choose between two or more conflicting options, none of which resolves the situation in a morally acceptable way.</div>
+    <p><b>Key distinction:</b> If a person faces a hard situation but is NOT forced to choose between conflicting options, they are not in a dilemma — just a problematic/distressful situation, and the logical move is to look for solutions.</p>
+    <p><b>Example (Efreminda):</b> A deeply religious woman who believes killing is wrong has an ectopic pregnancy. Continuing the pregnancy endangers her life; abortion would save her life but violate her moral conviction. Two conflicting options, neither fully acceptable.</p>
+    <h3>Karen Allen's 3 Conditions for a Moral Dilemma</h3>
+    <ol>
+      <li>The moral agent is <b>obliged to decide</b> which course of action is best.</li>
+      <li>There must be <b>different courses of action</b> to choose from.</li>
+      <li><b>Some moral principle is always compromised</b>, no matter the choice — there is no perfect solution. Benjiemen Labastin: the agent "seems fated to commit something wrong" — by choosing one moral requirement, they necessarily fail another.</li>
+    </ol>
   </section>
 
   <section class="rev" id="s2">
-    <h2>2. Kinds of Managers</h2>
-    <h3>By Level</h3>
+    <h2>2. Types of Moral Dilemmas</h2>
+    <p>The text groups common types into four pairs:</p>
     <table class="facts">
-      <tr><th>Level</th><th>Common Titles</th><th>Focus</th></tr>
-      <tr><td><b>Top managers</b></td><td>President, VP, CEO</td><td>Set org goals, overall strategy, operating policies; represent org externally</td></tr>
-      <tr><td><b>Middle managers</b></td><td>Plant manager, operations manager, division head, regional manager</td><td>Implement top managers' plans; supervise/coordinate lower-level managers (largest group)</td></tr>
-      <tr><td><b>First-line managers</b></td><td>Supervisor, coordinator, office manager</td><td>Supervise/coordinate operating employees; spend the most time directly overseeing subordinates</td></tr>
+      <tr><th>Type</th><th>Definition</th><th>Example</th></tr>
+      <tr><td><b>Epistemic</b></td><td>Two+ requirements conflict and the agent doesn't know which takes precedence — but with fuller knowledge, one option WOULD be better.</td><td>Promised to be home early for your son, but see a sick old man needing a hospital on the way.</td></tr>
+      <tr><td><b>Ontological</b></td><td>Two+ requirements conflict and neither overrides the other — genuinely, equally weighted; not a knowledge problem.</td><td>Military doctor, two wounded soldiers, only one bag of blood.</td></tr>
+      <tr><td><b>Self-imposed</b></td><td>Caused by the moral agent's own wrongdoing/choices.</td><td>David, a mayoral candidate, promises indigenous peoples he'll protect their forest, but also takes funding from a mining corporation.</td></tr>
+      <tr><td><b>World-imposed</b></td><td>External events place the agent in moral conflict — not the agent's own doing.</td><td>Sophie's Choice (see below).</td></tr>
+      <tr><td><b>Obligation</b></td><td>More than one feasible action is obligatory.</td><td>"Sartre's Student" (a student torn between duty to join the war and duty to care for his mother).</td></tr>
+      <tr><td><b>Prohibition</b></td><td>All feasible actions are forbidden.</td><td>Sophie's Choice is the classic example.</td></tr>
+      <tr><td><b>Single-agent</b></td><td>One agent "ought to do A" AND "ought to do B," but cannot do both.</td><td>A doctor whose patient has HIV: legal duty to report vs. desire to respect confidentiality.</td></tr>
+      <tr><td><b>Multi-person</b></td><td>Several people (family, org, community) must each act on their own obligations, which conflict — requires more than "doing right," it needs consensus.</td><td>A family deciding to terminate or prolong a member's life; a company choosing between cutting staff or underpaying to comply with wage law.</td></tr>
     </table>
-    <h3>By Area</h3>
-    <ul>
-      <li><b>Marketing managers</b> — get consumers/clients to buy products/services (new product development, promotion, distribution)</li>
-      <li><b>Financial managers</b> — accounting, cash management, investments</li>
-      <li><b>Operations managers</b> — create/manage systems that make products/services (production, inventory, quality control, plant layout, site selection)</li>
-      <li><b>Human resources managers</b> — hiring, recruiting, training, compensation, performance appraisal, discharging employees</li>
-      <li><b>Administrative/general managers</b> — generalists, not tied to one specialty (e.g., hospital administrator)</li>
-      <li>Specialized: public relations, R&D, internal consultants, international operations managers</li>
-    </ul>
+    <div class="callout"><b>Sophie's Choice (William Styron):</b> Sophie Zawistowska is forced by an SS doctor (Fritz Jemand von Niemand) to choose which of her two children — Eva or Jan — will be sent to the gas chamber at Auschwitz. If she refuses to choose, both die. She chooses Eva; Jan is sent to the Children's Camp. Used as the classic example of BOTH a world-imposed dilemma and a prohibition dilemma.</div>
   </section>
 
   <section class="rev" id="s3">
-    <h2>3. Basic Management Functions (P-O-L-C)</h2>
-    <div class="term"><b>Planning</b> — setting an organization's goals and deciding how best to achieve them.</div>
-    <div class="term"><b>Decision making</b> — (part of the planning process) selecting a course of action from a set of alternatives.</div>
-    <div class="term"><b>Organizing</b> — determining how activities and resources are to be grouped.</div>
-    <div class="term"><b>Leading</b> — the set of processes used to get members of the organization to work together to further the interests of the organization.</div>
-    <div class="term"><b>Controlling</b> — monitoring and correcting ongoing activities to facilitate goal attainment.</div>
-    <p><b>Key nuance:</b> Managers do NOT perform these strictly in sequence — most move back and forth between them unpredictably (Figure 1.2's dotted vs. solid arrows).</p>
+    <h2>3. Freedom as the Foundation of Moral Acts</h2>
+    <div class="term"><b>Freedom</b> — the power or right to act, speak, or think as one wants without hindrance or restraint. It also stands for securing everyone an equal opportunity for life, liberty, and the pursuit of happiness.</div>
+    <p>Freedom is NOT total license ("do whatever I want" = anarchy). Your freedom to act ends where it starts infringing on another person's freedom (e.g., you can't freely shout "Fire!" in a crowded theater).</p>
+    <h3>"Freedom of/to" vs. "Freedom from"</h3>
+    <p>President Franklin Delano Roosevelt's Four Freedoms (State of the Union, <b>January 6, 1941</b>):</p>
+    <ol>
+      <li><b>Freedom of</b> speech and expression</li>
+      <li><b>Freedom of</b> worship</li>
+      <li><b>Freedom from</b> want (economic security for all)</li>
+      <li><b>Freedom from</b> fear (reduction of armaments/aggression)</li>
+    </ol>
+    <p>Securing "freedom from" fear and want usually requires <b>collective, organized action</b> — typically government. Liberal representative democracy is presented as doing this best. FDR also framed the U.S. as part of an interdependent "family of nations."</p>
+    <p>FDR's basic foundations of a healthy democracy: equality of opportunity, jobs for those who can work, security for those who need it, ending special privilege for the few, preserving civil liberties, and enjoying the fruits of scientific progress.</p>
   </section>
 
   <section class="rev" id="s4">
-    <h2>4. Fundamental Management Skills</h2>
-    <div class="term"><b>Technical skills</b> — necessary to accomplish/understand the specific work of the org; most important for <b>first-line managers</b>.</div>
-    <div class="term"><b>Interpersonal skills</b> — ability to communicate with, understand, and motivate individuals/groups.</div>
-    <div class="term"><b>Conceptual skills</b> — the ability to think in the abstract; see the organization holistically ("big picture").</div>
-    <div class="term"><b>Diagnostic skills</b> — ability to visualize the most appropriate response to a situation (like a doctor diagnosing symptoms).</div>
-    <div class="term"><b>Communication skills</b> — ability to both convey and receive ideas/information effectively.</div>
-    <div class="term"><b>Decision-making skills</b> — ability to recognize/define problems & opportunities and select the right course of action.</div>
-    <div class="term"><b>Time management skills</b> — ability to prioritize work, work efficiently, and delegate appropriately.</div>
+    <h2>4. Culture and Its Role in Moral Behavior</h2>
+    <div class="term"><b>Culture</b> — a way of life; the totality of the social environment in which we conduct our lives. We don't choose the culture we're born into, but we can grow and adjust to it.</div>
+    <p>Our morality is shaped both by the culture acquired at home and by social experience — home, school, community, church, society, friends, relatives, entertainment, news, and social media all leave an imprint. The type of media we consume influences how we see ourselves, others, and morality.</p>
   </section>
 
   <section class="rev" id="s5">
-    <h2>5. The Science and Art of Management</h2>
-    <p><b>Science of management</b> — rational, logical, objective, systematic approach; uses data, facts, quantitative models. Best for routine/straightforward problems. Relies on technical, diagnostic, decision-making skills.</p>
-    <p><b>Art of management</b> — intuition, experience, instinct, personal insight. Needed because even "objective facts" can be wrong (Starbucks NYC example: research favored drip coffee, but customers wanted espresso).</p>
-    <p><b>Effective management = a blend of both science and art.</b></p>
+    <h2>5. Cultural Relativism</h2>
+    <p><b>Holmes (1998)</b> — three theses: (1) customs, practices, and moral beliefs vary from culture to culture; (2) morality depends on human nature, human condition, and specific social/cultural circumstances; (3) rightness/wrongness may vary from person to person and culture to culture — this last point is <b>relativism</b>.</p>
+    <div class="term"><b>Cultural relativism</b> — the view that a particular behavior may be judged morally right if one's own culture approves of it. Morality is relative to culture.</div>
+    <p><b>Implication:</b> Cultures "cannot be wrong" and cannot be legitimately criticized for their moral judgments; individuals who question their own culture's morality (from within this view) can never be considered "morally right." When different cultures make different judgments about the same act, both may be considered correct.</p>
+    <p><b>Why many oppose it:</b> If right and wrong are purely relative, people might abandon self-regulation entirely; moral responsibility and moral progress become impossible; there's no way to say which culture's answer to a moral question is the "proper" one, since we can't step outside all cultures to judge.</p>
   </section>
 
   <section class="rev" id="s6">
-    <h2>6. Historical Context of Management</h2>
-    <ul>
-      <li><b>Egyptians</b> — used planning, organizing, controlling to build the pyramids</li>
-      <li><b>Alexander the Great</b> — used a staff organization to coordinate military campaigns</li>
-      <li><b>Roman Empire</b> — well-defined organizational structure for communication/control</li>
-      <li><b>Socrates</b> — discussed management practices/concepts, 400 BC</li>
-      <li><b>Plato</b> — described job specialization, 350 BC</li>
-      <li><b>al-Farabi</b> (Persian scientist/philosopher) — listed leadership traits, AD 900</li>
-      <li><b>Robert Owen</b> (1771–1858, British industrialist) — one of the first to recognize importance of human resources & worker welfare</li>
-      <li><b>Charles Babbage</b> (1792–1871, English mathematician) — focused on production efficiency; believed in division of labor & applying math to facility/material use</li>
-    </ul>
-    <p>Why theory & history matter: theory = conceptual framework for organizing knowledge & guiding action; history helps avoid others' mistakes and provides heritage (e.g., Wells Fargo's corporate historian).</p>
+    <h2>6. The Filipino Way</h2>
+    <p>Filipino culture shares similarities with Asian neighbors and was shaped by foreign rulers for over 300 years.</p>
+    <h3>Religious Orientation</h3>
+    <p>Filipinos are part of a nation with strong religious inclination; monotheism dominates. Morality and values are strongly tied to religious beliefs, tenets, and rites. Yet there's often a gap between religious devotion and actual behavior — <b>Fr. Jaime Bulatao (1960)</b> coined the term <b>"split-level" Christians</b> to describe this inconsistency (pious in church, but irresponsible/corrupt elsewhere).</p>
+    <h3>Perception of How Others Judge Us</h3>
+    <p><b>Fr. Vitaliano Gorospe, S.J. (1966)</b>: the Filipino conscience is more <b>external</b> than internal — judgments of good/bad, right/wrong are shaped more by the presence and opinion of others than by internal conviction. This is captured in the concept of <b>"hiya"</b> (roughly, shame/sense of social propriety). Example from the text: a mother restricts her daughter's clothing not because she values decency itself, but because of what the neighbors might think of her as a mother.</p>
+    <p><b>Conclusion (Boylan, 2000):</b> Our view of morality is unique to each of us because of (1) the biological characteristics handed down by our parents, and (2) the unique upbringing and historical/social circumstances we each experienced.</p>
   </section>
 
   <section class="rev" id="s7">
-    <h2>7. The Classical Management Perspective</h2>
-    <div class="term"><b>Classical management perspective</b> — two branches: <b>scientific management</b> + <b>administrative management</b>.</div>
-    <h3>A. Scientific Management (individual worker efficiency)</h3>
-    <ul>
-      <li><b>Frederick W. Taylor (1856–1915)</b> — dominant figure; foreman at Midvale Steel; observed <b>"soldiering"</b> (employees deliberately working slower than capable); timed/studied jobs; implemented piecework pay. Worked later at Simonds Rolling Machine Co. and Bethlehem Steel.</li>
-      <li><b>Steps in Scientific Management (Fig. 1.3):</b> (1) Develop a science for each job element to replace rule-of-thumb methods → (2) Scientifically select & train workers → (3) Supervise to ensure prescribed methods are followed → (4) Continue to plan the work, but let workers do it.</li>
-      <li><b>Frank & Lillian Gilbreth</b> — husband-wife industrial engineers; bricklaying study reduced movements from <b>18 to 5</b>, output up ~<b>200%</b>. Wrote/inspired <i>Cheaper by the Dozen</i> (12 children).</li>
-    </ul>
-    <h3>B. Administrative Management (managing the total organization)</h3>
-    <ul>
-      <li><b>Henri Fayol (1841–1925)</b> — French industrialist; administrative management's most articulate spokesperson; <b>first to identify planning, organizing, leading, controlling</b> as the core managerial functions (work translated to English in 1930).</li>
-      <li><b>Lyndall Urwick (1891–1983)</b> — British army officer turned theorist/consultant; integrated scientific management with Fayol's work; known for synthesis, not original ideas.</li>
-      <li><b>Max Weber (1864–1920)</b> — German sociologist; work on <b>bureaucracy</b> (rational guidelines for structuring organizations efficiently); translated to English in 1947.</li>
-    </ul>
-    <p><b>Limitations of classical perspective:</b> best suited to stable/simple orgs; proposed universal guidelines that don't fit every organization; slighted the role of the individual (→ addressed later by behavioral perspective).</p>
+    <h2>7. Kohlberg's Stages of Moral Development</h2>
+    <div class="callout"><b>The Heinz Dilemma:</b> Heinz's wife is dying of cancer. A chemist has discovered a drug that could save her but charges 10x its production cost. Heinz can only raise half the money; the chemist refuses to lower the price or delay payment. Heinz breaks in and steals the drug. (Kohlberg used people's reasoning about this story to build his theory.)</div>
+    <p>Kohlberg identified <b>3 levels</b> of moral reasoning, each with <b>2 sub-stages</b> (6 stages total). People pass through them <b>in order</b>; reasoning from an earlier stage gets replaced by the new one. <b>Not everyone reaches every stage.</b></p>
+    <table class="facts">
+      <tr><th>Level</th><th>Who</th><th>Basis of Reasoning</th><th>Stages</th></tr>
+      <tr><td><b>1. Pre-conventional</b></td><td>Most 9-year-olds & younger</td><td>Physical consequences of actions; authority is external</td>
+        <td><b>Stage 1 — Obedience & Punishment:</b> good to avoid punishment.<br><br><b>Stage 2 — Individualism & Exchange:</b> recognizes different viewpoints exist besides authority's.</td></tr>
+      <tr><td><b>2. Conventional</b></td><td>Most adolescents & adults</td><td>Norms of one's group; authority internalized but not questioned</td>
+        <td><b>Stage 3 — Good Interpersonal Relationships:</b> good to be seen as good by others; approval-seeking.<br><br><b>Stage 4 — Maintaining the Social Order:</b> obey laws/rules to uphold order, avoid guilt.</td></tr>
+      <tr><td><b>3. Post-conventional</b></td><td>Only ~10-15% of people reach it</td><td>Self-chosen principles; individual rights and justice</td>
+        <td><b>Stage 5 — Social Contract & Individual Rights:</b> laws are for the good of the majority, but can work against individuals.<br><br><b>Stage 6 — Universal Principles:</b> own moral guidelines (human rights, justice, equality) that may not match the law; will defend them even against society.</td></tr>
+    </table>
   </section>
 
   <section class="rev" id="s8">
-    <h2>8. The Behavioral Management Perspective</h2>
-    <p>Emphasizes individual attitudes/behaviors and group processes (vs. classical's mechanistic view of workers as "cogs").</p>
-    <ul>
-      <li><b>Hugo Munsterberg (1863–1916)</b> — "father of industrial psychology"; established a psych lab at <b>Harvard, 1892</b>; book <i>Psychology and Industrial Efficiency</i> (translated 1913).</li>
-      <li><b>Mary Parker Follett (1868–1933)</b> — recognized the human element in the workplace during the scientific management era.</li>
-    </ul>
-    <h3>The Hawthorne Studies (1927–1932)</h3>
-    <p>Conducted at Western Electric's <b>Hawthorne plant</b> (near Chicago), sponsored initially by General Electric, led by <b>Elton Mayo</b> (Harvard).</p>
-    <ul>
-      <li><b>Lighting experiment:</b> Productivity rose in BOTH the experimental and control groups — even as lighting was later decreased — because workers received special attention/sympathetic supervision (only declined once lighting hit "moonlight" level, and GE withdrew sponsorship).</li>
-      <li><b>Incentive-pay experiment</b> (9 men, terminal banks): The group informally set its own acceptable output level. Overproducers = <b>"rate busters"</b>; underproducers = <b>"chiselers."</b></li>
-      <li>Conclusion: social/individual processes matter more than previously thought in shaping worker behavior.</li>
-    </ul>
-    <h3>Human Relations Movement</h3>
-    <p>Workers respond primarily to the <b>social context</b> of the workplace. Manager's concern for workers → increased satisfaction → improved performance.</p>
-    <ul>
-      <li><b>Abraham Maslow (1908–1970)</b> — 1943, hierarchy of needs theory.</li>
-      <li><b>Douglas McGregor (1906–1964)</b> — Theory X / Theory Y (1960).</li>
-    </ul>
+    <h2>8. Feelings and Moral Decision Making</h2>
+    <p>We like to think our moral decisions are rational/impartial, but we are "feeling beings" — our feelings (moral emotions) are always present and matter. Experts believe it is <b>impossible to make important moral judgments without emotions.</b></p>
     <table class="facts">
-      <tr><th>Theory X (pessimistic — like scientific mgmt)</th><th>Theory Y (positive — human relations view)</th></tr>
-      <tr><td>People dislike work, avoid it</td><td>Work is a natural part of life; not disliked</td></tr>
-      <tr><td>Must be controlled, directed, coerced, threatened</td><td>Internally motivated to reach committed objectives</td></tr>
-      <tr><td>Prefer direction, avoid responsibility, little ambition, want security</td><td>Seek & accept responsibility under favorable conditions; capable of innovation; often underutilized potential</td></tr>
+      <tr><th>Emotion type</th><th>Examples</th><th>Effect</th></tr>
+      <tr><td><b>Inner-directed negative</b></td><td>Guilt, embarrassment, shame</td><td>Motivate the person to act ethically</td></tr>
+      <tr><td><b>Outer-directed negative</b></td><td>Anger, disgust, contempt</td><td>Aim to discipline/punish others who acted unethically; discourages others from repeating it</td></tr>
+      <tr><td><b>Positive</b></td><td>Gratitude, admiration</td><td>Felt when seeing compassion/kindness; prompts people to help others</td></tr>
+      <tr><td><b>Suffering-based</b></td><td>Sympathy, <b>empathy</b></td><td>Lead people to act ethically toward others; <b>empathy is the central moral emotion</b> that most commonly motivates prosocial activity.</td></tr>
     </table>
-    <p>McGregor believed <b>Theory Y</b> was the better philosophy for managers.</p>
-    <div class="term"><b>Organizational behavior</b> — contemporary, more realistic field acknowledging human behavior in orgs is more complex than human relationists believed; interdisciplinary (psychology, sociology, anthropology, economics, medicine). Covers job satisfaction, stress, motivation, leadership, group dynamics, organizational politics, conflict, structure/design.</p>
+    <p><b>Bottom line:</b> Even though we tend to credit philosophy or religious values for our moral decisions, emotions play a significant, often underestimated, role.</p>
   </section>
 
   <section class="rev" id="s9">
-    <h2>9. The Quantitative Management Perspective</h2>
-    <p>Emerged during <b>World War II</b> — mathematical approaches (originally from Taylor/Gantt) applied to military logistics; later adopted by firms like DuPont & GE.</p>
-    <div class="term"><b>Management science</b> — focuses specifically on developing <b>mathematical models</b> (a simplified representation of a system/process/relationship).</div>
-    <div class="term"><b>Operations management</b> — a form of "applied" management science; less mathematically sophisticated; helps orgs produce products/services more efficiently (inventory management, linear programming, queuing theory, break-even analysis, simulation).</div>
-    <p><b>Limitations:</b> can't fully account for individual behavior/attitudes; time spent on quantitative technique can slow development of other skills; models require assumptions that may be unrealistic.</p>
+    <h2>9. The Moral Psychology of Thomas Aquinas</h2>
+    <p><b>Thomas Aquinas</b> — a Dominican priest and philosopher (over 700 years ago) who explored HOW humans think, feel, and choose in moral situations, rather than just listing rules.</p>
+    <h3>Human Action in Three Parts</h3>
+    <ol>
+      <li><b>Intellect</b> — our power to reason and understand; recognizes general truths ("cheating is wrong") and applies them to specific situations; evaluates options and searches for what is truly good.</li>
+      <li><b>Will</b> — our ability to make free choices. Even if the intellect knows what's right, it's the will that actually chooses it — and sometimes the will chooses what merely <i>seems</i> good rather than what is <i>truly</i> good.</li>
+      <li><b>Passions</b> — emotions/bodily responses (fear, compassion, anxiety). Aquinas does NOT see passions as inherently bad — when guided by reason, they can support moral action.</li>
+    </ol>
+    <h3>Framework for Moral Reasoning</h3>
+    <div class="term"><b>Synderesis</b> — our natural, innate grasp of basic moral truths ("do good and avoid evil"); a built-in moral compass that operates automatically.</div>
+    <div class="term"><b>Conscience</b> — applies the general truths known through synderesis to a SPECIFIC situation, through practical reasoning.</div>
+    <div class="term"><b>Natural Law</b> — the moral order written into human nature itself; through reason, we can discover what leads to human flourishing. It's the OBJECTIVE foundation.</div>
+    <p><b>How they work together:</b> Synderesis provides the initial moral awareness -> Conscience applies it through deliberate reasoning about a specific case -> Natural Law supplies the objective foundation that validates and guides the whole process.</p>
   </section>
 
   <section class="rev" id="s10">
-    <h2>10. Contemporary Perspectives: The Systems Perspective</h2>
-    <div class="term"><b>System</b> — an interrelated set of elements functioning as a whole.</div>
-    <p><b>Four basic elements (Figure 1.4):</b></p>
-    <ol>
-      <li><b>Inputs</b> — material, human, financial, information resources from the environment</li>
-      <li><b>Transformation process</b> — technology, operating systems, administrative systems</li>
-      <li><b>Outputs</b> — products/services, profits/losses, employee behaviors, information</li>
-      <li><b>Feedback</b> — environment's reaction back to the system</li>
-    </ol>
-    <ul>
-      <li><b>Open systems</b> — interact with their environment. <b>Closed systems</b> — do not (organizations are open systems; ignoring the environment is a mistake).</li>
-      <li><b>Subsystems</b> — systems within a broader system (e.g., marketing, production, finance depts within a firm); interdependent — a change in one affects others.</li>
-      <li><b>Synergy</b> — subsystems working together produce more than working alone (e.g., Disney's movies + theme parks + merchandise; P&G–Gillette acquisition).</li>
-      <li><b>Entropy</b> — a normal process leading to system decline if an org fails to monitor feedback and adapt (e.g., Studebaker, Circuit City went bankrupt).</li>
-    </ul>
-  </section>
-
-  <section class="rev" id="s11">
-    <h2>11. The Contingency Perspective</h2>
-    <div class="term"><b>Universal perspectives</b> (classical, behavioral, quantitative) try to find the "<b>one best way</b>" to manage.</div>
-    <div class="term"><b>Contingency perspective</b> — appropriate managerial behavior in a given situation depends ("is contingent") on the unique elements of that situation — no universal theory fits every organization.</div>
-    <p><b>Example:</b> Cisco CEO <b>John Chambers</b> shifted from an autocratic, command-and-control style to a more democratic style after the 2001 tech crash/downsizing — illustrating that management style must adapt to the situation.</p>
-  </section>
-
-  <section class="rev" id="s12">
-    <h2>12. Contemporary Management Issues & Challenges</h2>
-    <ul>
-      <li><b>Globalization</b> — varying property ownership, resources, government roles, and cultural/behavioral norms across countries.</li>
-      <li><b>Ethics & social responsibility</b> — corporate governance, business scandals (e.g., Allen Stanford's ~$7B Ponzi scheme), environmental/social obligations.</li>
-      <li><b>Quality</b> — basis for competition (e.g., Lexus/J.D. Power); improves productivity, lowers costs (Whistler Corp. used 100 of 250 employees just to repair defective units).</li>
-      <li><b>Shift to a service economy</b> — service sector was <50% of U.S. GNP in 1947, 65% by 1975, over <b>80% by 2010</b>; ~90% of new U.S. jobs since 1990 are service-sector.</li>
-      <li><b>Economic recession (2008–2010) & slow recovery (2011–2014)</b> — cost-cutting, streamlining, some firms positioned for renewed growth.</li>
-      <li><b>The changing/rapidly evolving workplace</b> — workforce reduction & expansion cycles.</li>
-      <li><b>Workforce diversity</b> — differences in age, gender, ethnicity, physical abilities; ~60% of U.S. women 16+ are now in the workforce (vs. ~1/3 fifty years ago).</li>
-      <li><b>Generational shifts</b> — 1980s "yuppies" (career-devoted) vs. <b>Gen X, Gen Y, Millennials</b> (favor flexibility, individuality, lifestyle/location over long-term corporate loyalty).</li>
-      <li><b>Organization change</b> — orgs that fail to monitor environment & adapt risk failure; some managers deliberately "shake things up" to avoid complacency.</li>
-      <li><b>Technology</b> — smartphones, wireless networks, social media ease communication but increase work pace, reduce time for contemplation, raise employee privacy issues.</li>
-    </ul>
-  </section>
-
-  <section class="rev" id="s13">
-    <h2>13. Rapid-Fire Facts (small details profs love to test)</h2>
-    <div class="callout"><b>Opening case:</b> Netflix's Reed Hastings — inspired by a <b>$40 late fee</b> at Blockbuster and a gym's flat-fee model; Netflix launched <b>1997</b>; by 2013, Blockbuster's market cap had fallen from a 2002 peak of $5B to $35M, while Netflix's topped $15B.</div>
+    <h2>10. Rapid-Fire Facts</h2>
     <table class="facts">
-      <tr><th>Person</th><th>Known for</th><th>Key date/detail</th></tr>
-      <tr><td>Frederick W. Taylor</td><td>Scientific management, "soldiering"</td><td>1856–1915; Midvale Steel foreman</td></tr>
-      <tr><td>Frank & Lillian Gilbreth</td><td>Bricklaying efficiency study</td><td>18→5 movements, +200% output</td></tr>
-      <tr><td>Henri Fayol</td><td>Identified P-O-L-C functions</td><td>1841–1925; translated to English 1930</td></tr>
-      <tr><td>Lyndall Urwick</td><td>Synthesized classical theory</td><td>1891–1983; ex-British army officer</td></tr>
-      <tr><td>Max Weber</td><td>Bureaucracy theory</td><td>1864–1920; translated to English 1947</td></tr>
-      <tr><td>Hugo Munsterberg</td><td>Father of industrial psychology</td><td>Harvard lab, 1892</td></tr>
-      <tr><td>Mary Parker Follett</td><td>Early human-element advocate</td><td>1868–1933</td></tr>
-      <tr><td>Elton Mayo</td><td>Led the Hawthorne Studies</td><td>Harvard; studies ran 1927–1932</td></tr>
-      <tr><td>Abraham Maslow</td><td>Hierarchy of needs</td><td>1943</td></tr>
-      <tr><td>Douglas McGregor</td><td>Theory X / Theory Y</td><td>1906–1964; model published 1960</td></tr>
-      <tr><td>Robert Owen</td><td>Early concern for worker welfare</td><td>1771–1858, British industrialist</td></tr>
-      <tr><td>Charles Babbage</td><td>Division of labor, math in production</td><td>1792–1871, English mathematician</td></tr>
+      <tr><th>Person</th><th>Contribution</th></tr>
+      <tr><td>Karen Allen</td><td>3 conditions that must be present for a moral dilemma</td></tr>
+      <tr><td>Benjiemen Labastin</td><td>Moral agent "seems fated to commit something wrong" in a dilemma</td></tr>
+      <tr><td>William Styron</td><td>Author of Sophie's Choice</td></tr>
+      <tr><td>FDR</td><td>"Four Freedoms" speech — January 6, 1941</td></tr>
+      <tr><td>Holmes (1998)</td><td>Three theses underlying cultural relativism</td></tr>
+      <tr><td>Fr. Jaime Bulatao</td><td>Coined "split-level" Christians</td></tr>
+      <tr><td>Fr. Vitaliano Gorospe</td><td>Filipino conscience is more external than internal; "hiya"</td></tr>
+      <tr><td>Boylan (2000)</td><td>Each person's morality is unique (biology + upbringing)</td></tr>
+      <tr><td>Lawrence Kohlberg</td><td>Theory of moral development; used the Heinz Dilemma</td></tr>
+      <tr><td>Thomas Aquinas</td><td>Intellect-will-passions; synderesis, conscience, natural law</td></tr>
     </table>
+    <div class="callout"><b>Review Note:</b> Watch for exact category pairings: epistemic & ontological, self-imposed & world-imposed, obligation & prohibition, single-agent & multi-person.</div>
   </section>
 
   <div class="callout" style="margin-top:10px;">
-    <b>Ready to test yourself?</b> Switch to the <b>Quiz</b> tab above — 50 items, instant feedback with explanations, and a running scoreboard.
+    <b>READY TO TEST YOURSELF?</b> Switch to the <b>Quiz</b> tab above — 50 items, instant feedback, and a running scoreboard.
   </div>
 
 </div>
@@ -507,22 +522,22 @@
   <div id="scoreboard">
     <div class="row">
       <div class="stat">Answered<br><b id="statAnswered">0/50</b></div>
-      <div class="stat">Correct<br><b id="statCorrect" style="color:var(--green)">0</b></div>
-      <div class="stat">Wrong<br><b id="statWrong" style="color:var(--red)">0</b></div>
+      <div class="stat">Correct<br><b id="statCorrect">0</b></div>
+      <div class="stat">Wrong<br><b id="statWrong">0</b></div>
       <div class="stat">Score<br><b id="statPct">0%</b></div>
     </div>
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   </div>
 
   <div id="finalBanner">
-    <h2>Quiz Complete!</h2>
+    <h2>Quiz Complete</h2>
     <div class="bigscore" id="finalScoreText">0 / 50</div>
     <div id="finalMsg"></div>
   </div>
 
   <div id="quizControls">
     <button class="ctrl" onclick="scrollToNextUnanswered()">Jump to next unanswered</button>
-    <button class="ctrl secondary" onclick="resetQuiz()">Reset quiz</button>
+    <button class="ctrl secondary" id="resetBtn" onclick="handleReset(this)">Reset quiz</button>
   </div>
 
   <div id="quizContainer"></div>
@@ -531,7 +546,7 @@
 
 </main>
 
-<footer>Reviewer & quiz built from Chapter 1: "Understanding the Manager's Job" — Fundamentals of Management, 8th ed. (Griffin). Good luck! 🍀</footer>
+<footer>Ethics Reviewer Edition. Built for clarity and focus.</footer>
 
 <script>
 function showView(name){
@@ -542,278 +557,389 @@ function showView(name){
   window.scrollTo(0,0);
 }
 
+// Custom two-tap confirmation logic to replace confirm()
+let resetTapCount = 0;
+let resetTimeout = null;
+
+function handleReset(btn) {
+  if (resetTapCount === 0) {
+    btn.textContent = "Confirm Reset (Double Tap)";
+    btn.style.background = "var(--black)";
+    btn.style.color = "var(--white)";
+    resetTapCount = 1;
+    
+    resetTimeout = setTimeout(() => {
+      resetTapCount = 0;
+      btn.textContent = "Reset quiz";
+      btn.style.background = "";
+      btn.style.color = "";
+    }, 3000);
+  } else {
+    clearTimeout(resetTimeout);
+    resetTapCount = 0;
+    btn.textContent = "Reset quiz";
+    btn.style.background = "";
+    btn.style.color = "";
+    executeReset();
+  }
+}
+
 const questions = [
-// ---------------- Section 1: Intro to Management ----------------
-{sec:"Intro to Management", q:"According to the chapter, what is an \u201corganization\u201d?", opts:[
-  "A group of people working together in a structured and coordinated fashion to achieve a set of goals",
-  "Any building where business takes place",
-  "A single manager's personal enterprise",
-  "An entity that exists only in government settings"
-], correct:0, exp:"An organization is a group of people working together in a structured, coordinated fashion to achieve goals \u2014 goals can be profit, knowledge, defense, coordination of charities, or social satisfaction."},
+// ---------------- Section A: Moral Dilemma (14) ----------------
+{sec:"Moral Dilemma", q:"According to the text, what is a \u201cdilemma\u201d?", opts:[
+  "A situation where a person is forced to choose between two or more conflicting options, none of which is acceptable",
+  "Any difficult or stressful situation a person faces",
+  "A situation with only one possible solution",
+  "A conflict between two people with opposing goals"
+], correct:0, exp:"A dilemma specifically means a forced choice among conflicting options where none are fully acceptable \u2014 not simply any hard situation."},
 
-{sec:"Intro to Management", q:"Management is directed at an organization's resources. Which of these is NOT one of the four resource types named in the text?", opts:[
-  "Human", "Financial", "Physical", "Legal"
-], correct:3, exp:"The text names four resource types: human, financial, physical, and information. \"Legal\" is not one of the four."},
+{sec:"Moral Dilemma", q:"If a person faces a difficult situation but is NOT forced to choose between two or more conflicting options, the text says that person is:", opts:[
+  "In a moral dilemma",
+  "Just experiencing a problematic or distressful situation, and should look for solutions",
+  "In an epistemic dilemma",
+  "In a self-imposed dilemma"
+], correct:1, exp:"Without a forced choice between conflicting options, it's not a dilemma \u2014 the logical response is simply to look for alternatives or solutions."},
 
-{sec:"Intro to Management", q:"What does it mean for a manager to be \u201cefficient\u201d?", opts:[
-  "Using resources wisely, in a cost-effective way",
-  "Making the right decisions and successfully implementing them",
-  "Working as fast as possible regardless of cost",
-  "Avoiding all risk"
-], correct:0, exp:"Efficient = using resources wisely, in a cost-effective way. (Effective, by contrast, means making the right decisions and implementing them successfully.)"},
+{sec:"Moral Dilemma", q:"In Efreminda's case (ectopic pregnancy), her two conflicting options are:", opts:[
+  "Continue the pregnancy and risk both her and the fetus's death, or abort the fetus to save herself but violate her moral/religious conviction against killing",
+  "Get a divorce or stay married",
+  "See a doctor or avoid medical help entirely",
+  "Move to another town or stay in her community"
+], correct:0, exp:"Efreminda must choose between abortion (saves her life, compromises her moral integrity) or continuing the pregnancy (endangers both her and the fetus)."},
 
-{sec:"Intro to Management", q:"What does it mean for a manager to be \u201ceffective\u201d?", opts:[
-  "Using resources wisely, in a cost-effective way",
-  "Making the right decisions and successfully implementing them",
-  "Cutting costs no matter the outcome",
-  "Following orders exactly as given"
-], correct:1, exp:"Effective = making the right decisions and successfully implementing them. Successful organizations are usually both efficient AND effective."},
+{sec:"Moral Dilemma", q:"According to Karen Allen, the FIRST condition for a moral dilemma is:", opts:[
+  "The agent is obliged to decide which course of action is best",
+  "The agent must be a religious person",
+  "There must be a legal consequence involved",
+  "The dilemma must involve more than one person"
+], correct:0, exp:"Condition 1: the moral agent must choose the best available option and act on it."},
 
-{sec:"Intro to Management", q:"According to the chapter, the average executive works about how many hours per week?", opts:[
-  "40 hours", "50 hours", "60 hours", "80 hours"
-], correct:2, exp:"The text states the average executive works 60 hours a week, facing globalization, competition, regulation, and other pressures."},
+{sec:"Moral Dilemma", q:"Karen Allen's SECOND condition for a moral dilemma requires:", opts:[
+  "A single, obviously correct option",
+  "Different courses of action to choose from",
+  "A resolution that satisfies all moral principles",
+  "Government intervention"
+], correct:1, exp:"Condition 2: there must be two or more conflicting options to choose from."},
 
-// ---------------- Section 2: Kinds of Managers ----------------
-{sec:"Kinds of Managers", q:"Which level of manager creates the organization's overall goals, strategy, and operating policies, and represents the org externally?", opts:[
-  "First-line managers", "Middle managers", "Top managers", "Administrative managers"
-], correct:2, exp:"Top managers (President, VP, CEO) create overall goals/strategy/policy and represent the organization to the external environment."},
+{sec:"Moral Dilemma", q:"According to Karen Allen's THIRD condition (echoed by Benjiemen Labastin), what is true of moral dilemmas?", opts:[
+  "There is always a perfect solution if you think hard enough",
+  "No matter what course of action is taken, some moral principle is always compromised \u2014 the agent is \u201cfated to commit something wrong\u201d",
+  "The agent is never held morally responsible for the outcome",
+  "Moral dilemmas can always be avoided with proper planning"
+], correct:1, exp:"Condition 3: there is no perfect solution \u2014 choosing one moral requirement necessarily means failing another."},
 
-{sec:"Kinds of Managers", q:"Which of the following is a first-line manager title, NOT a middle-manager title?", opts:[
-  "Plant manager", "Division head", "Regional manager", "Supervisor"
-], correct:3, exp:"Middle-management titles include plant manager, operations manager, division head, and regional manager. \u201cSupervisor\u201d is a first-line management title."},
+{sec:"Moral Dilemma", q:"Epistemic moral dilemmas are defined by:", opts:[
+  "The agent not knowing which of the conflicting moral requirements takes precedence, though fuller knowledge could reveal which option is better",
+  "Two requirements that are permanently, objectively equal in moral weight",
+  "A dilemma caused entirely by the agent's own past wrongdoing",
+  "A conflict between two separate people, each with their own obligation"
+], correct:0, exp:"Epistemic dilemmas are a knowledge problem \u2014 e.g., promising to be home early for your son vs. helping a sick old man; with fuller information, one option would likely be better."},
 
-{sec:"Kinds of Managers", q:"Compared to top and middle managers, first-line managers typically spend a large proportion of their time:", opts:[
-  "Meeting with government officials",
-  "Supervising the day-to-day work of their subordinates",
-  "Setting the organization's overall strategy",
-  "Managing shareholder relations"
-], correct:1, exp:"First-line managers (e.g., Starbucks store managers) spend much of their time directly supervising the work of operating employees."},
+{sec:"Moral Dilemma", q:"Ontological moral dilemmas differ from epistemic dilemmas because:", opts:[
+  "They only occur during wartime",
+  "Neither conflicting moral requirement overrides the other \u2014 it isn't a lack of knowledge, the requirements are genuinely, equally weighted",
+  "They only involve children",
+  "They have no real-world examples in the text"
+], correct:1, exp:"Example: a military doctor with two equally wounded soldiers and only one bag of blood \u2014 neither soldier's need is objectively \u201cmore deserving.\u201d"},
 
-{sec:"Kinds of Managers", q:"A manager responsible for recruiting, training, compensation systems, and performance appraisal works in which area?", opts:[
-  "Marketing", "Financial", "Human resources", "Administrative"
-], correct:2, exp:"Human resources managers handle HR planning, recruiting/selecting, training, compensation/benefits, performance appraisal, and discharging employees."},
+{sec:"Moral Dilemma", q:"A self-imposed moral dilemma is illustrated in the text by:", opts:[
+  "Sophie's Choice",
+  "David, a mayoral candidate who promised indigenous peoples he'd protect their forest, but also sought funding from a mining corporation \u2014 creating his own conflict of obligations",
+  "The Heinz Dilemma",
+  "The military doctor and two wounded soldiers"
+], correct:1, exp:"David's dilemma was caused by his own choices/wrongdoing during the campaign \u2014 the defining feature of a self-imposed dilemma."},
 
-{sec:"Kinds of Managers", q:"Administrative (general) managers, such as a hospital administrator, are best described as:", opts:[
-  "Specialists trained in only one functional area",
-  "Generalists with basic familiarity across all functional areas",
-  "Always the organization's CEO",
-  "Managers found only in manufacturing companies"
-], correct:1, exp:"Administrative/general managers are not tied to one management specialty \u2014 they are generalists familiar with all functional areas rather than experts in just one."},
+{sec:"Moral Dilemma", q:"A world-imposed moral dilemma means that:", opts:[
+  "The dilemma is caused by the agent's own wrongdoing",
+  "Certain events in the world place the agent in a situation of moral conflict, through no fault of their own",
+  "The dilemma can only occur in international politics",
+  "The agent has no real choices at all"
+], correct:1, exp:"Unlike self-imposed dilemmas, world-imposed dilemmas arise from external events \u2014 as in Sophie's Choice, where Sophie did nothing to cause her situation."},
 
-// ---------------- Section 3: Basic Management Functions ----------------
-{sec:"Basic Functions", q:"\u201cSelecting a course of action from a set of alternatives\u201d is the definition of:", opts:[
-  "Planning", "Decision making", "Organizing", "Controlling"
-], correct:1, exp:"Decision making, part of the planning process, is defined as selecting a course of action from a set of alternatives."},
+{sec:"Moral Dilemma", q:"In William Styron's Sophie's Choice, what happens?", opts:[
+  "Sophie must choose which of her two children (Eva or Jan) will be sent to the gas chamber at Auschwitz; she chooses Eva, and Jan is sent to the Children's Camp",
+  "Sophie must choose between two job offers",
+  "Sophie must decide whether to report a crime to the police",
+  "Sophie must choose which parent to live with"
+], correct:0, exp:"An SS doctor forces Sophie to choose one child to die; if she refuses, both die. She chooses Eva; Jan goes to the Children's Camp."},
 
-{sec:"Basic Functions", q:"\u201cDetermining how activities and resources are to be grouped\u201d defines which management function?", opts:[
-  "Planning", "Organizing", "Leading", "Controlling"
-], correct:1, exp:"Organizing is the function concerned with grouping activities and resources \u2014 it's more than just building an org chart."},
+{sec:"Moral Dilemma", q:"What is the difference between an obligation dilemma and a prohibition dilemma?", opts:[
+  "They are the same thing",
+  "Obligation dilemmas involve more than one feasible action that is obligatory; prohibition dilemmas involve situations where all feasible actions are forbidden",
+  "Obligation dilemmas only apply to soldiers; prohibition dilemmas only apply to civilians",
+  "Obligation dilemmas have legal consequences; prohibition dilemmas do not"
+], correct:1, exp:"Sophie's Choice is described as a classic example of a prohibition dilemma \u2014 every option available to her is morally forbidden."},
 
-{sec:"Basic Functions", q:"\u201cMonitoring and correcting ongoing activities to facilitate goal attainment\u201d defines:", opts:[
-  "Leading", "Organizing", "Controlling", "Planning"
-], correct:2, exp:"Controlling is the final phase of the management process: monitoring the organization's progress toward its goals."},
+{sec:"Moral Dilemma", q:"In a single-agent dilemma, illustrated by a doctor whose patient has HIV, the agent:", opts:[
+  "Ought, all things considered, to do A and ought to do B, but cannot do both (e.g., the legal duty to report vs. the desire to respect patient confidentiality)",
+  "Has no real obligations at all",
+  "Must consult multiple other people before deciding",
+  "Is always legally required to do only one specific thing, with no tension"
+], correct:0, exp:"A single-agent dilemma involves ONE agent torn between two equally binding obligations that cannot both be fulfilled."},
 
-{sec:"Basic Functions", q:"According to Figure 1.2 in the text, how do managers typically move through the four management functions?", opts:[
-  "Always in a strict, unchanging sequence",
-  "Most managers move back and forth between activities in unpredictable ways",
-  "Only top managers perform all four; others specialize in one",
-  "Each function is performed exactly once per year"
-], correct:1, exp:"While there is a basic logic to the P-O-L-C sequence, most managers engage in more than one activity at a time and move back and forth between them unpredictably."},
+{sec:"Moral Dilemma", q:"A multi-person dilemma, such as a family deciding whether to terminate or prolong a family member's life, requires:", opts:[
+  "Only one person's decision, regardless of others' input",
+  "Not just choosing what is right, but also reaching a general consensus among the people involved",
+  "A government ruling to resolve it",
+  "That all parties automatically agree"
+], correct:1, exp:"Multi-person dilemmas involve several people (family, organization, community) who must reach a consensual decision, making the moral obligation more complicated."},
 
-// ---------------- Section 4: Fundamental Skills ----------------
-{sec:"Fundamental Skills", q:"The manager's ability to think in the abstract and see the organization as a whole is called:", opts:[
-  "Technical skills", "Conceptual skills", "Diagnostic skills", "Interpersonal skills"
-], correct:1, exp:"Conceptual skills depend on the manager's ability to think in the abstract and view the organization holistically \u2014 to see the \u201cbig picture.\u201d"},
+// ---------------- Section B: Freedom (5) ----------------
+{sec:"Freedom", q:"According to the text, \u201cfreedom\u201d is defined as:", opts:[
+  "The power or right to act, speak, or think as one wants without hindrance or restraint",
+  "The absence of all laws and government",
+  "The ability to do anything without any consequences",
+  "A privilege only granted to citizens of democracies"
+], correct:0, exp:"Freedom also stands for securing everyone an equal opportunity for life, liberty, and the pursuit of happiness \u2014 not just unrestrained personal action."},
 
-{sec:"Fundamental Skills", q:"Skills that let a manager \u201cdiagnose\u201d an organizational problem the way a physician diagnoses an illness from symptoms are:", opts:[
-  "Communication skills", "Diagnostic skills", "Decision-making skills", "Time management skills"
-], correct:1, exp:"Diagnostic skills enable a manager to visualize the most appropriate response to a situation, similar to how a physician analyzes symptoms to determine their cause."},
+{sec:"Freedom", q:"The text explains that freedom does NOT mean total license, because:", opts:[
+  "Freedom is only for adults",
+  "Your choices are limited once they start to infringe on another person's freedom (e.g., you can't shout \u201cFire!\u201d in a crowded theater)",
+  "Freedom only applies to speech, not action",
+  "Freedom must be earned through good behavior"
+], correct:1, exp:"Taken literally as \u201cdo whatever I want,\u201d freedom would produce anarchy \u2014 real freedom exists only up to the point it infringes on others."},
 
-{sec:"Fundamental Skills", q:"The ability to correctly recognize and define problems/opportunities and select an appropriate course of action describes:", opts:[
-  "Decision-making skills", "Technical skills", "Conceptual skills", "Interpersonal skills"
-], correct:0, exp:"Decision-making skills refer to a manager's ability to recognize and define problems/opportunities and select the appropriate course of action to address them."},
+{sec:"Freedom", q:"In his 1941 State of the Union Address, FDR outlined the \u201cFour Freedoms.\u201d Which of the following is NOT one of them?", opts:[
+  "Freedom of speech and expression",
+  "Freedom of worship",
+  "Freedom from want",
+  "Freedom of the press"
+], correct:3, exp:"The actual Four Freedoms are: freedom of speech/expression, freedom of worship, freedom from want, and freedom from fear. \u201cFreedom of the press\u201d is not one of the four listed."},
 
-{sec:"Fundamental Skills", q:"Which skill is especially important for FIRST-LINE managers, who train subordinates and answer work-related questions?", opts:[
-  "Conceptual skills", "Technical skills", "Time management skills", "Diagnostic skills"
-], correct:1, exp:"Technical skills \u2014 knowing how to perform the tasks being supervised \u2014 are especially critical for first-line managers."},
+{sec:"Freedom", q:"The distinction between \u201cfreedom of/to\u201d and \u201cfreedom from\u201d was illustrated by:", opts:[
+  "President Franklin Delano Roosevelt's Four Freedoms speech",
+  "Karen Allen's three conditions",
+  "Kohlberg's stages of moral development",
+  "Thomas Aquinas's concept of natural law"
+], correct:0, exp:"FDR's January 6, 1941 State of the Union Address (Four Freedoms speech) is the source of this distinction in the text."},
 
-// ---------------- Section 5: Science & Art ----------------
-{sec:"Science & Art of Management", q:"According to the chapter, effective management is best described as:", opts:[
-  "Purely scientific and data-driven",
-  "Purely intuitive and artistic",
-  "A blend of both science and art",
-  "Irrelevant to skill development"
-], correct:2, exp:"The text states that effective management is a blend of both science (rational, logical, objective) and art (intuition, experience, personal insight)."},
+{sec:"Freedom", q:"According to the text, securing \u201cfreedom from fear\u201d and \u201cfreedom from want\u201d is most likely to require:", opts:[
+  "No organized effort at all",
+  "Some form of collective, organized action, often carried out by government (e.g., liberal representative democracy)",
+  "Total elimination of all governments",
+  "Purely individual effort with no collective action"
+], correct:1, exp:"The text argues these freedoms need collective action, most effectively carried out by government, with liberal representative democracy doing this best so far."},
 
-{sec:"Science & Art of Management", q:"The Starbucks New York City example \u2014 where market research favored drip coffee, but customers actually lined up for espresso \u2014 illustrates that:", opts:[
-  "Objective facts and market research are always reliable",
-  "Even \u201cobjective facts\u201d can prove wrong, requiring intuition and personal insight (the art of management)",
-  "The controlling function had failed",
-  "The systems perspective explains all customer behavior"
-], correct:1, exp:"This example shows managers must blend intuition/personal insight with hard data, since even seemingly objective research can turn out to be wrong."},
+// ---------------- Section C: Culture (9) ----------------
+{sec:"Culture", q:"According to the text, \u201cculture\u201d is defined as:", opts:[
+  "A way of life; the totality of the social environment in which we conduct our lives",
+  "A set of laws written by a government",
+  "Only the religious practices of a group",
+  "A person's individual personality traits"
+], correct:0, exp:"We don't choose the culture we're born into, but we can grow and adjust to it \u2014 it shapes who we become."},
 
-// ---------------- Section 6: Historical Context ----------------
-{sec:"Historical Context", q:"The Egyptians used which management functions when constructing the pyramids?", opts:[
-  "Leading and controlling only",
-  "Planning, organizing, and controlling",
-  "Only planning",
-  "None \u2014 pyramids required no management"
-], correct:1, exp:"The text states the Egyptians used the management functions of planning, organizing, and controlling to build the pyramids."},
+{sec:"Culture", q:"According to the text, our morality is affected by which of the following influences?", opts:[
+  "Home, school, community, church, and society, as well as friends, media, and social media",
+  "Only our genetics",
+  "Only our religion",
+  "Only our formal education"
+], correct:0, exp:"The text lists a broad range of influences on our moral behavior, not just one single source."},
 
-{sec:"Historical Context", q:"Who discussed management practices and concepts in 400 BC?", opts:[
-  "Plato", "Socrates", "Alexander the Great", "al-Farabi"
-], correct:1, exp:"Socrates discussed management practices and concepts in 400 BC; Plato described job specialization in 350 BC; al-Farabi listed leadership traits around AD 900."},
+{sec:"Culture", q:"According to Holmes (1998), which of the following is one of his three theses about culture and morality?", opts:[
+  "Customs, practices, and moral beliefs vary from culture to culture",
+  "All cultures have identical moral beliefs",
+  "Morality is entirely independent of culture",
+  "Only Western cultures have valid moral systems"
+], correct:0, exp:"Holmes's three theses include that customs/practices/moral beliefs vary by culture, morality depends on human nature/condition/circumstances, and rightness/wrongness may vary culture to culture (relativism)."},
 
-{sec:"Historical Context", q:"Which two men are identified as pioneers of the serious study of management, beginning in the 19th century?", opts:[
-  "Taylor and Fayol", "Robert Owen and Charles Babbage", "Mayo and Weber", "Munsterberg and Follett"
-], correct:1, exp:"Robert Owen (concern for worker welfare) and Charles Babbage (efficiency of production, division of labor) are named as 19th-century pioneers of management study."},
+{sec:"Culture", q:"\u201cCultural relativism\u201d is best defined as:", opts:[
+  "The view that particular behavior may be judged as morally right if one's own culture approves of it \u2014 morality is relative to culture",
+  "The belief that there is one single, universal morality for all cultures",
+  "A theory that rejects the existence of culture altogether",
+  "The idea that only law, not culture, determines morality"
+], correct:0, exp:"Cultural relativism ties moral rightness/wrongness directly to whether a person's own culture approves of the behavior."},
 
-{sec:"Historical Context", q:"Charles Babbage placed great faith in which concept, along with applying mathematics to production problems?", opts:[
-  "Division of labor", "Bureaucracy", "Human relations", "Synergy"
-], correct:0, exp:"Babbage, an English mathematician, placed great faith in the division of labor and advocated applying mathematics to efficient use of facilities and materials."},
+{sec:"Culture", q:"According to the text, what is a key implication of cultural relativism?", opts:[
+  "Cultures cannot be \u201cwrong,\u201d and individuals who question their own culture's morality can never be considered morally right by that view",
+  "All cultures must adopt the same moral standards",
+  "Cultural relativism proves that objective morality exists",
+  "Cultural relativism eliminates the need for any moral reasoning"
+], correct:0, exp:"Under cultural relativism, cultures are treated as incapable of moral error, and cross-cultural criticism becomes illegitimate."},
 
-// ---------------- Section 7: Classical Perspective ----------------
-{sec:"Classical Perspective", q:"The classical management perspective consists of two distinct branches:", opts:[
-  "Human relations and organizational behavior",
-  "Scientific management and administrative management",
-  "Systems and contingency perspectives",
-  "Management science and operations management"
-], correct:1, exp:"The classical management perspective includes scientific management (individual worker efficiency) and administrative management (managing the total organization)."},
+{sec:"Culture", q:"Why do many people oppose cultural relativism, according to the text?", opts:[
+  "Because it is too difficult to understand",
+  "Because acceptance of it could lead to an erosion of moral standards, since there would be no way to say any culture's practices are truly wrong",
+  "Because it was invented too recently to be trusted",
+  "Because it only applies to Filipino culture"
+], correct:1, exp:"Critics worry that if right/wrong are purely relative, people may abandon self-regulation and moral progress becomes impossible."},
 
-{sec:"Classical Perspective", q:"Frederick Taylor used the term \u201csoldiering\u201d to describe:", opts:[
-  "A normal process leading to system decline",
-  "Employees deliberately working at a pace slower than their capabilities",
-  "Two or more subsystems working together to produce more than working alone",
-  "A rational set of bureaucratic guidelines"
-], correct:1, exp:"Taylor observed \u201csoldiering\u201d as a foreman at Midvale Steel \u2014 employees deliberately working below their capability."},
+{sec:"Culture", q:"Fr. Jaime Bulatao (1960) coined which term to describe Filipinos who are pious and God-fearing at one moment but irresponsible or corrupt the next?", opts:[
+  "\u201cSplit-level\u201d Christians",
+  "\u201cHiya\u201d-driven Christians",
+  "Post-conventional Christians",
+  "Cultural relativists"
+], correct:0, exp:"\u201cSplit-level\u201d Christians describes the inconsistency between religious devotion and everyday moral behavior."},
 
-{sec:"Classical Perspective", q:"The Gilbreths' bricklaying study reduced physical movements from 18 to 5. By approximately how much did output increase?", opts:[
-  "50%", "100%", "200%", "500%"
-], correct:2, exp:"Frank Gilbreth's redesign of bricklaying reduced movements from 18 to 5 and increased output by about 200%."},
+{sec:"Culture", q:"According to Fr. Vitaliano Gorospe, S.J. (1966), the Filipino conscience tends to be:", opts:[
+  "More internal than external, based purely on personal conviction",
+  "More external than internal \u2014 heavily influenced by how others may judge us (the concept of \u201chiya\u201d)",
+  "Completely unaffected by social pressure",
+  "Based entirely on legal requirements"
+], correct:1, exp:"Gorospe argued Filipino moral judgment is strongly shaped by the presence and opinions of others, captured in the concept of \u201chiya.\u201d"},
 
-{sec:"Classical Perspective", q:"Who is credited as administrative management's most articulate spokesperson, and was the first to identify planning, organizing, leading, and controlling as core managerial functions?", opts:[
-  "Max Weber", "Henri Fayol", "Lyndall Urwick", "Frederick Taylor"
-], correct:1, exp:"Henri Fayol, a French industrialist, was administrative management's most articulate spokesperson and first identified the P-O-L-C functions (his work was translated into English in 1930)."},
+{sec:"Culture", q:"According to Boylan (2000), as cited in the text, why is each person's view of morality unique?", opts:[
+  "Because of biological characteristics from our parents and the unique upbringing/historical circumstances each of us experienced",
+  "Because morality is randomly assigned at birth",
+  "Because only religious people have a moral view",
+  "Because government regulations differ by country"
+], correct:0, exp:"The combination of inherited biology and personal upbringing creates a unique, personal moral worldview for each individual."},
 
-{sec:"Classical Perspective", q:"Whose work on bureaucracy laid the foundation for contemporary organization theory?", opts:[
-  "Henri Fayol", "Lyndall Urwick", "Max Weber", "Robert Owen"
-], correct:2, exp:"Max Weber, a German sociologist, developed the concept of bureaucracy \u2014 a rational set of guidelines for structuring organizations efficiently. His work was translated into English in 1947."},
+// ---------------- Section D: Kohlberg (10) ----------------
+{sec:"Kohlberg's Stages", q:"In the Heinz Dilemma, what did Heinz ultimately do?", opts:[
+  "He paid the full price for the drug",
+  "He broke into the chemist's shop and stole the drug to save his dying wife",
+  "He let his wife die rather than break the law",
+  "He sued the chemist in court"
+], correct:1, exp:"After the chemist refused to lower the price or accept partial payment, Heinz broke in and stole the drug for his dying wife."},
 
-// ---------------- Section 8: Behavioral Perspective ----------------
-{sec:"Behavioral Perspective", q:"Who is recognized as the \u201cfather of industrial psychology\u201d and established a psychological laboratory at Harvard in 1892?", opts:[
-  "Elton Mayo", "Hugo Munsterberg", "Mary Parker Follett", "Douglas McGregor"
-], correct:1, exp:"Hugo Munsterberg, a German psychologist, is recognized as the father of industrial psychology; his book Psychology and Industrial Efficiency was translated into English in 1913."},
+{sec:"Kohlberg's Stages", q:"Kohlberg identified how many distinct levels of moral reasoning, based on people's answers to the Heinz Dilemma?", opts:[
+  "Two: right and wrong",
+  "Three: pre-conventional, conventional, and post-conventional",
+  "Four: instinct, custom, law, and principle",
+  "Five levels, one for each stage"
+], correct:1, exp:"Kohlberg's theory has three levels, each containing two sub-stages, for six stages total."},
 
-{sec:"Behavioral Perspective", q:"The Hawthorne studies were conducted at which company's plant, between 1927 and 1932?", opts:[
-  "General Electric", "Western Electric", "Bethlehem Steel", "Midvale Steel"
-], correct:1, exp:"The Hawthorne studies took place at Western Electric's Hawthorne plant near Chicago (initially sponsored by General Electric), led by Elton Mayo."},
+{sec:"Kohlberg's Stages", q:"According to Kohlberg, how do people move through the levels of moral development, and does everyone reach every stage?", opts:[
+  "People pass through the levels in order, and the reasoning of an earlier stage is replaced by the new one; not everyone achieves all the stages",
+  "People can skip levels randomly",
+  "Everyone eventually reaches the highest stage",
+  "The levels have no fixed order"
+], correct:0, exp:"The stages occur in a fixed sequence, but Kohlberg claimed not everyone reaches the later, more advanced stages."},
 
-{sec:"Behavioral Perspective", q:"In the Hawthorne lighting experiment, the surprising finding was that:", opts:[
-  "Productivity fell in both the experimental and control groups",
-  "Productivity rose in both groups \u2014 even when lighting was decreased \u2014 due to the special attention given to the workers",
-  "Only the control group's output changed",
-  "Lighting had no measurable effect on either group"
-], correct:1, exp:"Productivity increased in both groups regardless of actual lighting changes; researchers attributed this to workers receiving special attention and sympathetic supervision, not the lighting itself."},
+{sec:"Kohlberg's Stages", q:"At the Pre-conventional level (most nine-year-olds and younger), moral reasoning is based on:", opts:[
+  "Universal ethical principles chosen by the individual",
+  "The physical consequences of actions, with authority external to the individual",
+  "The approval of peer groups",
+  "Formal legal codes"
+], correct:1, exp:"A personal code of morality does not yet exist at this level; reasoning follows the physical consequences of actions and outside authority."},
 
-{sec:"Behavioral Perspective", q:"In the Hawthorne incentive-pay experiment, workers who overproduced were labeled ______, and underproducers were labeled ______.", opts:[
-  "chiselers; rate busters", "rate busters; chiselers", "soldiers; slackers", "yuppies; loyalists"
-], correct:1, exp:"Overproducers were branded \u201crate busters,\u201d while underproducers were labeled \u201cchiselers\u201d \u2014 the group informally set its own acceptable output level."},
+{sec:"Kohlberg's Stages", q:"Stage 1 of Kohlberg's theory, \u201cObedience and Punishment Orientation,\u201d means:", opts:[
+  "The individual is good in order to avoid being punished",
+  "The individual follows the law to gain social status",
+  "The individual acts based on universal human rights",
+  "The individual seeks approval from close friends"
+], correct:0, exp:"At Stage 1, if a person is punished, they assume they must have done something wrong \u2014 avoiding punishment is the motivator."},
 
-{sec:"Behavioral Perspective", q:"Douglas McGregor's Theory X assumes that:", opts:[
-  "People naturally enjoy work and seek out responsibility",
-  "People dislike work and must be controlled, directed, or coerced to perform",
-  "People are motivated mainly by self-actualization",
-  "People will always exceed expectations without supervision"
-], correct:1, exp:"Theory X is the pessimistic, negative view of workers (consistent with scientific management): people dislike work, must be coerced, prefer direction, and avoid responsibility."},
+{sec:"Kohlberg's Stages", q:"Stage 2, \u201cIndividualism and Exchange,\u201d is characterized by:", opts:[
+  "Blind obedience to a single authority figure",
+  "Recognizing that there is not just one right view handed down by authorities \u2014 different individuals have different viewpoints",
+  "A focus on maintaining social order and law",
+  "Reasoning based on universal justice principles"
+], correct:1, exp:"At Stage 2, children begin to recognize that authority isn't the only source of a \u201ccorrect\u201d viewpoint."},
 
-{sec:"Behavioral Perspective", q:"The contemporary, interdisciplinary field (drawing on psychology, sociology, anthropology, economics, and medicine) that recognizes human behavior in organizations is more complex than early human relations theorists believed is called:", opts:[
-  "Scientific management", "Organizational behavior", "Management science", "Administrative management"
-], correct:1, exp:"Organizational behavior is the contemporary field acknowledging the complexity of human behavior in organizations, covering topics like job satisfaction, motivation, leadership, and group dynamics."},
+{sec:"Kohlberg's Stages", q:"At the Conventional level (most adolescents and adults), moral reasoning is based on:", opts:[
+  "Avoiding physical punishment only",
+  "The norms of the group to which the person belongs; authority is internalized but not questioned",
+  "Individually chosen universal principles",
+  "Total rejection of societal rules"
+], correct:1, exp:"At this level, people internalize the moral standards of valued adult role models and group norms."},
 
-// ---------------- Section 9: Quantitative Perspective ----------------
-{sec:"Quantitative Perspective", q:"The quantitative management perspective emerged primarily during which period?", opts:[
-  "The Industrial Revolution", "World War II", "The Great Depression", "The 1980s recession"
-], correct:1, exp:"During WWII, government officials and scientists applied mathematical approaches (from Taylor and Gantt) to military logistics problems, giving rise to the quantitative perspective."},
+{sec:"Kohlberg's Stages", q:"What is the key difference between Stage 3 (\u201cGood Interpersonal Relationships\u201d) and Stage 4 (\u201cMaintaining the Social Order\u201d)?", opts:[
+  "Stage 3 is about being seen as good by others (approval-seeking); Stage 4 is about obeying the wider rules/laws of society to uphold order and avoid guilt",
+  "Stage 3 is for children only; Stage 4 is for adults only",
+  "They are identical stages with different names",
+  "Stage 3 involves legal reasoning; Stage 4 involves religious reasoning"
+], correct:0, exp:"Stage 3 centers on interpersonal approval, while Stage 4 shifts to a broader concern for societal rules and law."},
 
-{sec:"Quantitative Perspective", q:"Which branch of the quantitative perspective focuses specifically on developing mathematical models?", opts:[
-  "Operations management", "Management science", "Organizational behavior", "Administrative management"
-], correct:1, exp:"Management science focuses specifically on developing mathematical models \u2014 simplified representations of a system, process, or relationship."},
+{sec:"Kohlberg's Stages", q:"According to Kohlberg, what percentage of people are capable of reaching Post-conventional morality (Stages 5-6)?", opts:[
+  "Nearly 100%",
+  "Only about 10-15%",
+  "Exactly 50%",
+  "75-90%"
+], correct:1, exp:"Kohlberg believed only 10-15% of people are capable of the abstract thinking required for Stage 5 or 6 reasoning."},
 
-{sec:"Quantitative Perspective", q:"Operations management is best described as:", opts:[
-  "A purely theoretical discipline unrelated to daily operations",
-  "A form of \u201capplied\u201d management science that helps organizations produce goods/services more efficiently",
-  "The study of individual worker motivation",
-  "Identical to scientific management"
-], correct:1, exp:"Operations management is less mathematically sophisticated than management science and can be thought of as applied management science \u2014 used for inventory management, linear programming, queuing theory, etc."},
+{sec:"Kohlberg's Stages", q:"What distinguishes Stage 6 (\u201cUniversal Principles\u201d) from Stage 5 (\u201cSocial Contract and Individual Rights\u201d)?", opts:[
+  "Stage 5 involves following personal, universal moral guidelines that may not fit existing law, even at the cost of imprisonment; Stage 6 is about laws working for the good of the majority",
+  "Stage 6 involves a person's own set of moral guidelines (e.g., human rights, justice, equality) that may not fit the law, and the person will defend these principles even against society; Stage 5 recognizes that laws/rules, while generally good, can sometimes work against particular individuals",
+  "They are exactly the same stage",
+  "Stage 5 is only about religion; Stage 6 is only about politics"
+], correct:1, exp:"Stage 5 acknowledges rules can conflict with individual interests; Stage 6 goes further \u2014 the person holds self-derived universal principles and will defend them even against society's disapproval."},
 
-// ---------------- Section 10: Systems Perspective ----------------
-{sec:"Systems Perspective", q:"In the systems perspective, a \u201csystem\u201d is defined as:", opts:[
-  "A single machine or tool",
-  "An interrelated set of elements functioning as a whole",
-  "Only the financial department of a company",
-  "A synonym for bureaucracy"
-], correct:1, exp:"A system is defined as an interrelated set of elements functioning as a whole \u2014 organizations can be understood this way."},
+// ---------------- Section E: Feelings & Moral Decision Making (6) ----------------
+{sec:"Feelings & Moral Decision Making", q:"According to the text (citing ethicsunwrapped.utexas.edu), can people make important moral judgments without emotions?", opts:[
+  "Yes, always \u2014 emotions should be entirely excluded from ethical decision-making",
+  "Experts think it is impossible to make any important moral judgments without emotions",
+  "Emotions are irrelevant to moral reasoning",
+  "Only religious people rely on emotions for moral judgments"
+], correct:1, exp:"The text states emotions/feelings and intuitions play a major role in ethical decisions, and experts consider them essential, not optional."},
 
-{sec:"Systems Perspective", q:"The four basic elements of the systems model (Figure 1.4) are:", opts:[
-  "Planning, organizing, leading, controlling",
-  "Inputs, transformation processes, outputs, and feedback",
-  "Efficiency, effectiveness, synergy, entropy",
-  "Top, middle, first-line, and specialized managers"
-], correct:1, exp:"The systems model consists of inputs (from the environment), a transformation process, outputs (back into the environment), and feedback."},
+{sec:"Feelings & Moral Decision Making", q:"Inner-directed negative emotions like guilt, embarrassment, and shame tend to:", opts:[
+  "Motivate people to act ethically",
+  "Have no effect on behavior",
+  "Only affect children, not adults",
+  "Discipline or punish other people"
+], correct:0, exp:"Inner-directed negative emotions are self-focused and push the person toward more ethical behavior."},
 
-{sec:"Systems Perspective", q:"A system that interacts with its environment is called a(n):", opts:[
-  "Closed system", "Open system", "Subsystem", "Entropic system"
-], correct:1, exp:"Open systems interact with their environment; closed systems do not. Organizations are open systems, though some mistakenly ignore their environment."},
+{sec:"Feelings & Moral Decision Making", q:"Outer-directed negative emotions like anger, disgust, or contempt are typically directed at:", opts:[
+  "Oneself, to induce guilt",
+  "Those who have acted unethically, aiming to discipline or punish and discourage others from behaving the same way",
+  "Random targets with no moral connection",
+  "Only political leaders"
+], correct:1, exp:"These emotions are aimed outward, at people who behaved unethically, functioning as informal discipline/punishment."},
 
-{sec:"Systems Perspective", q:"When two or more subsystems working together produce more than they could working alone, this is called:", opts:[
-  "Entropy", "Synergy", "Feedback", "Soldiering"
-], correct:1, exp:"Synergy \u2014 illustrated by Disney's movies, theme parks, and merchandise reinforcing one another, or P&G's acquisition of Gillette."},
+{sec:"Feelings & Moral Decision Making", q:"Positive emotions like gratitude and admiration, felt when observing someone act with compassion or kindness, tend to:", opts:[
+  "Prompt people to help others",
+  "Cause people to feel jealous",
+  "Have no influence on future behavior",
+  "Only occur in professional settings"
+], correct:0, exp:"Positive emotions triggered by witnessing kindness can inspire the observer to act helpfully as well."},
 
-{sec:"Systems Perspective", q:"Entropy, in the systems perspective, refers to:", opts:[
-  "The growth phase of a healthy, expanding organization",
-  "A normal process leading to system decline if feedback is ignored",
-  "A type of employee incentive pay plan",
-  "A synonym for synergy"
-], correct:1, exp:"Entropy is a normal process leading to system decline when an organization fails to monitor feedback and adapt \u2014 e.g., Studebaker and Circuit City's failures."},
+{sec:"Feelings & Moral Decision Making", q:"Which emotion does the text identify as \u201cthe central moral emotion that most commonly motivates prosocial activity such as altruism, cooperation, and generosity\u201d?", opts:[
+  "Anger",
+  "Empathy",
+  "Pride",
+  "Fear"
+], correct:1, exp:"Empathy, evoked by others' suffering, is singled out as the central driver of prosocial, ethical behavior."},
 
-// ---------------- Section 11: Contingency Perspective ----------------
-{sec:"Contingency Perspective", q:"How does the contingency perspective differ from the classical, behavioral, and quantitative perspectives?", opts:[
-  "It also claims there is \u201cone best way\u201d to manage all organizations",
-  "It suggests appropriate managerial behavior depends on the unique elements of a given situation, not universal rules",
-  "It ignores the organizational environment entirely",
-  "It applies only to manufacturing firms"
-], correct:1, exp:"Classical, behavioral, and quantitative approaches are \u201cuniversal\u201d perspectives seeking the one best way; the contingency perspective instead says the right approach depends on the specific situation."},
+{sec:"Feelings & Moral Decision Making", q:"According to the text, what might surprise us about the source of our moral decisions?", opts:[
+  "That they are influenced only by philosophy or religious values",
+  "That, in truth, our emotions play a significant role in our ethical decision-making, more than we might assume",
+  "That moral decisions are completely random",
+  "That morality has nothing to do with feelings"
+], correct:1, exp:"Even though we tend to credit philosophy/religion for our moral choices, the text emphasizes emotions' significant, often underestimated, influence."},
 
-{sec:"Contingency Perspective", q:"Cisco CEO John Chambers shifting from an autocratic, command-and-control style to a more democratic style after the 2001 downturn illustrates:", opts:[
-  "Scientific management",
-  "The contingency perspective \u2014 adapting management style to the situation",
-  "The quantitative perspective",
-  "Entropy"
-], correct:1, exp:"Chambers changed his management style as circumstances changed at Cisco \u2014 a real-world example of the contingency perspective in action."},
+// ---------------- Section F: Aquinas (6) ----------------
+{sec:"Aquinas's Moral Psychology", q:"According to Thomas Aquinas, truly moral human actions result from three essential parts working together. What are they?", opts:[
+  "Intellect, Will, and Passions",
+  "Synderesis, Conscience, and Natural Law",
+  "Pre-conventional, Conventional, and Post-conventional reasoning",
+  "Epistemic, Ontological, and Self-imposed dilemmas"
+], correct:0, exp:"Intellect, Will, and Passions are the three parts of human action Aquinas identifies (Synderesis/Conscience/Natural Law form a separate framework for moral reasoning)."},
 
-// ---------------- Section 12: Contemporary Challenges ----------------
-{sec:"Contemporary Challenges", q:"Which contemporary challenge involves varying property ownership arrangements, resource availability, government roles, and cultural norms across countries?", opts:[
-  "Entropy", "Globalization", "Soldiering", "Synergy"
-], correct:1, exp:"Globalization poses challenges and opportunities at both macro (ownership, resources, government) and behavioral (values, beliefs, norms) levels."},
+{sec:"Aquinas's Moral Psychology", q:"According to Aquinas, the role of the \u201cIntellect\u201d in moral action is to:", opts:[
+  "Make the final free choice",
+  "Reason and understand \u2014 recognizing general truths and applying them to specific situations, evaluating options",
+  "Generate emotional/bodily responses like fear or compassion",
+  "Enforce legal consequences"
+], correct:1, exp:"The intellect is the reasoning power that identifies general moral truths and searches for what is truly good in a given situation."},
 
-{sec:"Contemporary Challenges", q:"By 2010, the service sector accounted for roughly what percentage of U.S. gross national product (GNP)?", opts:[
-  "50%", "65%", "Over 80%", "30%"
-], correct:2, exp:"The service sector was under 50% of GNP in 1947, reached 65% by 1975, and surpassed 80% by 2010."},
+{sec:"Aquinas's Moral Psychology", q:"According to Aquinas, the \u201cWill\u201d is:", opts:[
+  "Our power to reason abstractly",
+  "Our ability to make free choices; even if the intellect knows what's right, the will is what actually chooses it (sometimes choosing what merely seems good, not what is truly good)",
+  "A synonym for conscience",
+  "Purely an emotional response"
+], correct:1, exp:"The will is the faculty of free choice; it can choose correctly or can be misled into choosing what only appears good."},
 
-{sec:"Contemporary Challenges", q:"Which generational groups are described as less devoted to long-term corporate careers and more interested in flexibility, individuality, and lifestyle/location preferences?", opts:[
-  "Baby Boomers", "1980s \u201cyuppies\u201d", "Generation X, Generation Y, and Millennials", "War-era workers"
-], correct:2, exp:"Unlike the career-devoted \u201cyuppies\u201d of the 1980s, Gen X, Gen Y, and Millennials tend to prefer smaller, flexible, entrepreneurial firms and prioritize lifestyle and location."},
+{sec:"Aquinas's Moral Psychology", q:"According to Aquinas, how does he view \u201cPassions\u201d (emotions and bodily responses like fear or compassion)?", opts:[
+  "As entirely bad and something to be suppressed",
+  "As irrelevant to moral action",
+  "As not inherently bad \u2014 when guided by reason, passions can actually support moral action",
+  "As the sole basis of all moral decisions"
+], correct:2, exp:"Aquinas sees passions as morally neutral in themselves; guided by reason, they can support genuinely moral action."},
 
-{sec:"Contemporary Challenges", q:"Increasing attention to pollution, business's environmental obligations, and corporate governance frameworks falls under which contemporary management challenge?", opts:[
-  "Quality", "Ethics and social responsibility", "Technology", "Service economy"
-], correct:1, exp:"Ethics and social responsibility cover corporate governance, environmental obligations, and responses to scandals like Allen Stanford's ~$7 billion Ponzi scheme."},
+{sec:"Aquinas's Moral Psychology", q:"\u201cSynderesis,\u201d in Aquinas's framework, refers to:", opts:[
+  "The natural, innate grasp of basic moral truths (like \u201cdo good and avoid evil\u201d) \u2014 a built-in moral compass that operates automatically, before formal reasoning",
+  "The formal, deliberate process of weighing options in a specific situation",
+  "A legal code written by governments",
+  "A stage in Kohlberg's theory of moral development"
+], correct:0, exp:"Synderesis is the innate, automatic grasp of fundamental moral principles, distinct from the deliberate reasoning of conscience."},
 
-{sec:"Contemporary Challenges", q:"According to the text, new technology (smartphones, wireless networks, social media) has:", opts:[
-  "Only benefited managers, with no downsides",
-  "Made communication easier, but also increased work pace, cut into contemplation time, and raised employee privacy concerns",
-  "Eliminated the need for the organizing function",
-  "Replaced the need for planning entirely"
-], correct:1, exp:"While technology eases communication, it has increased the work pace for managers, reduced time for thoughtful decision-making, and created new privacy issues (e.g., discipline over employees' social media posts)."}
+{sec:"Aquinas's Moral Psychology", q:"How does \u201cConscience\u201d differ from \u201cNatural Law\u201d in Aquinas's framework?", opts:[
+  "They are identical concepts",
+  "Conscience applies moral truths to specific situations through practical reasoning and weighing circumstances; Natural Law is the objective, rational moral order in human nature that grounds those truths in the first place",
+  "Conscience is only relevant to religious people; Natural Law is only relevant to scientists",
+  "Conscience is innate and automatic; Natural Law requires no reasoning at all"
+], correct:1, exp:"Conscience is the deliberative application of moral principles to a concrete case, while Natural Law is the objective foundation (rooted in human nature) that makes those principles more than subjective opinion."}
 ];
 
 const total = questions.length;
@@ -829,7 +955,7 @@ function buildQuiz(){
 
     const secEl = document.createElement('div');
     secEl.className = 'qsection';
-    secEl.textContent = 'Item ' + (idx+1) + ' of ' + total + ' \u00b7 ' + item.sec;
+    secEl.textContent = 'ITEM ' + (idx+1) + ' OF ' + total + ' \u00b7 ' + item.sec;
     card.appendChild(secEl);
 
     const qEl = document.createElement('div');
@@ -860,7 +986,7 @@ function selectAnswer(qIdx, chosenIdx){
   const item = questions[qIdx];
   const card = document.getElementById('q'+qIdx);
   const buttons = card.querySelectorAll('.opt');
-  if (card.dataset.answered === '1') return; // already answered
+  if (card.dataset.answered === '1') return;
 
   card.dataset.answered = '1';
   answeredCount++;
@@ -882,7 +1008,10 @@ function selectAnswer(qIdx, chosenIdx){
   const expEl = document.getElementById('exp'+qIdx);
   expEl.classList.add('show');
   expEl.classList.add(isCorrect ? 'right' : 'wrong');
-  expEl.innerHTML = (isCorrect ? '\u2705 <b>Correct!</b> ' : '\u274c <b>Not quite \u2014 correct answer: ' + String.fromCharCode(65+item.correct) + '.</b> ') + item.exp;
+  
+  // Minimalist text-based feedback replacing emojis
+  const statusText = isCorrect ? 'CORRECT:' : 'INCORRECT \u2014 Right answer is ' + String.fromCharCode(65+item.correct) + ':';
+  expEl.innerHTML = '<b>' + statusText + '</b> ' + item.exp;
 
   updateScoreboard();
 }
@@ -907,10 +1036,10 @@ function showFinalBanner(){
   const finalPct = Math.round((correctCount/total)*100);
   document.getElementById('finalScoreText').textContent = correctCount + ' / ' + total + '  (' + finalPct + '%)';
   let msg = '';
-  if (finalPct >= 90) msg = "Excellent! You're locked in for this quiz. Skim the Rapid-Fire Facts once more for extra insurance.";
-  else if (finalPct >= 75) msg = "Solid grasp of the chapter. Review the items you missed above \u2014 they're highlighted in red.";
-  else if (finalPct >= 50) msg = "Decent start \u2014 scroll back through your missed (red) answers and reread those Reviewer sections before your quiz.";
-  else msg = "Head back to the Reviewer tab and go section by section, then retake this quiz \u2014 you've got time to turn this around.";
+  if (finalPct >= 90) msg = "Excellent result. You have a solid grasp on the material.";
+  else if (finalPct >= 75) msg = "Good understanding. Review the incorrect items for full mastery.";
+  else if (finalPct >= 50) msg = "Average performance. Review the main text and retry.";
+  else msg = "Significant review needed. Please read the reviewer sections carefully before trying again.";
   banner.querySelector('#finalMsg').textContent = msg;
   banner.style.display = 'block';
   banner.scrollIntoView({behavior:'smooth', block:'start'});
@@ -927,8 +1056,7 @@ function scrollToNextUnanswered(){
   showFinalBanner();
 }
 
-function resetQuiz(){
-  if(!confirm('Reset all answers and start the quiz over?')) return;
+function executeReset(){
   answeredCount = 0;
   correctCount = 0;
   document.getElementById('quizContainer').innerHTML = '';
