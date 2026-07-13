@@ -1,300 +1,945 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Art of Oral History | Call for Artists</title>
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-  
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Icons (Lucide) -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 1 Reviewer & Quiz — Understanding the Manager's Job</title>
+<style>
+  :root{
+    --navy:#1c2b4a;
+    --navy-light:#2d4270;
+    --paper:#fafaf8;
+    --card:#ffffff;
+    --border:#dcdfe4;
+    --text:#22262e;
+    --muted:#5b6472;
+    --green:#1e7d3c;
+    --green-bg:#e7f6ec;
+    --red:#b3261e;
+    --red-bg:#fce8e6;
+    --gold:#a3760a;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family: Georgia, 'Times New Roman', serif;
+    background:var(--paper);
+    color:var(--text);
+    line-height:1.55;
+  }
+  h1,h2,h3,h4{
+    font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+    color:var(--navy);
+    margin-top:1.4em;
+  }
+  a{color:var(--navy-light);}
+  header{
+    background:var(--navy);
+    color:#fff;
+    padding:16px 20px;
+    position:sticky;
+    top:0;
+    z-index:50;
+    box-shadow:0 2px 6px rgba(0,0,0,0.15);
+  }
+  header .title{
+    font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+    font-size:1.05rem;
+    font-weight:bold;
+    margin-bottom:10px;
+  }
+  header .title small{
+    display:block;
+    font-weight:normal;
+    font-size:0.78rem;
+    color:#c6cee0;
+    margin-top:2px;
+  }
+  .tabs{
+    display:flex;
+    gap:8px;
+  }
+  .tab-btn{
+    background:var(--navy-light);
+    color:#fff;
+    border:none;
+    padding:9px 16px;
+    border-radius:6px;
+    cursor:pointer;
+    font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+    font-size:0.92rem;
+    font-weight:bold;
+  }
+  .tab-btn.active{
+    background:#fff;
+    color:var(--navy);
+  }
+  main{
+    max-width:820px;
+    margin:0 auto;
+    padding:20px 16px 80px;
+  }
+  .view{display:none;}
+  .view.active{display:block;}
 
-  <style>
-    :root {
-      --brand-red: #982E2E;
-      --bg-cream: #F5F3EF;
-      --text-dark: #1A1A1A;
-      --text-muted: #4A4A4A;
-    }
-    
-    .font-garamond {
-      font-family: 'EB Garamond', Garamond, serif;
-    }
-    
-    .font-helvetica {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    }
+  /* ---------- Reviewer ---------- */
+  .toc{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:14px 18px;
+    margin-bottom:20px;
+  }
+  .toc h2{margin-top:0;font-size:1.05rem;}
+  .toc ol{margin:0;padding-left:20px;columns:2;font-size:0.92rem;}
+  .toc a{text-decoration:none;}
+  .toc a:hover{text-decoration:underline;}
 
-    body {
-      background-color: var(--bg-cream);
-      color: var(--text-dark);
-      margin: 0;
-      padding: 0;
-      scroll-behavior: smooth;
-    }
+  section.rev{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:4px 20px 18px;
+    margin-bottom:16px;
+  }
+  section.rev h2{
+    font-size:1.15rem;
+    border-bottom:2px solid var(--navy);
+    padding-bottom:6px;
+  }
+  section.rev h3{
+    font-size:1rem;
+    color:var(--navy-light);
+    margin-bottom:4px;
+  }
+  .term{
+    background:var(--green-bg);
+    border-left:4px solid var(--green);
+    padding:8px 12px;
+    margin:8px 0;
+    border-radius:4px;
+    font-size:0.94rem;
+  }
+  .term b{color:var(--navy);}
+  ul, ol{padding-left:22px;}
+  li{margin-bottom:4px;}
+  table.facts{
+    width:100%;
+    border-collapse:collapse;
+    margin:10px 0;
+    font-size:0.9rem;
+  }
+  table.facts th, table.facts td{
+    border:1px solid var(--border);
+    padding:6px 8px;
+    text-align:left;
+    vertical-align:top;
+  }
+  table.facts th{background:#eef1f7;color:var(--navy);}
+  .callout{
+    background:#fff8e6;
+    border:1px solid #e8cf8a;
+    border-radius:6px;
+    padding:10px 14px;
+    font-size:0.9rem;
+    margin:10px 0;
+  }
+  .callout b{color:var(--gold);}
 
-    /* Custom Selection Color */
-    ::selection {
-      background-color: #982E2E;
-      color: white;
-    }
-
-    /* Animations */
-    .fade-in-up {
-      animation: fadeInUp 0.8s ease-out forwards;
-      opacity: 0;
-      transform: translateY(20px);
-    }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-      
-    .stagger-1 { animation-delay: 0.1s; }
-    .stagger-2 { animation-delay: 0.2s; }
-    .stagger-3 { animation-delay: 0.3s; }
-    .stagger-4 { animation-delay: 0.4s; }
-  </style>
+  /* ---------- Quiz ---------- */
+  #scoreboard{
+    position:sticky;
+    top:78px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:10px 16px;
+    margin-bottom:16px;
+    z-index:40;
+    box-shadow:0 2px 6px rgba(0,0,0,0.08);
+    font-family:'Trebuchet MS', Helvetica, Arial, sans-serif;
+  }
+  #scoreboard .row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  #scoreboard .stat{font-size:0.85rem;color:var(--muted);}
+  #scoreboard .stat b{font-size:1.1rem;color:var(--navy);}
+  .progress-bar{
+    height:8px;
+    background:#e6e9ee;
+    border-radius:5px;
+    overflow:hidden;
+    margin-top:8px;
+  }
+  .progress-fill{
+    height:100%;
+    background:var(--navy-light);
+    width:0%;
+    transition:width .3s ease;
+  }
+  #finalBanner{
+    display:none;
+    background:var(--navy);
+    color:#fff;
+    padding:16px 18px;
+    border-radius:8px;
+    margin-bottom:18px;
+    font-family:'Trebuchet MS', Helvetica, Arial, sans-serif;
+  }
+  #finalBanner h2{color:#fff;margin-top:0;}
+  #finalBanner .bigscore{font-size:2rem;font-weight:bold;}
+  .qcard{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:14px 16px;
+    margin-bottom:12px;
+  }
+  .qcard .qsection{
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    color:var(--muted);
+    font-family:'Trebuchet MS', Helvetica, Arial, sans-serif;
+  }
+  .qcard .qtext{
+    font-family:'Trebuchet MS', Helvetica, Arial, sans-serif;
+    font-weight:bold;
+    margin:4px 0 10px;
+    font-size:0.98rem;
+  }
+  .opt{
+    display:block;
+    width:100%;
+    text-align:left;
+    background:#f6f7f9;
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:9px 12px;
+    margin-bottom:7px;
+    cursor:pointer;
+    font-family: Georgia, serif;
+    font-size:0.93rem;
+    color:var(--text);
+  }
+  .opt:hover:not(:disabled){background:#eceff3;}
+  .opt:disabled{cursor:default;}
+  .opt.correct{background:var(--green-bg);border-color:var(--green);color:var(--green);font-weight:bold;}
+  .opt.incorrect{background:var(--red-bg);border-color:var(--red);color:var(--red);font-weight:bold;}
+  .opt.dim{opacity:0.55;}
+  .explain{
+    margin-top:8px;
+    padding:10px 12px;
+    border-radius:6px;
+    font-size:0.9rem;
+    display:none;
+  }
+  .explain.show{display:block;}
+  .explain.right{background:var(--green-bg);border-left:4px solid var(--green);}
+  .explain.wrong{background:var(--red-bg);border-left:4px solid var(--red);}
+  .explain b{color:var(--navy);}
+  #quizControls{
+    display:flex;
+    gap:10px;
+    margin:10px 0 20px;
+    flex-wrap:wrap;
+  }
+  button.ctrl{
+    background:var(--navy);
+    color:#fff;
+    border:none;
+    padding:9px 16px;
+    border-radius:6px;
+    cursor:pointer;
+    font-family:'Trebuchet MS', Helvetica, Arial, sans-serif;
+    font-size:0.88rem;
+  }
+  button.ctrl.secondary{background:#8a8f99;}
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:0.8rem;
+    padding:20px;
+  }
+  @media (max-width:600px){
+    .toc ol{columns:1;}
+  }
+</style>
 </head>
-<body class="min-h-screen font-helvetica">
+<body>
 
-  <!-- Navigation -->
-  <nav class="fixed top-0 w-full bg-[#F5F3EF]/90 backdrop-blur-md z-50 border-b border-[#982E2E]/10">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <div class="font-garamond text-xl font-semibold tracking-wide text-[#982E2E]">
-        The Refuge Archive
-      </div>
-      <div class="flex items-center gap-6">
-        <a href="mailto:contact@therefugeearchive.org" class="text-sm font-medium hover:text-[#982E2E] transition-colors hidden sm:block">
-          contact@therefugeearchive.org
-        </a>
-        <a href="https://www.therefugeearchive.org/the-art-of-oral-history" target="_blank" rel="noopener noreferrer" class="bg-[#982E2E] text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-[#7a2525] transition-all transform hover:scale-105 shadow-md">
-          Apply Now
-        </a>
-      </div>
-    </div>
-  </nav>
+<header>
+  <div class="title">Chapter 1 — Understanding the Manager's Job
+    <small>Fundamentals of Management, 8th ed. (Griffin) · Reviewer + 50-item Quiz</small>
+  </div>
+  <div class="tabs">
+    <button class="tab-btn active" id="tabRevBtn" onclick="showView('reviewer')">📖 Reviewer</button>
+    <button class="tab-btn" id="tabQuizBtn" onclick="showView('quiz')">📝 Quiz (50 items)</button>
+  </div>
+</header>
 
-  <!-- Hero Section -->
-  <section class="pt-32 pb-20 px-6 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-    <div class="fade-in-up">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#982E2E]/10 text-[#982E2E] text-sm font-medium mb-6">
-        <span class="w-2 h-2 rounded-full bg-[#982E2E] animate-pulse"></span>
-        From Stories to Action
-      </div>
-      <h1 class="font-garamond text-5xl md:text-7xl font-medium leading-tight mb-6 text-[#1A1A1A]">
-        The Art of <br />
-        <span class="text-[#982E2E] italic">Oral History.</span>
-      </h1>
-      <p class="text-lg md:text-xl text-[#4A4A4A] leading-relaxed mb-8 max-w-lg">
-        We invite artists to visualize oral histories, turning the archive into a vessel for advocacy. Turn lived experiences into powerful global advocacy.
-      </p>
-      <div class="flex flex-wrap gap-4">
-        <a href="https://www.therefugeearchive.org/the-art-of-oral-history" target="_blank" rel="noopener noreferrer" class="bg-[#982E2E] text-white px-8 py-4 rounded-full font-medium hover:bg-[#7a2525] transition-all flex items-center gap-2 group shadow-lg shadow-[#982E2E]/20">
-          Submit Portfolio
-          <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
-        </a>
-        <a href="#how-it-works" class="px-8 py-4 rounded-full font-medium border border-[#1A1A1A]/20 hover:border-[#982E2E] hover:text-[#982E2E] transition-all">
-          Learn the Process
-        </a>
-      </div>
-    </div>
+<main>
 
-    <!-- Video Embed -->
-    <div class="fade-in-up stagger-2 relative">
-      <div class="absolute -inset-4 bg-gradient-to-tr from-[#982E2E]/20 to-transparent opacity-50 blur-2xl rounded-full"></div>
-      <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-white/20 aspect-video bg-black flex items-center justify-center group">
-         <iframe 
-            class="w-full h-full relative z-10" 
-            src="https://www.youtube.com/embed/aU7YNWS2C9g?si=liUu9ROSMbS-gE6E" 
-            title="YouTube video player" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            referrerpolicy="strict-origin-when-cross-origin" 
-            allowfullscreen>
-          </iframe>
-      </div>
-      <p class="text-center mt-4 text-sm font-garamond italic text-[#4A4A4A]">
-        Watch how your work will be featured and experienced globally.
-      </p>
-    </div>
+<!-- ======================= REVIEWER ======================= -->
+<div class="view active" id="view-reviewer">
+
+  <div class="toc">
+    <h2>Jump to a section</h2>
+    <ol>
+      <li><a href="#s1">Intro to Management</a></li>
+      <li><a href="#s2">Kinds of Managers</a></li>
+      <li><a href="#s3">Basic Management Functions</a></li>
+      <li><a href="#s4">Fundamental Skills</a></li>
+      <li><a href="#s5">Science & Art of Management</a></li>
+      <li><a href="#s6">Historical Context</a></li>
+      <li><a href="#s7">Classical Perspective</a></li>
+      <li><a href="#s8">Behavioral Perspective</a></li>
+      <li><a href="#s9">Quantitative Perspective</a></li>
+      <li><a href="#s10">Systems Perspective</a></li>
+      <li><a href="#s11">Contingency Perspective</a></li>
+      <li><a href="#s12">Contemporary Challenges</a></li>
+      <li><a href="#s13">Rapid-Fire Facts (details profs love)</a></li>
+    </ol>
+  </div>
+
+  <section class="rev" id="s1">
+    <h2>1. Introduction to Management</h2>
+    <div class="term"><b>Organization</b> — a group of people working together in a structured and coordinated fashion to achieve a set of goals (profit, knowledge, defense, coordination, social satisfaction, etc.)</div>
+    <div class="term"><b>Management</b> — a set of activities (planning & decision making, organizing, leading, controlling) directed at an organization's <b>resources</b> (human, financial, physical, information) to achieve organizational goals in an efficient and effective manner.</div>
+    <div class="term"><b>Manager</b> — someone whose primary responsibility is to carry out the management process.</div>
+    <div class="term"><b>Efficient</b> = using resources wisely, in a cost-effective way. &nbsp; <b>Effective</b> = making the right decisions and successfully implementing them. Successful orgs are usually <i>both</i>.</div>
+    <p>The average executive works about <b>60 hours/week</b>, facing globalization, competition, regulation, shareholder pressure, new tech, and social media.</p>
   </section>
 
-  <!-- The Mission Stats -->
-  <section class="bg-[#1A1A1A] text-[#F5F3EF] py-20 px-6">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
-      <div class="md:w-1/2">
-        <h2 class="font-garamond text-4xl md:text-5xl mb-4">108 Million <span class="text-[#982E2E] italic">Displaced.</span></h2>
-        <p class="text-lg opacity-80 leading-relaxed font-light">
-          Approximately 50 million are women. Art inspires what statistics alone can't convey. This is your chance to show your art to the world and make a tangible impact.
-        </p>
-      </div>
-      <div class="md:w-1/3 border-l-2 border-[#982E2E] pl-8">
-        <h3 class="font-garamond text-2xl mb-2 text-[#982E2E]">Your Mission</h3>
-        <p class="opacity-80 font-light">
-          Turn the archive into an active advocacy tool, helping the world understand the specific plight of female-headed households.
-        </p>
-      </div>
-    </div>
+  <section class="rev" id="s2">
+    <h2>2. Kinds of Managers</h2>
+    <h3>By Level</h3>
+    <table class="facts">
+      <tr><th>Level</th><th>Common Titles</th><th>Focus</th></tr>
+      <tr><td><b>Top managers</b></td><td>President, VP, CEO</td><td>Set org goals, overall strategy, operating policies; represent org externally</td></tr>
+      <tr><td><b>Middle managers</b></td><td>Plant manager, operations manager, division head, regional manager</td><td>Implement top managers' plans; supervise/coordinate lower-level managers (largest group)</td></tr>
+      <tr><td><b>First-line managers</b></td><td>Supervisor, coordinator, office manager</td><td>Supervise/coordinate operating employees; spend the most time directly overseeing subordinates</td></tr>
+    </table>
+    <h3>By Area</h3>
+    <ul>
+      <li><b>Marketing managers</b> — get consumers/clients to buy products/services (new product development, promotion, distribution)</li>
+      <li><b>Financial managers</b> — accounting, cash management, investments</li>
+      <li><b>Operations managers</b> — create/manage systems that make products/services (production, inventory, quality control, plant layout, site selection)</li>
+      <li><b>Human resources managers</b> — hiring, recruiting, training, compensation, performance appraisal, discharging employees</li>
+      <li><b>Administrative/general managers</b> — generalists, not tied to one specialty (e.g., hospital administrator)</li>
+      <li>Specialized: public relations, R&D, internal consultants, international operations managers</li>
+    </ul>
   </section>
 
-  <!-- Interactive Process Section -->
-  <section id="how-it-works" class="py-24 px-6 max-w-7xl mx-auto">
-    <div class="text-center mb-16 fade-in-up">
-      <h2 class="font-garamond text-4xl md:text-5xl text-[#1A1A1A] mb-4">The Process</h2>
-      <p class="text-[#4A4A4A]">How we collaborate to bring stories to life.</p>
-    </div>
-
-    <div class="grid md:grid-cols-4 gap-6">
-      <!-- Card 01 -->
-      <div class="fade-in-up stagger-1 relative p-8 rounded-2xl transition-all duration-500 ease-out cursor-pointer bg-white border border-gray-200 hover:border-[#982E2E] hover:shadow-xl hover:-translate-y-2 group">
-        <div class="font-garamond text-4xl mb-6 opacity-80 text-[#982E2E]">01</div>
-        <h3 class="font-garamond text-2xl mb-4 text-[#1A1A1A]">Watch & Apply</h3>
-        <p class="text-sm leading-relaxed text-[#4A4A4A]">Review our mission and submission guidelines carefully. Submit your application portfolio directly through our website.</p>
-        <div class="absolute bottom-6 right-6 transition-all duration-300 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0">
-           <i data-lucide="arrow-right" class="w-5 h-5 text-[#982E2E]"></i>
-        </div>
-      </div>
-
-      <!-- Card 02 -->
-      <div class="fade-in-up stagger-2 relative p-8 rounded-2xl transition-all duration-500 ease-out cursor-pointer bg-white border border-gray-200 hover:border-[#982E2E] hover:shadow-xl hover:-translate-y-2 group">
-        <div class="font-garamond text-4xl mb-6 opacity-80 text-[#982E2E]">02</div>
-        <h3 class="font-garamond text-2xl mb-4 text-[#1A1A1A]">Receive a Story</h3>
-        <p class="text-sm leading-relaxed text-[#4A4A4A]">Once selected, you will receive a summary of the oral history.</p>
-        <div class="absolute bottom-6 right-6 transition-all duration-300 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0">
-           <i data-lucide="arrow-right" class="w-5 h-5 text-[#982E2E]"></i>
-        </div>
-      </div>
-
-      <!-- Card 03 (Highlight) -->
-      <div class="fade-in-up stagger-3 relative p-8 rounded-2xl transition-all duration-500 ease-out cursor-pointer bg-[#982E2E] text-white shadow-xl transform -translate-y-2 group">
-        <div class="font-garamond text-4xl mb-6 opacity-80 text-white">03</div>
-        <h3 class="font-garamond text-2xl mb-4 text-white">Create & Collaborate</h3>
-        <p class="text-sm leading-relaxed text-white/90">Our media team sets the publishing schedule. You maintain total creative freedom to interpret the feeling of the story.</p>
-        <div class="absolute bottom-6 right-6 transition-all duration-300 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0">
-           <i data-lucide="arrow-right" class="w-5 h-5 text-white"></i>
-        </div>
-      </div>
-
-      <!-- Card 04 -->
-      <div class="fade-in-up stagger-4 relative p-8 rounded-2xl transition-all duration-500 ease-out cursor-pointer bg-white border border-gray-200 hover:border-[#982E2E] hover:shadow-xl hover:-translate-y-2 group">
-        <div class="font-garamond text-4xl mb-6 opacity-80 text-[#982E2E]">04</div>
-        <h3 class="font-garamond text-2xl mb-4 text-[#1A1A1A]">Dual-Row Experience</h3>
-        <p class="text-sm leading-relaxed text-[#4A4A4A]">The platform presents history in parallel: Transcription (Fact) and your Interpretation (Feeling). A holistic understanding of displacement.</p>
-        <div class="absolute bottom-6 right-6 transition-all duration-300 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0">
-           <i data-lucide="arrow-right" class="w-5 h-5 text-[#982E2E]"></i>
-        </div>
-      </div>
-    </div>
+  <section class="rev" id="s3">
+    <h2>3. Basic Management Functions (P-O-L-C)</h2>
+    <div class="term"><b>Planning</b> — setting an organization's goals and deciding how best to achieve them.</div>
+    <div class="term"><b>Decision making</b> — (part of the planning process) selecting a course of action from a set of alternatives.</div>
+    <div class="term"><b>Organizing</b> — determining how activities and resources are to be grouped.</div>
+    <div class="term"><b>Leading</b> — the set of processes used to get members of the organization to work together to further the interests of the organization.</div>
+    <div class="term"><b>Controlling</b> — monitoring and correcting ongoing activities to facilitate goal attainment.</div>
+    <p><b>Key nuance:</b> Managers do NOT perform these strictly in sequence — most move back and forth between them unpredictably (Figure 1.2's dotted vs. solid arrows).</p>
   </section>
 
-  <!-- Benefits Section -->
-  <section class="bg-white py-24 px-6 border-y border-[#1A1A1A]/10">
-    <div class="max-w-7xl mx-auto">
-      <div class="mb-16">
-        <h2 class="font-garamond text-4xl md:text-5xl text-[#1A1A1A] mb-4">
-          Create Art <br/><span class="text-[#982E2E] italic">That Travels.</span>
-        </h2>
-        <div class="w-24 h-1 bg-[#982E2E] mt-6"></div>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-12">
-        <div class="flex gap-6 items-start group">
-          <div class="p-4 rounded-full bg-[#F5F3EF] group-hover:bg-[#982E2E]/10 transition-colors shrink-0">
-            <i data-lucide="shield" class="w-8 h-8 text-[#982E2E]"></i>
-          </div>
-          <div>
-            <h3 class="font-garamond text-2xl mb-3 text-[#1A1A1A] group-hover:text-[#982E2E] transition-colors">100% Ownership</h3>
-            <p class="text-[#4A4A4A] leading-relaxed font-light">You keep full ownership and rights to your work. We only ask for the right to feature it in our parallel timeline experience.</p>
-          </div>
-        </div>
-
-        <div class="flex gap-6 items-start group">
-          <div class="p-4 rounded-full bg-[#F5F3EF] group-hover:bg-[#982E2E]/10 transition-colors shrink-0">
-            <i data-lucide="globe" class="w-8 h-8 text-[#982E2E]"></i>
-          </div>
-          <div>
-            <h3 class="font-garamond text-2xl mb-3 text-[#1A1A1A] group-hover:text-[#982E2E] transition-colors">Global Visibility</h3>
-            <p class="text-[#4A4A4A] leading-relaxed font-light">Your work becomes part of an international advocacy platform, exposed globally in different geolocations and featured across all our platforms.</p>
-          </div>
-        </div>
-
-        <div class="flex gap-6 items-start group">
-          <div class="p-4 rounded-full bg-[#F5F3EF] group-hover:bg-[#982E2E]/10 transition-colors shrink-0">
-            <i data-lucide="handshake" class="w-8 h-8 text-[#982E2E]"></i>
-          </div>
-          <div>
-            <h3 class="font-garamond text-2xl mb-3 text-[#1A1A1A] group-hover:text-[#982E2E] transition-colors">Strategic Partnerships</h3>
-            <p class="text-[#4A4A4A] leading-relaxed font-light">Connect with institutions driving real change worldwide. Open doors for potential partnerships and professional enhancement.</p>
-          </div>
-        </div>
-
-        <div class="flex gap-6 items-start group">
-          <div class="p-4 rounded-full bg-[#F5F3EF] group-hover:bg-[#982E2E]/10 transition-colors shrink-0">
-            <i data-lucide="award" class="w-8 h-8 text-[#982E2E]"></i>
-          </div>
-          <div>
-            <h3 class="font-garamond text-2xl mb-3 text-[#1A1A1A] group-hover:text-[#982E2E] transition-colors">Legacy & Recognition</h3>
-            <p class="text-[#4A4A4A] leading-relaxed font-light">Build a portfolio that stands for human rights and ethical storytelling. Long-term collaboration opportunities await.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+  <section class="rev" id="s4">
+    <h2>4. Fundamental Management Skills</h2>
+    <div class="term"><b>Technical skills</b> — necessary to accomplish/understand the specific work of the org; most important for <b>first-line managers</b>.</div>
+    <div class="term"><b>Interpersonal skills</b> — ability to communicate with, understand, and motivate individuals/groups.</div>
+    <div class="term"><b>Conceptual skills</b> — the ability to think in the abstract; see the organization holistically ("big picture").</div>
+    <div class="term"><b>Diagnostic skills</b> — ability to visualize the most appropriate response to a situation (like a doctor diagnosing symptoms).</div>
+    <div class="term"><b>Communication skills</b> — ability to both convey and receive ideas/information effectively.</div>
+    <div class="term"><b>Decision-making skills</b> — ability to recognize/define problems & opportunities and select the right course of action.</div>
+    <div class="term"><b>Time management skills</b> — ability to prioritize work, work efficiently, and delegate appropriately.</div>
   </section>
 
-  <!-- CTA & Contact Section -->
-  <section id="apply" class="py-24 px-6 bg-[#982E2E] text-white text-center relative overflow-hidden">
-    <!-- Decorative background elements -->
-    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-      <div class="absolute -top-[20%] -left-[10%] w-[50%] h-[150%] bg-white/5 rounded-full transform rotate-12"></div>
-      <div class="absolute -bottom-[20%] -right-[10%] w-[40%] h-[150%] bg-black/10 rounded-full transform -rotate-12"></div>
-    </div>
-
-    <div class="max-w-3xl mx-auto relative z-10">
-      <h2 class="font-garamond text-5xl md:text-6xl mb-6 font-medium">Call for Artists</h2>
-      <p class="text-xl mb-10 text-white/90 font-light max-w-2xl mx-auto">
-        This is your chance to show your art to the world while advocating for those who need it most. 
-      </p>
-      
-      <div class="bg-white text-[#1A1A1A] p-8 rounded-2xl shadow-2xl max-w-lg mx-auto">
-        <h3 class="text-xl font-bold mb-4 font-garamond text-[#982E2E]">Ready to apply?</h3>
-        <p class="text-sm text-gray-600 mb-6 font-light">Submit your portfolio for review. Selected artists will be contacted directly by our curation team.</p>
-        <a href="https://www.therefugeearchive.org/the-art-of-oral-history" target="_blank" rel="noopener noreferrer" class="w-full bg-[#1A1A1A] text-white py-4 rounded-xl font-medium hover:bg-[#982E2E] transition-colors flex items-center justify-center gap-2 group">
-          Submit Application
-          <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
-        </a>
-        
-        <div class="mt-6 pt-6 border-t border-gray-200 text-sm">
-          <p class="text-gray-500 mb-2">Have specific questions?</p>
-          <a href="mailto:contact@therefugeearchive.org" class="inline-flex items-center gap-2 text-[#982E2E] hover:underline font-medium">
-            <i data-lucide="mail" class="w-4 h-4"></i>
-            contact@therefugeearchive.org
-          </a>
-        </div>
-      </div>
-    </div>
+  <section class="rev" id="s5">
+    <h2>5. The Science and Art of Management</h2>
+    <p><b>Science of management</b> — rational, logical, objective, systematic approach; uses data, facts, quantitative models. Best for routine/straightforward problems. Relies on technical, diagnostic, decision-making skills.</p>
+    <p><b>Art of management</b> — intuition, experience, instinct, personal insight. Needed because even "objective facts" can be wrong (Starbucks NYC example: research favored drip coffee, but customers wanted espresso).</p>
+    <p><b>Effective management = a blend of both science and art.</b></p>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-[#1A1A1A] text-white/60 py-8 px-6 text-center text-sm font-light">
-    <p>© <span id="current-year"></span> The Refuge Archive. All rights reserved.</p>
-    <p class="mt-2">Empowering lived experiences through art.</p>
-  </footer>
+  <section class="rev" id="s6">
+    <h2>6. Historical Context of Management</h2>
+    <ul>
+      <li><b>Egyptians</b> — used planning, organizing, controlling to build the pyramids</li>
+      <li><b>Alexander the Great</b> — used a staff organization to coordinate military campaigns</li>
+      <li><b>Roman Empire</b> — well-defined organizational structure for communication/control</li>
+      <li><b>Socrates</b> — discussed management practices/concepts, 400 BC</li>
+      <li><b>Plato</b> — described job specialization, 350 BC</li>
+      <li><b>al-Farabi</b> (Persian scientist/philosopher) — listed leadership traits, AD 900</li>
+      <li><b>Robert Owen</b> (1771–1858, British industrialist) — one of the first to recognize importance of human resources & worker welfare</li>
+      <li><b>Charles Babbage</b> (1792–1871, English mathematician) — focused on production efficiency; believed in division of labor & applying math to facility/material use</li>
+    </ul>
+    <p>Why theory & history matter: theory = conceptual framework for organizing knowledge & guiding action; history helps avoid others' mistakes and provides heritage (e.g., Wells Fargo's corporate historian).</p>
+  </section>
 
-  <!-- Initialize Icons & Year -->
-  <script>
-    lucide.createIcons();
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-  </script>
+  <section class="rev" id="s7">
+    <h2>7. The Classical Management Perspective</h2>
+    <div class="term"><b>Classical management perspective</b> — two branches: <b>scientific management</b> + <b>administrative management</b>.</div>
+    <h3>A. Scientific Management (individual worker efficiency)</h3>
+    <ul>
+      <li><b>Frederick W. Taylor (1856–1915)</b> — dominant figure; foreman at Midvale Steel; observed <b>"soldiering"</b> (employees deliberately working slower than capable); timed/studied jobs; implemented piecework pay. Worked later at Simonds Rolling Machine Co. and Bethlehem Steel.</li>
+      <li><b>Steps in Scientific Management (Fig. 1.3):</b> (1) Develop a science for each job element to replace rule-of-thumb methods → (2) Scientifically select & train workers → (3) Supervise to ensure prescribed methods are followed → (4) Continue to plan the work, but let workers do it.</li>
+      <li><b>Frank & Lillian Gilbreth</b> — husband-wife industrial engineers; bricklaying study reduced movements from <b>18 to 5</b>, output up ~<b>200%</b>. Wrote/inspired <i>Cheaper by the Dozen</i> (12 children).</li>
+    </ul>
+    <h3>B. Administrative Management (managing the total organization)</h3>
+    <ul>
+      <li><b>Henri Fayol (1841–1925)</b> — French industrialist; administrative management's most articulate spokesperson; <b>first to identify planning, organizing, leading, controlling</b> as the core managerial functions (work translated to English in 1930).</li>
+      <li><b>Lyndall Urwick (1891–1983)</b> — British army officer turned theorist/consultant; integrated scientific management with Fayol's work; known for synthesis, not original ideas.</li>
+      <li><b>Max Weber (1864–1920)</b> — German sociologist; work on <b>bureaucracy</b> (rational guidelines for structuring organizations efficiently); translated to English in 1947.</li>
+    </ul>
+    <p><b>Limitations of classical perspective:</b> best suited to stable/simple orgs; proposed universal guidelines that don't fit every organization; slighted the role of the individual (→ addressed later by behavioral perspective).</p>
+  </section>
+
+  <section class="rev" id="s8">
+    <h2>8. The Behavioral Management Perspective</h2>
+    <p>Emphasizes individual attitudes/behaviors and group processes (vs. classical's mechanistic view of workers as "cogs").</p>
+    <ul>
+      <li><b>Hugo Munsterberg (1863–1916)</b> — "father of industrial psychology"; established a psych lab at <b>Harvard, 1892</b>; book <i>Psychology and Industrial Efficiency</i> (translated 1913).</li>
+      <li><b>Mary Parker Follett (1868–1933)</b> — recognized the human element in the workplace during the scientific management era.</li>
+    </ul>
+    <h3>The Hawthorne Studies (1927–1932)</h3>
+    <p>Conducted at Western Electric's <b>Hawthorne plant</b> (near Chicago), sponsored initially by General Electric, led by <b>Elton Mayo</b> (Harvard).</p>
+    <ul>
+      <li><b>Lighting experiment:</b> Productivity rose in BOTH the experimental and control groups — even as lighting was later decreased — because workers received special attention/sympathetic supervision (only declined once lighting hit "moonlight" level, and GE withdrew sponsorship).</li>
+      <li><b>Incentive-pay experiment</b> (9 men, terminal banks): The group informally set its own acceptable output level. Overproducers = <b>"rate busters"</b>; underproducers = <b>"chiselers."</b></li>
+      <li>Conclusion: social/individual processes matter more than previously thought in shaping worker behavior.</li>
+    </ul>
+    <h3>Human Relations Movement</h3>
+    <p>Workers respond primarily to the <b>social context</b> of the workplace. Manager's concern for workers → increased satisfaction → improved performance.</p>
+    <ul>
+      <li><b>Abraham Maslow (1908–1970)</b> — 1943, hierarchy of needs theory.</li>
+      <li><b>Douglas McGregor (1906–1964)</b> — Theory X / Theory Y (1960).</li>
+    </ul>
+    <table class="facts">
+      <tr><th>Theory X (pessimistic — like scientific mgmt)</th><th>Theory Y (positive — human relations view)</th></tr>
+      <tr><td>People dislike work, avoid it</td><td>Work is a natural part of life; not disliked</td></tr>
+      <tr><td>Must be controlled, directed, coerced, threatened</td><td>Internally motivated to reach committed objectives</td></tr>
+      <tr><td>Prefer direction, avoid responsibility, little ambition, want security</td><td>Seek & accept responsibility under favorable conditions; capable of innovation; often underutilized potential</td></tr>
+    </table>
+    <p>McGregor believed <b>Theory Y</b> was the better philosophy for managers.</p>
+    <div class="term"><b>Organizational behavior</b> — contemporary, more realistic field acknowledging human behavior in orgs is more complex than human relationists believed; interdisciplinary (psychology, sociology, anthropology, economics, medicine). Covers job satisfaction, stress, motivation, leadership, group dynamics, organizational politics, conflict, structure/design.</p>
+  </section>
+
+  <section class="rev" id="s9">
+    <h2>9. The Quantitative Management Perspective</h2>
+    <p>Emerged during <b>World War II</b> — mathematical approaches (originally from Taylor/Gantt) applied to military logistics; later adopted by firms like DuPont & GE.</p>
+    <div class="term"><b>Management science</b> — focuses specifically on developing <b>mathematical models</b> (a simplified representation of a system/process/relationship).</div>
+    <div class="term"><b>Operations management</b> — a form of "applied" management science; less mathematically sophisticated; helps orgs produce products/services more efficiently (inventory management, linear programming, queuing theory, break-even analysis, simulation).</div>
+    <p><b>Limitations:</b> can't fully account for individual behavior/attitudes; time spent on quantitative technique can slow development of other skills; models require assumptions that may be unrealistic.</p>
+  </section>
+
+  <section class="rev" id="s10">
+    <h2>10. Contemporary Perspectives: The Systems Perspective</h2>
+    <div class="term"><b>System</b> — an interrelated set of elements functioning as a whole.</div>
+    <p><b>Four basic elements (Figure 1.4):</b></p>
+    <ol>
+      <li><b>Inputs</b> — material, human, financial, information resources from the environment</li>
+      <li><b>Transformation process</b> — technology, operating systems, administrative systems</li>
+      <li><b>Outputs</b> — products/services, profits/losses, employee behaviors, information</li>
+      <li><b>Feedback</b> — environment's reaction back to the system</li>
+    </ol>
+    <ul>
+      <li><b>Open systems</b> — interact with their environment. <b>Closed systems</b> — do not (organizations are open systems; ignoring the environment is a mistake).</li>
+      <li><b>Subsystems</b> — systems within a broader system (e.g., marketing, production, finance depts within a firm); interdependent — a change in one affects others.</li>
+      <li><b>Synergy</b> — subsystems working together produce more than working alone (e.g., Disney's movies + theme parks + merchandise; P&G–Gillette acquisition).</li>
+      <li><b>Entropy</b> — a normal process leading to system decline if an org fails to monitor feedback and adapt (e.g., Studebaker, Circuit City went bankrupt).</li>
+    </ul>
+  </section>
+
+  <section class="rev" id="s11">
+    <h2>11. The Contingency Perspective</h2>
+    <div class="term"><b>Universal perspectives</b> (classical, behavioral, quantitative) try to find the "<b>one best way</b>" to manage.</div>
+    <div class="term"><b>Contingency perspective</b> — appropriate managerial behavior in a given situation depends ("is contingent") on the unique elements of that situation — no universal theory fits every organization.</div>
+    <p><b>Example:</b> Cisco CEO <b>John Chambers</b> shifted from an autocratic, command-and-control style to a more democratic style after the 2001 tech crash/downsizing — illustrating that management style must adapt to the situation.</p>
+  </section>
+
+  <section class="rev" id="s12">
+    <h2>12. Contemporary Management Issues & Challenges</h2>
+    <ul>
+      <li><b>Globalization</b> — varying property ownership, resources, government roles, and cultural/behavioral norms across countries.</li>
+      <li><b>Ethics & social responsibility</b> — corporate governance, business scandals (e.g., Allen Stanford's ~$7B Ponzi scheme), environmental/social obligations.</li>
+      <li><b>Quality</b> — basis for competition (e.g., Lexus/J.D. Power); improves productivity, lowers costs (Whistler Corp. used 100 of 250 employees just to repair defective units).</li>
+      <li><b>Shift to a service economy</b> — service sector was <50% of U.S. GNP in 1947, 65% by 1975, over <b>80% by 2010</b>; ~90% of new U.S. jobs since 1990 are service-sector.</li>
+      <li><b>Economic recession (2008–2010) & slow recovery (2011–2014)</b> — cost-cutting, streamlining, some firms positioned for renewed growth.</li>
+      <li><b>The changing/rapidly evolving workplace</b> — workforce reduction & expansion cycles.</li>
+      <li><b>Workforce diversity</b> — differences in age, gender, ethnicity, physical abilities; ~60% of U.S. women 16+ are now in the workforce (vs. ~1/3 fifty years ago).</li>
+      <li><b>Generational shifts</b> — 1980s "yuppies" (career-devoted) vs. <b>Gen X, Gen Y, Millennials</b> (favor flexibility, individuality, lifestyle/location over long-term corporate loyalty).</li>
+      <li><b>Organization change</b> — orgs that fail to monitor environment & adapt risk failure; some managers deliberately "shake things up" to avoid complacency.</li>
+      <li><b>Technology</b> — smartphones, wireless networks, social media ease communication but increase work pace, reduce time for contemplation, raise employee privacy issues.</li>
+    </ul>
+  </section>
+
+  <section class="rev" id="s13">
+    <h2>13. Rapid-Fire Facts (small details profs love to test)</h2>
+    <div class="callout"><b>Opening case:</b> Netflix's Reed Hastings — inspired by a <b>$40 late fee</b> at Blockbuster and a gym's flat-fee model; Netflix launched <b>1997</b>; by 2013, Blockbuster's market cap had fallen from a 2002 peak of $5B to $35M, while Netflix's topped $15B.</div>
+    <table class="facts">
+      <tr><th>Person</th><th>Known for</th><th>Key date/detail</th></tr>
+      <tr><td>Frederick W. Taylor</td><td>Scientific management, "soldiering"</td><td>1856–1915; Midvale Steel foreman</td></tr>
+      <tr><td>Frank & Lillian Gilbreth</td><td>Bricklaying efficiency study</td><td>18→5 movements, +200% output</td></tr>
+      <tr><td>Henri Fayol</td><td>Identified P-O-L-C functions</td><td>1841–1925; translated to English 1930</td></tr>
+      <tr><td>Lyndall Urwick</td><td>Synthesized classical theory</td><td>1891–1983; ex-British army officer</td></tr>
+      <tr><td>Max Weber</td><td>Bureaucracy theory</td><td>1864–1920; translated to English 1947</td></tr>
+      <tr><td>Hugo Munsterberg</td><td>Father of industrial psychology</td><td>Harvard lab, 1892</td></tr>
+      <tr><td>Mary Parker Follett</td><td>Early human-element advocate</td><td>1868–1933</td></tr>
+      <tr><td>Elton Mayo</td><td>Led the Hawthorne Studies</td><td>Harvard; studies ran 1927–1932</td></tr>
+      <tr><td>Abraham Maslow</td><td>Hierarchy of needs</td><td>1943</td></tr>
+      <tr><td>Douglas McGregor</td><td>Theory X / Theory Y</td><td>1906–1964; model published 1960</td></tr>
+      <tr><td>Robert Owen</td><td>Early concern for worker welfare</td><td>1771–1858, British industrialist</td></tr>
+      <tr><td>Charles Babbage</td><td>Division of labor, math in production</td><td>1792–1871, English mathematician</td></tr>
+    </table>
+  </section>
+
+  <div class="callout" style="margin-top:10px;">
+    <b>Ready to test yourself?</b> Switch to the <b>Quiz</b> tab above — 50 items, instant feedback with explanations, and a running scoreboard.
+  </div>
+
+</div>
+
+<!-- ======================= QUIZ ======================= -->
+<div class="view" id="view-quiz">
+
+  <div id="scoreboard">
+    <div class="row">
+      <div class="stat">Answered<br><b id="statAnswered">0/50</b></div>
+      <div class="stat">Correct<br><b id="statCorrect" style="color:var(--green)">0</b></div>
+      <div class="stat">Wrong<br><b id="statWrong" style="color:var(--red)">0</b></div>
+      <div class="stat">Score<br><b id="statPct">0%</b></div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <div id="finalBanner">
+    <h2>Quiz Complete!</h2>
+    <div class="bigscore" id="finalScoreText">0 / 50</div>
+    <div id="finalMsg"></div>
+  </div>
+
+  <div id="quizControls">
+    <button class="ctrl" onclick="scrollToNextUnanswered()">Jump to next unanswered</button>
+    <button class="ctrl secondary" onclick="resetQuiz()">Reset quiz</button>
+  </div>
+
+  <div id="quizContainer"></div>
+
+</div>
+
+</main>
+
+<footer>Reviewer & quiz built from Chapter 1: "Understanding the Manager's Job" — Fundamentals of Management, 8th ed. (Griffin). Good luck! 🍀</footer>
+
+<script>
+function showView(name){
+  document.getElementById('view-reviewer').classList.toggle('active', name==='reviewer');
+  document.getElementById('view-quiz').classList.toggle('active', name==='quiz');
+  document.getElementById('tabRevBtn').classList.toggle('active', name==='reviewer');
+  document.getElementById('tabQuizBtn').classList.toggle('active', name==='quiz');
+  window.scrollTo(0,0);
+}
+
+const questions = [
+// ---------------- Section 1: Intro to Management ----------------
+{sec:"Intro to Management", q:"According to the chapter, what is an \u201corganization\u201d?", opts:[
+  "A group of people working together in a structured and coordinated fashion to achieve a set of goals",
+  "Any building where business takes place",
+  "A single manager's personal enterprise",
+  "An entity that exists only in government settings"
+], correct:0, exp:"An organization is a group of people working together in a structured, coordinated fashion to achieve goals \u2014 goals can be profit, knowledge, defense, coordination of charities, or social satisfaction."},
+
+{sec:"Intro to Management", q:"Management is directed at an organization's resources. Which of these is NOT one of the four resource types named in the text?", opts:[
+  "Human", "Financial", "Physical", "Legal"
+], correct:3, exp:"The text names four resource types: human, financial, physical, and information. \"Legal\" is not one of the four."},
+
+{sec:"Intro to Management", q:"What does it mean for a manager to be \u201cefficient\u201d?", opts:[
+  "Using resources wisely, in a cost-effective way",
+  "Making the right decisions and successfully implementing them",
+  "Working as fast as possible regardless of cost",
+  "Avoiding all risk"
+], correct:0, exp:"Efficient = using resources wisely, in a cost-effective way. (Effective, by contrast, means making the right decisions and implementing them successfully.)"},
+
+{sec:"Intro to Management", q:"What does it mean for a manager to be \u201ceffective\u201d?", opts:[
+  "Using resources wisely, in a cost-effective way",
+  "Making the right decisions and successfully implementing them",
+  "Cutting costs no matter the outcome",
+  "Following orders exactly as given"
+], correct:1, exp:"Effective = making the right decisions and successfully implementing them. Successful organizations are usually both efficient AND effective."},
+
+{sec:"Intro to Management", q:"According to the chapter, the average executive works about how many hours per week?", opts:[
+  "40 hours", "50 hours", "60 hours", "80 hours"
+], correct:2, exp:"The text states the average executive works 60 hours a week, facing globalization, competition, regulation, and other pressures."},
+
+// ---------------- Section 2: Kinds of Managers ----------------
+{sec:"Kinds of Managers", q:"Which level of manager creates the organization's overall goals, strategy, and operating policies, and represents the org externally?", opts:[
+  "First-line managers", "Middle managers", "Top managers", "Administrative managers"
+], correct:2, exp:"Top managers (President, VP, CEO) create overall goals/strategy/policy and represent the organization to the external environment."},
+
+{sec:"Kinds of Managers", q:"Which of the following is a first-line manager title, NOT a middle-manager title?", opts:[
+  "Plant manager", "Division head", "Regional manager", "Supervisor"
+], correct:3, exp:"Middle-management titles include plant manager, operations manager, division head, and regional manager. \u201cSupervisor\u201d is a first-line management title."},
+
+{sec:"Kinds of Managers", q:"Compared to top and middle managers, first-line managers typically spend a large proportion of their time:", opts:[
+  "Meeting with government officials",
+  "Supervising the day-to-day work of their subordinates",
+  "Setting the organization's overall strategy",
+  "Managing shareholder relations"
+], correct:1, exp:"First-line managers (e.g., Starbucks store managers) spend much of their time directly supervising the work of operating employees."},
+
+{sec:"Kinds of Managers", q:"A manager responsible for recruiting, training, compensation systems, and performance appraisal works in which area?", opts:[
+  "Marketing", "Financial", "Human resources", "Administrative"
+], correct:2, exp:"Human resources managers handle HR planning, recruiting/selecting, training, compensation/benefits, performance appraisal, and discharging employees."},
+
+{sec:"Kinds of Managers", q:"Administrative (general) managers, such as a hospital administrator, are best described as:", opts:[
+  "Specialists trained in only one functional area",
+  "Generalists with basic familiarity across all functional areas",
+  "Always the organization's CEO",
+  "Managers found only in manufacturing companies"
+], correct:1, exp:"Administrative/general managers are not tied to one management specialty \u2014 they are generalists familiar with all functional areas rather than experts in just one."},
+
+// ---------------- Section 3: Basic Management Functions ----------------
+{sec:"Basic Functions", q:"\u201cSelecting a course of action from a set of alternatives\u201d is the definition of:", opts:[
+  "Planning", "Decision making", "Organizing", "Controlling"
+], correct:1, exp:"Decision making, part of the planning process, is defined as selecting a course of action from a set of alternatives."},
+
+{sec:"Basic Functions", q:"\u201cDetermining how activities and resources are to be grouped\u201d defines which management function?", opts:[
+  "Planning", "Organizing", "Leading", "Controlling"
+], correct:1, exp:"Organizing is the function concerned with grouping activities and resources \u2014 it's more than just building an org chart."},
+
+{sec:"Basic Functions", q:"\u201cMonitoring and correcting ongoing activities to facilitate goal attainment\u201d defines:", opts:[
+  "Leading", "Organizing", "Controlling", "Planning"
+], correct:2, exp:"Controlling is the final phase of the management process: monitoring the organization's progress toward its goals."},
+
+{sec:"Basic Functions", q:"According to Figure 1.2 in the text, how do managers typically move through the four management functions?", opts:[
+  "Always in a strict, unchanging sequence",
+  "Most managers move back and forth between activities in unpredictable ways",
+  "Only top managers perform all four; others specialize in one",
+  "Each function is performed exactly once per year"
+], correct:1, exp:"While there is a basic logic to the P-O-L-C sequence, most managers engage in more than one activity at a time and move back and forth between them unpredictably."},
+
+// ---------------- Section 4: Fundamental Skills ----------------
+{sec:"Fundamental Skills", q:"The manager's ability to think in the abstract and see the organization as a whole is called:", opts:[
+  "Technical skills", "Conceptual skills", "Diagnostic skills", "Interpersonal skills"
+], correct:1, exp:"Conceptual skills depend on the manager's ability to think in the abstract and view the organization holistically \u2014 to see the \u201cbig picture.\u201d"},
+
+{sec:"Fundamental Skills", q:"Skills that let a manager \u201cdiagnose\u201d an organizational problem the way a physician diagnoses an illness from symptoms are:", opts:[
+  "Communication skills", "Diagnostic skills", "Decision-making skills", "Time management skills"
+], correct:1, exp:"Diagnostic skills enable a manager to visualize the most appropriate response to a situation, similar to how a physician analyzes symptoms to determine their cause."},
+
+{sec:"Fundamental Skills", q:"The ability to correctly recognize and define problems/opportunities and select an appropriate course of action describes:", opts:[
+  "Decision-making skills", "Technical skills", "Conceptual skills", "Interpersonal skills"
+], correct:0, exp:"Decision-making skills refer to a manager's ability to recognize and define problems/opportunities and select the appropriate course of action to address them."},
+
+{sec:"Fundamental Skills", q:"Which skill is especially important for FIRST-LINE managers, who train subordinates and answer work-related questions?", opts:[
+  "Conceptual skills", "Technical skills", "Time management skills", "Diagnostic skills"
+], correct:1, exp:"Technical skills \u2014 knowing how to perform the tasks being supervised \u2014 are especially critical for first-line managers."},
+
+// ---------------- Section 5: Science & Art ----------------
+{sec:"Science & Art of Management", q:"According to the chapter, effective management is best described as:", opts:[
+  "Purely scientific and data-driven",
+  "Purely intuitive and artistic",
+  "A blend of both science and art",
+  "Irrelevant to skill development"
+], correct:2, exp:"The text states that effective management is a blend of both science (rational, logical, objective) and art (intuition, experience, personal insight)."},
+
+{sec:"Science & Art of Management", q:"The Starbucks New York City example \u2014 where market research favored drip coffee, but customers actually lined up for espresso \u2014 illustrates that:", opts:[
+  "Objective facts and market research are always reliable",
+  "Even \u201cobjective facts\u201d can prove wrong, requiring intuition and personal insight (the art of management)",
+  "The controlling function had failed",
+  "The systems perspective explains all customer behavior"
+], correct:1, exp:"This example shows managers must blend intuition/personal insight with hard data, since even seemingly objective research can turn out to be wrong."},
+
+// ---------------- Section 6: Historical Context ----------------
+{sec:"Historical Context", q:"The Egyptians used which management functions when constructing the pyramids?", opts:[
+  "Leading and controlling only",
+  "Planning, organizing, and controlling",
+  "Only planning",
+  "None \u2014 pyramids required no management"
+], correct:1, exp:"The text states the Egyptians used the management functions of planning, organizing, and controlling to build the pyramids."},
+
+{sec:"Historical Context", q:"Who discussed management practices and concepts in 400 BC?", opts:[
+  "Plato", "Socrates", "Alexander the Great", "al-Farabi"
+], correct:1, exp:"Socrates discussed management practices and concepts in 400 BC; Plato described job specialization in 350 BC; al-Farabi listed leadership traits around AD 900."},
+
+{sec:"Historical Context", q:"Which two men are identified as pioneers of the serious study of management, beginning in the 19th century?", opts:[
+  "Taylor and Fayol", "Robert Owen and Charles Babbage", "Mayo and Weber", "Munsterberg and Follett"
+], correct:1, exp:"Robert Owen (concern for worker welfare) and Charles Babbage (efficiency of production, division of labor) are named as 19th-century pioneers of management study."},
+
+{sec:"Historical Context", q:"Charles Babbage placed great faith in which concept, along with applying mathematics to production problems?", opts:[
+  "Division of labor", "Bureaucracy", "Human relations", "Synergy"
+], correct:0, exp:"Babbage, an English mathematician, placed great faith in the division of labor and advocated applying mathematics to efficient use of facilities and materials."},
+
+// ---------------- Section 7: Classical Perspective ----------------
+{sec:"Classical Perspective", q:"The classical management perspective consists of two distinct branches:", opts:[
+  "Human relations and organizational behavior",
+  "Scientific management and administrative management",
+  "Systems and contingency perspectives",
+  "Management science and operations management"
+], correct:1, exp:"The classical management perspective includes scientific management (individual worker efficiency) and administrative management (managing the total organization)."},
+
+{sec:"Classical Perspective", q:"Frederick Taylor used the term \u201csoldiering\u201d to describe:", opts:[
+  "A normal process leading to system decline",
+  "Employees deliberately working at a pace slower than their capabilities",
+  "Two or more subsystems working together to produce more than working alone",
+  "A rational set of bureaucratic guidelines"
+], correct:1, exp:"Taylor observed \u201csoldiering\u201d as a foreman at Midvale Steel \u2014 employees deliberately working below their capability."},
+
+{sec:"Classical Perspective", q:"The Gilbreths' bricklaying study reduced physical movements from 18 to 5. By approximately how much did output increase?", opts:[
+  "50%", "100%", "200%", "500%"
+], correct:2, exp:"Frank Gilbreth's redesign of bricklaying reduced movements from 18 to 5 and increased output by about 200%."},
+
+{sec:"Classical Perspective", q:"Who is credited as administrative management's most articulate spokesperson, and was the first to identify planning, organizing, leading, and controlling as core managerial functions?", opts:[
+  "Max Weber", "Henri Fayol", "Lyndall Urwick", "Frederick Taylor"
+], correct:1, exp:"Henri Fayol, a French industrialist, was administrative management's most articulate spokesperson and first identified the P-O-L-C functions (his work was translated into English in 1930)."},
+
+{sec:"Classical Perspective", q:"Whose work on bureaucracy laid the foundation for contemporary organization theory?", opts:[
+  "Henri Fayol", "Lyndall Urwick", "Max Weber", "Robert Owen"
+], correct:2, exp:"Max Weber, a German sociologist, developed the concept of bureaucracy \u2014 a rational set of guidelines for structuring organizations efficiently. His work was translated into English in 1947."},
+
+// ---------------- Section 8: Behavioral Perspective ----------------
+{sec:"Behavioral Perspective", q:"Who is recognized as the \u201cfather of industrial psychology\u201d and established a psychological laboratory at Harvard in 1892?", opts:[
+  "Elton Mayo", "Hugo Munsterberg", "Mary Parker Follett", "Douglas McGregor"
+], correct:1, exp:"Hugo Munsterberg, a German psychologist, is recognized as the father of industrial psychology; his book Psychology and Industrial Efficiency was translated into English in 1913."},
+
+{sec:"Behavioral Perspective", q:"The Hawthorne studies were conducted at which company's plant, between 1927 and 1932?", opts:[
+  "General Electric", "Western Electric", "Bethlehem Steel", "Midvale Steel"
+], correct:1, exp:"The Hawthorne studies took place at Western Electric's Hawthorne plant near Chicago (initially sponsored by General Electric), led by Elton Mayo."},
+
+{sec:"Behavioral Perspective", q:"In the Hawthorne lighting experiment, the surprising finding was that:", opts:[
+  "Productivity fell in both the experimental and control groups",
+  "Productivity rose in both groups \u2014 even when lighting was decreased \u2014 due to the special attention given to the workers",
+  "Only the control group's output changed",
+  "Lighting had no measurable effect on either group"
+], correct:1, exp:"Productivity increased in both groups regardless of actual lighting changes; researchers attributed this to workers receiving special attention and sympathetic supervision, not the lighting itself."},
+
+{sec:"Behavioral Perspective", q:"In the Hawthorne incentive-pay experiment, workers who overproduced were labeled ______, and underproducers were labeled ______.", opts:[
+  "chiselers; rate busters", "rate busters; chiselers", "soldiers; slackers", "yuppies; loyalists"
+], correct:1, exp:"Overproducers were branded \u201crate busters,\u201d while underproducers were labeled \u201cchiselers\u201d \u2014 the group informally set its own acceptable output level."},
+
+{sec:"Behavioral Perspective", q:"Douglas McGregor's Theory X assumes that:", opts:[
+  "People naturally enjoy work and seek out responsibility",
+  "People dislike work and must be controlled, directed, or coerced to perform",
+  "People are motivated mainly by self-actualization",
+  "People will always exceed expectations without supervision"
+], correct:1, exp:"Theory X is the pessimistic, negative view of workers (consistent with scientific management): people dislike work, must be coerced, prefer direction, and avoid responsibility."},
+
+{sec:"Behavioral Perspective", q:"The contemporary, interdisciplinary field (drawing on psychology, sociology, anthropology, economics, and medicine) that recognizes human behavior in organizations is more complex than early human relations theorists believed is called:", opts:[
+  "Scientific management", "Organizational behavior", "Management science", "Administrative management"
+], correct:1, exp:"Organizational behavior is the contemporary field acknowledging the complexity of human behavior in organizations, covering topics like job satisfaction, motivation, leadership, and group dynamics."},
+
+// ---------------- Section 9: Quantitative Perspective ----------------
+{sec:"Quantitative Perspective", q:"The quantitative management perspective emerged primarily during which period?", opts:[
+  "The Industrial Revolution", "World War II", "The Great Depression", "The 1980s recession"
+], correct:1, exp:"During WWII, government officials and scientists applied mathematical approaches (from Taylor and Gantt) to military logistics problems, giving rise to the quantitative perspective."},
+
+{sec:"Quantitative Perspective", q:"Which branch of the quantitative perspective focuses specifically on developing mathematical models?", opts:[
+  "Operations management", "Management science", "Organizational behavior", "Administrative management"
+], correct:1, exp:"Management science focuses specifically on developing mathematical models \u2014 simplified representations of a system, process, or relationship."},
+
+{sec:"Quantitative Perspective", q:"Operations management is best described as:", opts:[
+  "A purely theoretical discipline unrelated to daily operations",
+  "A form of \u201capplied\u201d management science that helps organizations produce goods/services more efficiently",
+  "The study of individual worker motivation",
+  "Identical to scientific management"
+], correct:1, exp:"Operations management is less mathematically sophisticated than management science and can be thought of as applied management science \u2014 used for inventory management, linear programming, queuing theory, etc."},
+
+// ---------------- Section 10: Systems Perspective ----------------
+{sec:"Systems Perspective", q:"In the systems perspective, a \u201csystem\u201d is defined as:", opts:[
+  "A single machine or tool",
+  "An interrelated set of elements functioning as a whole",
+  "Only the financial department of a company",
+  "A synonym for bureaucracy"
+], correct:1, exp:"A system is defined as an interrelated set of elements functioning as a whole \u2014 organizations can be understood this way."},
+
+{sec:"Systems Perspective", q:"The four basic elements of the systems model (Figure 1.4) are:", opts:[
+  "Planning, organizing, leading, controlling",
+  "Inputs, transformation processes, outputs, and feedback",
+  "Efficiency, effectiveness, synergy, entropy",
+  "Top, middle, first-line, and specialized managers"
+], correct:1, exp:"The systems model consists of inputs (from the environment), a transformation process, outputs (back into the environment), and feedback."},
+
+{sec:"Systems Perspective", q:"A system that interacts with its environment is called a(n):", opts:[
+  "Closed system", "Open system", "Subsystem", "Entropic system"
+], correct:1, exp:"Open systems interact with their environment; closed systems do not. Organizations are open systems, though some mistakenly ignore their environment."},
+
+{sec:"Systems Perspective", q:"When two or more subsystems working together produce more than they could working alone, this is called:", opts:[
+  "Entropy", "Synergy", "Feedback", "Soldiering"
+], correct:1, exp:"Synergy \u2014 illustrated by Disney's movies, theme parks, and merchandise reinforcing one another, or P&G's acquisition of Gillette."},
+
+{sec:"Systems Perspective", q:"Entropy, in the systems perspective, refers to:", opts:[
+  "The growth phase of a healthy, expanding organization",
+  "A normal process leading to system decline if feedback is ignored",
+  "A type of employee incentive pay plan",
+  "A synonym for synergy"
+], correct:1, exp:"Entropy is a normal process leading to system decline when an organization fails to monitor feedback and adapt \u2014 e.g., Studebaker and Circuit City's failures."},
+
+// ---------------- Section 11: Contingency Perspective ----------------
+{sec:"Contingency Perspective", q:"How does the contingency perspective differ from the classical, behavioral, and quantitative perspectives?", opts:[
+  "It also claims there is \u201cone best way\u201d to manage all organizations",
+  "It suggests appropriate managerial behavior depends on the unique elements of a given situation, not universal rules",
+  "It ignores the organizational environment entirely",
+  "It applies only to manufacturing firms"
+], correct:1, exp:"Classical, behavioral, and quantitative approaches are \u201cuniversal\u201d perspectives seeking the one best way; the contingency perspective instead says the right approach depends on the specific situation."},
+
+{sec:"Contingency Perspective", q:"Cisco CEO John Chambers shifting from an autocratic, command-and-control style to a more democratic style after the 2001 downturn illustrates:", opts:[
+  "Scientific management",
+  "The contingency perspective \u2014 adapting management style to the situation",
+  "The quantitative perspective",
+  "Entropy"
+], correct:1, exp:"Chambers changed his management style as circumstances changed at Cisco \u2014 a real-world example of the contingency perspective in action."},
+
+// ---------------- Section 12: Contemporary Challenges ----------------
+{sec:"Contemporary Challenges", q:"Which contemporary challenge involves varying property ownership arrangements, resource availability, government roles, and cultural norms across countries?", opts:[
+  "Entropy", "Globalization", "Soldiering", "Synergy"
+], correct:1, exp:"Globalization poses challenges and opportunities at both macro (ownership, resources, government) and behavioral (values, beliefs, norms) levels."},
+
+{sec:"Contemporary Challenges", q:"By 2010, the service sector accounted for roughly what percentage of U.S. gross national product (GNP)?", opts:[
+  "50%", "65%", "Over 80%", "30%"
+], correct:2, exp:"The service sector was under 50% of GNP in 1947, reached 65% by 1975, and surpassed 80% by 2010."},
+
+{sec:"Contemporary Challenges", q:"Which generational groups are described as less devoted to long-term corporate careers and more interested in flexibility, individuality, and lifestyle/location preferences?", opts:[
+  "Baby Boomers", "1980s \u201cyuppies\u201d", "Generation X, Generation Y, and Millennials", "War-era workers"
+], correct:2, exp:"Unlike the career-devoted \u201cyuppies\u201d of the 1980s, Gen X, Gen Y, and Millennials tend to prefer smaller, flexible, entrepreneurial firms and prioritize lifestyle and location."},
+
+{sec:"Contemporary Challenges", q:"Increasing attention to pollution, business's environmental obligations, and corporate governance frameworks falls under which contemporary management challenge?", opts:[
+  "Quality", "Ethics and social responsibility", "Technology", "Service economy"
+], correct:1, exp:"Ethics and social responsibility cover corporate governance, environmental obligations, and responses to scandals like Allen Stanford's ~$7 billion Ponzi scheme."},
+
+{sec:"Contemporary Challenges", q:"According to the text, new technology (smartphones, wireless networks, social media) has:", opts:[
+  "Only benefited managers, with no downsides",
+  "Made communication easier, but also increased work pace, cut into contemplation time, and raised employee privacy concerns",
+  "Eliminated the need for the organizing function",
+  "Replaced the need for planning entirely"
+], correct:1, exp:"While technology eases communication, it has increased the work pace for managers, reduced time for thoughtful decision-making, and created new privacy issues (e.g., discipline over employees' social media posts)."}
+];
+
+const total = questions.length;
+let answeredCount = 0;
+let correctCount = 0;
+
+function buildQuiz(){
+  const container = document.getElementById('quizContainer');
+  questions.forEach((item, idx) => {
+    const card = document.createElement('div');
+    card.className = 'qcard';
+    card.id = 'q'+idx;
+
+    const secEl = document.createElement('div');
+    secEl.className = 'qsection';
+    secEl.textContent = 'Item ' + (idx+1) + ' of ' + total + ' \u00b7 ' + item.sec;
+    card.appendChild(secEl);
+
+    const qEl = document.createElement('div');
+    qEl.className = 'qtext';
+    qEl.textContent = item.q;
+    card.appendChild(qEl);
+
+    const optWrap = document.createElement('div');
+    item.opts.forEach((optText, oIdx) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.textContent = String.fromCharCode(65+oIdx) + ')  ' + optText;
+      btn.onclick = () => selectAnswer(idx, oIdx);
+      optWrap.appendChild(btn);
+    });
+    card.appendChild(optWrap);
+
+    const expEl = document.createElement('div');
+    expEl.className = 'explain';
+    expEl.id = 'exp'+idx;
+    card.appendChild(expEl);
+
+    container.appendChild(card);
+  });
+}
+
+function selectAnswer(qIdx, chosenIdx){
+  const item = questions[qIdx];
+  const card = document.getElementById('q'+qIdx);
+  const buttons = card.querySelectorAll('.opt');
+  if (card.dataset.answered === '1') return; // already answered
+
+  card.dataset.answered = '1';
+  answeredCount++;
+
+  const isCorrect = (chosenIdx === item.correct);
+  if (isCorrect) correctCount++;
+
+  buttons.forEach((btn, oIdx) => {
+    btn.disabled = true;
+    if (oIdx === item.correct){
+      btn.classList.add('correct');
+    } else if (oIdx === chosenIdx && !isCorrect){
+      btn.classList.add('incorrect');
+    } else {
+      btn.classList.add('dim');
+    }
+  });
+
+  const expEl = document.getElementById('exp'+qIdx);
+  expEl.classList.add('show');
+  expEl.classList.add(isCorrect ? 'right' : 'wrong');
+  expEl.innerHTML = (isCorrect ? '\u2705 <b>Correct!</b> ' : '\u274c <b>Not quite \u2014 correct answer: ' + String.fromCharCode(65+item.correct) + '.</b> ') + item.exp;
+
+  updateScoreboard();
+}
+
+function updateScoreboard(){
+  document.getElementById('statAnswered').textContent = answeredCount + '/' + total;
+  document.getElementById('statCorrect').textContent = correctCount;
+  document.getElementById('statWrong').textContent = answeredCount - correctCount;
+  const pct = answeredCount ? Math.round((correctCount/answeredCount)*100) : 0;
+  document.getElementById('statPct').textContent = pct + '%';
+  document.getElementById('progressFill').style.width = Math.round((answeredCount/total)*100) + '%';
+
+  if (answeredCount === total){
+    showFinalBanner();
+  } else {
+    document.getElementById('finalBanner').style.display = 'none';
+  }
+}
+
+function showFinalBanner(){
+  const banner = document.getElementById('finalBanner');
+  const finalPct = Math.round((correctCount/total)*100);
+  document.getElementById('finalScoreText').textContent = correctCount + ' / ' + total + '  (' + finalPct + '%)';
+  let msg = '';
+  if (finalPct >= 90) msg = "Excellent! You're locked in for this quiz. Skim the Rapid-Fire Facts once more for extra insurance.";
+  else if (finalPct >= 75) msg = "Solid grasp of the chapter. Review the items you missed above \u2014 they're highlighted in red.";
+  else if (finalPct >= 50) msg = "Decent start \u2014 scroll back through your missed (red) answers and reread those Reviewer sections before your quiz.";
+  else msg = "Head back to the Reviewer tab and go section by section, then retake this quiz \u2014 you've got time to turn this around.";
+  banner.querySelector('#finalMsg').textContent = msg;
+  banner.style.display = 'block';
+  banner.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function scrollToNextUnanswered(){
+  for (let i=0;i<questions.length;i++){
+    const card = document.getElementById('q'+i);
+    if (card.dataset.answered !== '1'){
+      card.scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+  }
+  showFinalBanner();
+}
+
+function resetQuiz(){
+  if(!confirm('Reset all answers and start the quiz over?')) return;
+  answeredCount = 0;
+  correctCount = 0;
+  document.getElementById('quizContainer').innerHTML = '';
+  document.getElementById('finalBanner').style.display = 'none';
+  buildQuiz();
+  updateScoreboard();
+  window.scrollTo(0,0);
+}
+
+buildQuiz();
+</script>
+
 </body>
 </html>
