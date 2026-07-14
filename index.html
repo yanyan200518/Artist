@@ -1,1073 +1,932 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ethics Reviewer & Quiz — Minimalist Edition</title>
-<style>
-  :root {
-    --black: #000000;
-    --dark-gray: #333333;
-    --gray: #777777;
-    --light-gray: #e5e5e5;
-    --white: #ffffff;
-  }
-  
-  /* Reset and sharp borders */
-  * { 
-    box-sizing: border-box; 
-    border-radius: 0 !important; /* Forces sharp corners everywhere */
-  }
-
-  body {
-    margin: 0;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background: var(--white);
-    color: var(--black);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  h1, h2, h3, h4 {
-    font-weight: 700;
-    color: var(--black);
-    margin-top: 1.5em;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  
-  a {
-    color: var(--black);
-    text-decoration: underline;
-  }
-  
-  a:hover {
-    background: var(--black);
-    color: var(--white);
-  }
-
-  header {
-    background: var(--white);
-    color: var(--black);
-    padding: 20px;
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    border-bottom: 2px solid var(--black);
-  }
-
-  header .title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  header .title small {
-    display: block;
-    font-weight: normal;
-    font-size: 0.85rem;
-    color: var(--gray);
-    margin-top: 5px;
-  }
-
-  .tabs {
-    display: flex;
-    gap: 0;
-    border: 1px solid var(--black);
-  }
-
-  .tab-btn {
-    flex: 1;
-    background: var(--white);
-    color: var(--black);
-    border: none;
-    border-right: 1px solid var(--black);
-    padding: 12px 16px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    transition: background 0.2s, color 0.2s;
-  }
-  
-  .tab-btn:last-child {
-    border-right: none;
-  }
-
-  .tab-btn:hover {
-    background: var(--light-gray);
-  }
-
-  .tab-btn.active {
-    background: var(--black);
-    color: var(--white);
-  }
-
-  main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 30px 20px 100px;
-  }
-
-  .view { display: none; }
-  .view.active { display: block; }
-
-  /* ---------- Reviewer ---------- */
-  .toc {
-    background: var(--white);
-    border: 2px solid var(--black);
-    padding: 20px;
-    margin-bottom: 30px;
-  }
-
-  .toc h2 { margin-top: 0; font-size: 1.1rem; }
-  .toc ol { margin: 0; padding-left: 20px; columns: 2; font-size: 0.95rem; }
-
-  section.rev {
-    background: var(--white);
-    border: 1px solid var(--black);
-    padding: 10px 25px 25px;
-    margin-bottom: 25px;
-  }
-
-  section.rev h2 {
-    font-size: 1.2rem;
-    border-bottom: 2px solid var(--black);
-    padding-bottom: 8px;
-  }
-
-  section.rev h3 {
-    font-size: 1rem;
-    margin-bottom: 5px;
-  }
-
-  .term {
-    background: var(--light-gray);
-    border-left: 5px solid var(--black);
-    padding: 12px 15px;
-    margin: 15px 0;
-    font-size: 0.95rem;
-  }
-
-  ul, ol { padding-left: 25px; }
-  li { margin-bottom: 8px; }
-  
-  table.facts {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 0.95rem;
-  }
-
-  table.facts th, table.facts td {
-    border: 1px solid var(--black);
-    padding: 10px 12px;
-    text-align: left;
-    vertical-align: top;
-  }
-
-  table.facts th { background: var(--black); color: var(--white); }
-
-  .callout {
-    border: 2px dashed var(--black);
-    padding: 15px;
-    font-size: 0.95rem;
-    margin: 20px 0;
-    font-weight: 500;
-  }
-
-  /* ---------- Quiz ---------- */
-  #scoreboard {
-    position: sticky;
-    top: 98px;
-    background: var(--white);
-    border: 2px solid var(--black);
-    padding: 15px 20px;
-    margin-bottom: 25px;
-    z-index: 40;
-  }
-
-  #scoreboard .row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  #scoreboard .stat { font-size: 0.85rem; color: var(--gray); text-transform: uppercase;}
-  #scoreboard .stat b { font-size: 1.2rem; color: var(--black); display: block; }
-
-  .progress-bar {
-    height: 10px;
-    background: var(--light-gray);
-    border: 1px solid var(--black);
-    margin-top: 15px;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background: var(--black);
-    width: 0%;
-    transition: width 0.3s ease;
-  }
-
-  #finalBanner {
-    display: none;
-    background: var(--black);
-    color: var(--white);
-    padding: 25px;
-    margin-bottom: 25px;
-    border: 2px solid var(--black);
-  }
-
-  #finalBanner h2 { color: var(--white); margin-top: 0; }
-  #finalBanner .bigscore { font-size: 2.5rem; font-weight: bold; margin: 15px 0; }
-
-  .qcard {
-    background: var(--white);
-    border: 1px solid var(--black);
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-
-  .qcard .qsection {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    font-weight: bold;
-    color: var(--gray);
-    border-bottom: 1px solid var(--light-gray);
-    padding-bottom: 5px;
-    margin-bottom: 15px;
-  }
-
-  .qcard .qtext {
-    font-weight: bold;
-    margin-bottom: 15px;
-    font-size: 1.05rem;
-  }
-
-  .opt {
-    display: block;
-    width: 100%;
-    text-align: left;
-    background: var(--white);
-    border: 1px solid var(--black);
-    padding: 12px 15px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    font-size: 0.95rem;
-    font-family: inherit;
-    transition: all 0.2s ease;
-  }
-
-  .opt:hover:not(:disabled) { 
-    background: var(--black); 
-    color: var(--white); 
-  }
-
-  .opt:disabled { cursor: default; }
-  
-  .opt.correct { 
-    background: var(--black); 
-    color: var(--white); 
-    font-weight: bold; 
-    border: 2px solid var(--black); 
-  }
-  
-  .opt.incorrect { 
-    background: var(--light-gray); 
-    color: var(--gray); 
-    border: 1px dashed var(--gray); 
-  }
-  
-  .opt.dim { opacity: 0.5; }
-
-  .explain {
-    margin-top: 15px;
-    padding: 15px;
-    font-size: 0.95rem;
-    display: none;
-    border: 1px solid var(--black);
-  }
-
-  .explain.show { display: block; }
-  .explain.right { background: var(--white); border-left: 5px solid var(--black); }
-  .explain.wrong { background: var(--light-gray); border-left: 5px solid var(--gray); color: var(--dark-gray); }
-
-  #quizControls {
-    display: flex;
-    gap: 15px;
-    margin: 20px 0 30px;
-    flex-wrap: wrap;
-  }
-
-  button.ctrl {
-    background: var(--white);
-    color: var(--black);
-    border: 2px solid var(--black);
-    padding: 12px 20px;
-    cursor: pointer;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    transition: all 0.2s ease;
-  }
-
-  button.ctrl:hover {
-    background: var(--black);
-    color: var(--white);
-  }
-
-  button.ctrl.secondary {
-    border-style: dashed;
-  }
-
-  footer {
-    text-align: center;
-    color: var(--black);
-    font-size: 0.85rem;
-    padding: 30px 20px;
-    border-top: 1px solid var(--black);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  @media (max-width: 600px) {
-    .toc ol { columns: 1; }
-    .tabs { flex-direction: column; }
-    .tab-btn { border-right: none; border-bottom: 1px solid var(--black); }
-    .tab-btn:last-child { border-bottom: none; }
-    #scoreboard { top: 120px; }
-  }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Management Reviewer - Chapters 1, 3, and 8</title>
+  <style>
+    :root {
+      --bg: #fff;
+      --fg: #000;
+      --muted: #555;
+      --line: #000;
+      --soft: #f4f4f4;
+      --bad: #111;
+      --good: #000;
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.45;
+    }
+    header {
+      border-bottom: 2px solid var(--line);
+      padding: 18px 20px 14px;
+      position: sticky;
+      top: 0;
+      background: #fff;
+      z-index: 10;
+    }
+    .wrap { max-width: var(--max); margin: 0 auto; }
+    h1 {
+      margin: 0 0 6px;
+      font-size: clamp(24px, 4vw, 42px);
+      letter-spacing: 0;
+      line-height: 1.02;
+      text-transform: uppercase;
+    }
+    .sub { margin: 0; color: var(--muted); font-size: 14px; }
+    nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    button, select {
+      appearance: none;
+      border: 1px solid #000;
+      background: #fff;
+      color: #000;
+      border-radius: 0;
+      padding: 9px 11px;
+      font: inherit;
+      min-height: 38px;
+    }
+    button { cursor: pointer; }
+    button:hover, button.active, select:focus, button:focus {
+      background: #000;
+      color: #fff;
+      outline: none;
+    }
+    main { padding: 22px 20px 48px; }
+    section.view { display: none; }
+    section.view.active { display: block; }
+    .chapter {
+      border: 2px solid #000;
+      margin: 0 0 18px;
+      padding: 18px;
+    }
+    h2 {
+      font-size: 22px;
+      margin: 0 0 12px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #000;
+      padding-bottom: 8px;
+    }
+    h3 {
+      font-size: 17px;
+      margin: 18px 0 8px;
+      text-transform: uppercase;
+    }
+    h4 {
+      font-size: 15px;
+      margin: 14px 0 6px;
+      text-transform: uppercase;
+    }
+    ul { margin: 8px 0 12px 21px; padding: 0; }
+    li { margin: 5px 0; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+    .box {
+      border: 1px solid #000;
+      padding: 12px;
+      background: #fff;
+    }
+    .box h4:first-child { margin-top: 0; }
+    .term {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 8px;
+      border-top: 1px solid #000;
+      padding: 8px 0;
+    }
+    .term b { text-transform: uppercase; font-size: 13px; }
+    .controls {
+      border: 2px solid #000;
+      padding: 14px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .score {
+      margin-left: auto;
+      font-weight: 700;
+      min-width: 160px;
+      text-align: right;
+    }
+    .question {
+      border: 2px solid #000;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+    .qtop {
+      display: flex;
+      gap: 8px;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 13px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .prompt { font-weight: 700; font-size: 17px; margin: 0 0 12px; }
+    .answers { display: grid; gap: 8px; }
+    .answer {
+      width: 100%;
+      text-align: left;
+      border: 1px solid #000;
+      background: #fff;
+      color: #000;
+      padding: 10px;
+    }
+    .answer.correct {
+      background: #000;
+      color: #fff;
+      outline: 3px double #000;
+    }
+    .answer.wrong {
+      background: #fff;
+      color: #000;
+      text-decoration: line-through;
+    }
+    .answer:disabled { cursor: default; }
+    .explain {
+      display: none;
+      border-top: 1px solid #000;
+      margin-top: 12px;
+      padding-top: 10px;
+    }
+    .explain.show { display: block; }
+    .explain b { text-transform: uppercase; }
+    .notice {
+      border: 2px solid #000;
+      padding: 12px;
+      background: var(--soft);
+      margin-bottom: 16px;
+    }
+    .mini {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .kbd {
+      border: 1px solid #000;
+      padding: 1px 5px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 12px;
+    }
+    @media (max-width: 720px) {
+      header { position: static; }
+      .term { grid-template-columns: 1fr; }
+      .score { margin-left: 0; text-align: left; width: 100%; }
+      .chapter, .question { padding: 13px; }
+    }
+    @media print {
+      header { position: static; }
+      nav, .controls, #quiz { display: none !important; }
+      section.view { display: block !important; }
+      .chapter, .box { break-inside: avoid; }
+    }
+  </style>
 </head>
 <body>
-
-<header>
-  <div class="title">Ethics — Moral Dilemma, Freedom, Culture, Kohlberg, Emotions & Aquinas
-    <small>Weeks 2–5 Reviewer + 50-item Quiz</small>
-  </div>
-  <div class="tabs">
-    <button class="tab-btn active" id="tabRevBtn" onclick="showView('reviewer')">Reviewer</button>
-    <button class="tab-btn" id="tabQuizBtn" onclick="showView('quiz')">Quiz (50 items)</button>
-  </div>
-</header>
-
-<main>
-
-<!-- ======================= REVIEWER ======================= -->
-<div class="view active" id="view-reviewer">
-
-  <div class="toc">
-    <h2>Jump to a section</h2>
-    <ol>
-      <li><a href="#s1">Moral Dilemma — Basics</a></li>
-      <li><a href="#s2">Types of Moral Dilemmas</a></li>
-      <li><a href="#s3">Freedom as Foundation of Moral Acts</a></li>
-      <li><a href="#s4">Culture & Moral Behavior</a></li>
-      <li><a href="#s5">Cultural Relativism</a></li>
-      <li><a href="#s6">The Filipino Way</a></li>
-      <li><a href="#s7">Kohlberg's Stages of Moral Development</a></li>
-      <li><a href="#s8">Feelings & Moral Decision Making</a></li>
-      <li><a href="#s9">The Moral Psychology of Thomas Aquinas</a></li>
-      <li><a href="#s10">Rapid-Fire Facts</a></li>
-    </ol>
-  </div>
-
-  <section class="rev" id="s1">
-    <h2>1. Moral Dilemma — The Basics</h2>
-    <div class="term"><b>Dilemma</b> — a situation where a person is forced to choose between two or more conflicting options, neither of which is acceptable.</div>
-    <div class="term"><b>Moral (ethical) dilemma</b> — a dilemma involving human actions with moral implications; a "moral agent" is forced to choose between two or more conflicting options, none of which resolves the situation in a morally acceptable way.</div>
-    <p><b>Key distinction:</b> If a person faces a hard situation but is NOT forced to choose between conflicting options, they are not in a dilemma — just a problematic/distressful situation, and the logical move is to look for solutions.</p>
-    <p><b>Example (Efreminda):</b> A deeply religious woman who believes killing is wrong has an ectopic pregnancy. Continuing the pregnancy endangers her life; abortion would save her life but violate her moral conviction. Two conflicting options, neither fully acceptable.</p>
-    <h3>Karen Allen's 3 Conditions for a Moral Dilemma</h3>
-    <ol>
-      <li>The moral agent is <b>obliged to decide</b> which course of action is best.</li>
-      <li>There must be <b>different courses of action</b> to choose from.</li>
-      <li><b>Some moral principle is always compromised</b>, no matter the choice — there is no perfect solution. Benjiemen Labastin: the agent "seems fated to commit something wrong" — by choosing one moral requirement, they necessarily fail another.</li>
-    </ol>
-  </section>
-
-  <section class="rev" id="s2">
-    <h2>2. Types of Moral Dilemmas</h2>
-    <p>The text groups common types into four pairs:</p>
-    <table class="facts">
-      <tr><th>Type</th><th>Definition</th><th>Example</th></tr>
-      <tr><td><b>Epistemic</b></td><td>Two+ requirements conflict and the agent doesn't know which takes precedence — but with fuller knowledge, one option WOULD be better.</td><td>Promised to be home early for your son, but see a sick old man needing a hospital on the way.</td></tr>
-      <tr><td><b>Ontological</b></td><td>Two+ requirements conflict and neither overrides the other — genuinely, equally weighted; not a knowledge problem.</td><td>Military doctor, two wounded soldiers, only one bag of blood.</td></tr>
-      <tr><td><b>Self-imposed</b></td><td>Caused by the moral agent's own wrongdoing/choices.</td><td>David, a mayoral candidate, promises indigenous peoples he'll protect their forest, but also takes funding from a mining corporation.</td></tr>
-      <tr><td><b>World-imposed</b></td><td>External events place the agent in moral conflict — not the agent's own doing.</td><td>Sophie's Choice (see below).</td></tr>
-      <tr><td><b>Obligation</b></td><td>More than one feasible action is obligatory.</td><td>"Sartre's Student" (a student torn between duty to join the war and duty to care for his mother).</td></tr>
-      <tr><td><b>Prohibition</b></td><td>All feasible actions are forbidden.</td><td>Sophie's Choice is the classic example.</td></tr>
-      <tr><td><b>Single-agent</b></td><td>One agent "ought to do A" AND "ought to do B," but cannot do both.</td><td>A doctor whose patient has HIV: legal duty to report vs. desire to respect confidentiality.</td></tr>
-      <tr><td><b>Multi-person</b></td><td>Several people (family, org, community) must each act on their own obligations, which conflict — requires more than "doing right," it needs consensus.</td><td>A family deciding to terminate or prolong a member's life; a company choosing between cutting staff or underpaying to comply with wage law.</td></tr>
-    </table>
-    <div class="callout"><b>Sophie's Choice (William Styron):</b> Sophie Zawistowska is forced by an SS doctor (Fritz Jemand von Niemand) to choose which of her two children — Eva or Jan — will be sent to the gas chamber at Auschwitz. If she refuses to choose, both die. She chooses Eva; Jan is sent to the Children's Camp. Used as the classic example of BOTH a world-imposed dilemma and a prohibition dilemma.</div>
-  </section>
-
-  <section class="rev" id="s3">
-    <h2>3. Freedom as the Foundation of Moral Acts</h2>
-    <div class="term"><b>Freedom</b> — the power or right to act, speak, or think as one wants without hindrance or restraint. It also stands for securing everyone an equal opportunity for life, liberty, and the pursuit of happiness.</div>
-    <p>Freedom is NOT total license ("do whatever I want" = anarchy). Your freedom to act ends where it starts infringing on another person's freedom (e.g., you can't freely shout "Fire!" in a crowded theater).</p>
-    <h3>"Freedom of/to" vs. "Freedom from"</h3>
-    <p>President Franklin Delano Roosevelt's Four Freedoms (State of the Union, <b>January 6, 1941</b>):</p>
-    <ol>
-      <li><b>Freedom of</b> speech and expression</li>
-      <li><b>Freedom of</b> worship</li>
-      <li><b>Freedom from</b> want (economic security for all)</li>
-      <li><b>Freedom from</b> fear (reduction of armaments/aggression)</li>
-    </ol>
-    <p>Securing "freedom from" fear and want usually requires <b>collective, organized action</b> — typically government. Liberal representative democracy is presented as doing this best. FDR also framed the U.S. as part of an interdependent "family of nations."</p>
-    <p>FDR's basic foundations of a healthy democracy: equality of opportunity, jobs for those who can work, security for those who need it, ending special privilege for the few, preserving civil liberties, and enjoying the fruits of scientific progress.</p>
-  </section>
-
-  <section class="rev" id="s4">
-    <h2>4. Culture and Its Role in Moral Behavior</h2>
-    <div class="term"><b>Culture</b> — a way of life; the totality of the social environment in which we conduct our lives. We don't choose the culture we're born into, but we can grow and adjust to it.</div>
-    <p>Our morality is shaped both by the culture acquired at home and by social experience — home, school, community, church, society, friends, relatives, entertainment, news, and social media all leave an imprint. The type of media we consume influences how we see ourselves, others, and morality.</p>
-  </section>
-
-  <section class="rev" id="s5">
-    <h2>5. Cultural Relativism</h2>
-    <p><b>Holmes (1998)</b> — three theses: (1) customs, practices, and moral beliefs vary from culture to culture; (2) morality depends on human nature, human condition, and specific social/cultural circumstances; (3) rightness/wrongness may vary from person to person and culture to culture — this last point is <b>relativism</b>.</p>
-    <div class="term"><b>Cultural relativism</b> — the view that a particular behavior may be judged morally right if one's own culture approves of it. Morality is relative to culture.</div>
-    <p><b>Implication:</b> Cultures "cannot be wrong" and cannot be legitimately criticized for their moral judgments; individuals who question their own culture's morality (from within this view) can never be considered "morally right." When different cultures make different judgments about the same act, both may be considered correct.</p>
-    <p><b>Why many oppose it:</b> If right and wrong are purely relative, people might abandon self-regulation entirely; moral responsibility and moral progress become impossible; there's no way to say which culture's answer to a moral question is the "proper" one, since we can't step outside all cultures to judge.</p>
-  </section>
-
-  <section class="rev" id="s6">
-    <h2>6. The Filipino Way</h2>
-    <p>Filipino culture shares similarities with Asian neighbors and was shaped by foreign rulers for over 300 years.</p>
-    <h3>Religious Orientation</h3>
-    <p>Filipinos are part of a nation with strong religious inclination; monotheism dominates. Morality and values are strongly tied to religious beliefs, tenets, and rites. Yet there's often a gap between religious devotion and actual behavior — <b>Fr. Jaime Bulatao (1960)</b> coined the term <b>"split-level" Christians</b> to describe this inconsistency (pious in church, but irresponsible/corrupt elsewhere).</p>
-    <h3>Perception of How Others Judge Us</h3>
-    <p><b>Fr. Vitaliano Gorospe, S.J. (1966)</b>: the Filipino conscience is more <b>external</b> than internal — judgments of good/bad, right/wrong are shaped more by the presence and opinion of others than by internal conviction. This is captured in the concept of <b>"hiya"</b> (roughly, shame/sense of social propriety). Example from the text: a mother restricts her daughter's clothing not because she values decency itself, but because of what the neighbors might think of her as a mother.</p>
-    <p><b>Conclusion (Boylan, 2000):</b> Our view of morality is unique to each of us because of (1) the biological characteristics handed down by our parents, and (2) the unique upbringing and historical/social circumstances we each experienced.</p>
-  </section>
-
-  <section class="rev" id="s7">
-    <h2>7. Kohlberg's Stages of Moral Development</h2>
-    <div class="callout"><b>The Heinz Dilemma:</b> Heinz's wife is dying of cancer. A chemist has discovered a drug that could save her but charges 10x its production cost. Heinz can only raise half the money; the chemist refuses to lower the price or delay payment. Heinz breaks in and steals the drug. (Kohlberg used people's reasoning about this story to build his theory.)</div>
-    <p>Kohlberg identified <b>3 levels</b> of moral reasoning, each with <b>2 sub-stages</b> (6 stages total). People pass through them <b>in order</b>; reasoning from an earlier stage gets replaced by the new one. <b>Not everyone reaches every stage.</b></p>
-    <table class="facts">
-      <tr><th>Level</th><th>Who</th><th>Basis of Reasoning</th><th>Stages</th></tr>
-      <tr><td><b>1. Pre-conventional</b></td><td>Most 9-year-olds & younger</td><td>Physical consequences of actions; authority is external</td>
-        <td><b>Stage 1 — Obedience & Punishment:</b> good to avoid punishment.<br><br><b>Stage 2 — Individualism & Exchange:</b> recognizes different viewpoints exist besides authority's.</td></tr>
-      <tr><td><b>2. Conventional</b></td><td>Most adolescents & adults</td><td>Norms of one's group; authority internalized but not questioned</td>
-        <td><b>Stage 3 — Good Interpersonal Relationships:</b> good to be seen as good by others; approval-seeking.<br><br><b>Stage 4 — Maintaining the Social Order:</b> obey laws/rules to uphold order, avoid guilt.</td></tr>
-      <tr><td><b>3. Post-conventional</b></td><td>Only ~10-15% of people reach it</td><td>Self-chosen principles; individual rights and justice</td>
-        <td><b>Stage 5 — Social Contract & Individual Rights:</b> laws are for the good of the majority, but can work against individuals.<br><br><b>Stage 6 — Universal Principles:</b> own moral guidelines (human rights, justice, equality) that may not match the law; will defend them even against society.</td></tr>
-    </table>
-  </section>
-
-  <section class="rev" id="s8">
-    <h2>8. Feelings and Moral Decision Making</h2>
-    <p>We like to think our moral decisions are rational/impartial, but we are "feeling beings" — our feelings (moral emotions) are always present and matter. Experts believe it is <b>impossible to make important moral judgments without emotions.</b></p>
-    <table class="facts">
-      <tr><th>Emotion type</th><th>Examples</th><th>Effect</th></tr>
-      <tr><td><b>Inner-directed negative</b></td><td>Guilt, embarrassment, shame</td><td>Motivate the person to act ethically</td></tr>
-      <tr><td><b>Outer-directed negative</b></td><td>Anger, disgust, contempt</td><td>Aim to discipline/punish others who acted unethically; discourages others from repeating it</td></tr>
-      <tr><td><b>Positive</b></td><td>Gratitude, admiration</td><td>Felt when seeing compassion/kindness; prompts people to help others</td></tr>
-      <tr><td><b>Suffering-based</b></td><td>Sympathy, <b>empathy</b></td><td>Lead people to act ethically toward others; <b>empathy is the central moral emotion</b> that most commonly motivates prosocial activity.</td></tr>
-    </table>
-    <p><b>Bottom line:</b> Even though we tend to credit philosophy or religious values for our moral decisions, emotions play a significant, often underestimated, role.</p>
-  </section>
-
-  <section class="rev" id="s9">
-    <h2>9. The Moral Psychology of Thomas Aquinas</h2>
-    <p><b>Thomas Aquinas</b> — a Dominican priest and philosopher (over 700 years ago) who explored HOW humans think, feel, and choose in moral situations, rather than just listing rules.</p>
-    <h3>Human Action in Three Parts</h3>
-    <ol>
-      <li><b>Intellect</b> — our power to reason and understand; recognizes general truths ("cheating is wrong") and applies them to specific situations; evaluates options and searches for what is truly good.</li>
-      <li><b>Will</b> — our ability to make free choices. Even if the intellect knows what's right, it's the will that actually chooses it — and sometimes the will chooses what merely <i>seems</i> good rather than what is <i>truly</i> good.</li>
-      <li><b>Passions</b> — emotions/bodily responses (fear, compassion, anxiety). Aquinas does NOT see passions as inherently bad — when guided by reason, they can support moral action.</li>
-    </ol>
-    <h3>Framework for Moral Reasoning</h3>
-    <div class="term"><b>Synderesis</b> — our natural, innate grasp of basic moral truths ("do good and avoid evil"); a built-in moral compass that operates automatically.</div>
-    <div class="term"><b>Conscience</b> — applies the general truths known through synderesis to a SPECIFIC situation, through practical reasoning.</div>
-    <div class="term"><b>Natural Law</b> — the moral order written into human nature itself; through reason, we can discover what leads to human flourishing. It's the OBJECTIVE foundation.</div>
-    <p><b>How they work together:</b> Synderesis provides the initial moral awareness -> Conscience applies it through deliberate reasoning about a specific case -> Natural Law supplies the objective foundation that validates and guides the whole process.</p>
-  </section>
-
-  <section class="rev" id="s10">
-    <h2>10. Rapid-Fire Facts</h2>
-    <table class="facts">
-      <tr><th>Person</th><th>Contribution</th></tr>
-      <tr><td>Karen Allen</td><td>3 conditions that must be present for a moral dilemma</td></tr>
-      <tr><td>Benjiemen Labastin</td><td>Moral agent "seems fated to commit something wrong" in a dilemma</td></tr>
-      <tr><td>William Styron</td><td>Author of Sophie's Choice</td></tr>
-      <tr><td>FDR</td><td>"Four Freedoms" speech — January 6, 1941</td></tr>
-      <tr><td>Holmes (1998)</td><td>Three theses underlying cultural relativism</td></tr>
-      <tr><td>Fr. Jaime Bulatao</td><td>Coined "split-level" Christians</td></tr>
-      <tr><td>Fr. Vitaliano Gorospe</td><td>Filipino conscience is more external than internal; "hiya"</td></tr>
-      <tr><td>Boylan (2000)</td><td>Each person's morality is unique (biology + upbringing)</td></tr>
-      <tr><td>Lawrence Kohlberg</td><td>Theory of moral development; used the Heinz Dilemma</td></tr>
-      <tr><td>Thomas Aquinas</td><td>Intellect-will-passions; synderesis, conscience, natural law</td></tr>
-    </table>
-    <div class="callout"><b>Review Note:</b> Watch for exact category pairings: epistemic & ontological, self-imposed & world-imposed, obligation & prohibition, single-agent & multi-person.</div>
-  </section>
-
-  <div class="callout" style="margin-top:10px;">
-    <b>READY TO TEST YOURSELF?</b> Switch to the <b>Quiz</b> tab above — 50 items, instant feedback, and a running scoreboard.
-  </div>
-
-</div>
-
-<!-- ======================= QUIZ ======================= -->
-<div class="view" id="view-quiz">
-
-  <div id="scoreboard">
-    <div class="row">
-      <div class="stat">Answered<br><b id="statAnswered">0/50</b></div>
-      <div class="stat">Correct<br><b id="statCorrect">0</b></div>
-      <div class="stat">Wrong<br><b id="statWrong">0</b></div>
-      <div class="stat">Score<br><b id="statPct">0%</b></div>
+  <header>
+    <div class="wrap">
+      <h1>Management Reviewer</h1>
+      <p class="sub">Fundamentals of Management, 8e - Chapters 1, 3, and 8. Built for detail-heavy exam prep.</p>
+      <nav>
+        <button class="tab active" data-view="reviewer">Reviewer</button>
+        <button class="tab" data-view="quiz">Quiz</button>
+        <button class="tab" data-view="cram">Cram Sheet</button>
+        <button onclick="window.print()">Print</button>
+      </nav>
     </div>
-    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-  </div>
-
-  <div id="finalBanner">
-    <h2>Quiz Complete</h2>
-    <div class="bigscore" id="finalScoreText">0 / 50</div>
-    <div id="finalMsg"></div>
-  </div>
-
-  <div id="quizControls">
-    <button class="ctrl" onclick="scrollToNextUnanswered()">Jump to next unanswered</button>
-    <button class="ctrl secondary" id="resetBtn" onclick="handleReset(this)">Reset quiz</button>
-  </div>
-
-  <div id="quizContainer"></div>
-
-</div>
-
-</main>
-
-<footer>Ethics Reviewer Edition. Built for clarity and focus.</footer>
-
-<script>
-function showView(name){
-  document.getElementById('view-reviewer').classList.toggle('active', name==='reviewer');
-  document.getElementById('view-quiz').classList.toggle('active', name==='quiz');
-  document.getElementById('tabRevBtn').classList.toggle('active', name==='reviewer');
-  document.getElementById('tabQuizBtn').classList.toggle('active', name==='quiz');
-  window.scrollTo(0,0);
-}
-
-// Custom two-tap confirmation logic to replace confirm()
-let resetTapCount = 0;
-let resetTimeout = null;
-
-function handleReset(btn) {
-  if (resetTapCount === 0) {
-    btn.textContent = "Confirm Reset (Double Tap)";
-    btn.style.background = "var(--black)";
-    btn.style.color = "var(--white)";
-    resetTapCount = 1;
-    
-    resetTimeout = setTimeout(() => {
-      resetTapCount = 0;
-      btn.textContent = "Reset quiz";
-      btn.style.background = "";
-      btn.style.color = "";
-    }, 3000);
-  } else {
-    clearTimeout(resetTimeout);
-    resetTapCount = 0;
-    btn.textContent = "Reset quiz";
-    btn.style.background = "";
-    btn.style.color = "";
-    executeReset();
-  }
-}
-
-const questions = [
-// ---------------- Section A: Moral Dilemma (14) ----------------
-{sec:"Moral Dilemma", q:"According to the text, what is a \u201cdilemma\u201d?", opts:[
-  "A situation where a person is forced to choose between two or more conflicting options, none of which is acceptable",
-  "Any difficult or stressful situation a person faces",
-  "A situation with only one possible solution",
-  "A conflict between two people with opposing goals"
-], correct:0, exp:"A dilemma specifically means a forced choice among conflicting options where none are fully acceptable \u2014 not simply any hard situation."},
-
-{sec:"Moral Dilemma", q:"If a person faces a difficult situation but is NOT forced to choose between two or more conflicting options, the text says that person is:", opts:[
-  "In a moral dilemma",
-  "Just experiencing a problematic or distressful situation, and should look for solutions",
-  "In an epistemic dilemma",
-  "In a self-imposed dilemma"
-], correct:1, exp:"Without a forced choice between conflicting options, it's not a dilemma \u2014 the logical response is simply to look for alternatives or solutions."},
-
-{sec:"Moral Dilemma", q:"In Efreminda's case (ectopic pregnancy), her two conflicting options are:", opts:[
-  "Continue the pregnancy and risk both her and the fetus's death, or abort the fetus to save herself but violate her moral/religious conviction against killing",
-  "Get a divorce or stay married",
-  "See a doctor or avoid medical help entirely",
-  "Move to another town or stay in her community"
-], correct:0, exp:"Efreminda must choose between abortion (saves her life, compromises her moral integrity) or continuing the pregnancy (endangers both her and the fetus)."},
-
-{sec:"Moral Dilemma", q:"According to Karen Allen, the FIRST condition for a moral dilemma is:", opts:[
-  "The agent is obliged to decide which course of action is best",
-  "The agent must be a religious person",
-  "There must be a legal consequence involved",
-  "The dilemma must involve more than one person"
-], correct:0, exp:"Condition 1: the moral agent must choose the best available option and act on it."},
-
-{sec:"Moral Dilemma", q:"Karen Allen's SECOND condition for a moral dilemma requires:", opts:[
-  "A single, obviously correct option",
-  "Different courses of action to choose from",
-  "A resolution that satisfies all moral principles",
-  "Government intervention"
-], correct:1, exp:"Condition 2: there must be two or more conflicting options to choose from."},
-
-{sec:"Moral Dilemma", q:"According to Karen Allen's THIRD condition (echoed by Benjiemen Labastin), what is true of moral dilemmas?", opts:[
-  "There is always a perfect solution if you think hard enough",
-  "No matter what course of action is taken, some moral principle is always compromised \u2014 the agent is \u201cfated to commit something wrong\u201d",
-  "The agent is never held morally responsible for the outcome",
-  "Moral dilemmas can always be avoided with proper planning"
-], correct:1, exp:"Condition 3: there is no perfect solution \u2014 choosing one moral requirement necessarily means failing another."},
-
-{sec:"Moral Dilemma", q:"Epistemic moral dilemmas are defined by:", opts:[
-  "The agent not knowing which of the conflicting moral requirements takes precedence, though fuller knowledge could reveal which option is better",
-  "Two requirements that are permanently, objectively equal in moral weight",
-  "A dilemma caused entirely by the agent's own past wrongdoing",
-  "A conflict between two separate people, each with their own obligation"
-], correct:0, exp:"Epistemic dilemmas are a knowledge problem \u2014 e.g., promising to be home early for your son vs. helping a sick old man; with fuller information, one option would likely be better."},
-
-{sec:"Moral Dilemma", q:"Ontological moral dilemmas differ from epistemic dilemmas because:", opts:[
-  "They only occur during wartime",
-  "Neither conflicting moral requirement overrides the other \u2014 it isn't a lack of knowledge, the requirements are genuinely, equally weighted",
-  "They only involve children",
-  "They have no real-world examples in the text"
-], correct:1, exp:"Example: a military doctor with two equally wounded soldiers and only one bag of blood \u2014 neither soldier's need is objectively \u201cmore deserving.\u201d"},
-
-{sec:"Moral Dilemma", q:"A self-imposed moral dilemma is illustrated in the text by:", opts:[
-  "Sophie's Choice",
-  "David, a mayoral candidate who promised indigenous peoples he'd protect their forest, but also sought funding from a mining corporation \u2014 creating his own conflict of obligations",
-  "The Heinz Dilemma",
-  "The military doctor and two wounded soldiers"
-], correct:1, exp:"David's dilemma was caused by his own choices/wrongdoing during the campaign \u2014 the defining feature of a self-imposed dilemma."},
-
-{sec:"Moral Dilemma", q:"A world-imposed moral dilemma means that:", opts:[
-  "The dilemma is caused by the agent's own wrongdoing",
-  "Certain events in the world place the agent in a situation of moral conflict, through no fault of their own",
-  "The dilemma can only occur in international politics",
-  "The agent has no real choices at all"
-], correct:1, exp:"Unlike self-imposed dilemmas, world-imposed dilemmas arise from external events \u2014 as in Sophie's Choice, where Sophie did nothing to cause her situation."},
-
-{sec:"Moral Dilemma", q:"In William Styron's Sophie's Choice, what happens?", opts:[
-  "Sophie must choose which of her two children (Eva or Jan) will be sent to the gas chamber at Auschwitz; she chooses Eva, and Jan is sent to the Children's Camp",
-  "Sophie must choose between two job offers",
-  "Sophie must decide whether to report a crime to the police",
-  "Sophie must choose which parent to live with"
-], correct:0, exp:"An SS doctor forces Sophie to choose one child to die; if she refuses, both die. She chooses Eva; Jan goes to the Children's Camp."},
-
-{sec:"Moral Dilemma", q:"What is the difference between an obligation dilemma and a prohibition dilemma?", opts:[
-  "They are the same thing",
-  "Obligation dilemmas involve more than one feasible action that is obligatory; prohibition dilemmas involve situations where all feasible actions are forbidden",
-  "Obligation dilemmas only apply to soldiers; prohibition dilemmas only apply to civilians",
-  "Obligation dilemmas have legal consequences; prohibition dilemmas do not"
-], correct:1, exp:"Sophie's Choice is described as a classic example of a prohibition dilemma \u2014 every option available to her is morally forbidden."},
-
-{sec:"Moral Dilemma", q:"In a single-agent dilemma, illustrated by a doctor whose patient has HIV, the agent:", opts:[
-  "Ought, all things considered, to do A and ought to do B, but cannot do both (e.g., the legal duty to report vs. the desire to respect patient confidentiality)",
-  "Has no real obligations at all",
-  "Must consult multiple other people before deciding",
-  "Is always legally required to do only one specific thing, with no tension"
-], correct:0, exp:"A single-agent dilemma involves ONE agent torn between two equally binding obligations that cannot both be fulfilled."},
-
-{sec:"Moral Dilemma", q:"A multi-person dilemma, such as a family deciding whether to terminate or prolong a family member's life, requires:", opts:[
-  "Only one person's decision, regardless of others' input",
-  "Not just choosing what is right, but also reaching a general consensus among the people involved",
-  "A government ruling to resolve it",
-  "That all parties automatically agree"
-], correct:1, exp:"Multi-person dilemmas involve several people (family, organization, community) who must reach a consensual decision, making the moral obligation more complicated."},
-
-// ---------------- Section B: Freedom (5) ----------------
-{sec:"Freedom", q:"According to the text, \u201cfreedom\u201d is defined as:", opts:[
-  "The power or right to act, speak, or think as one wants without hindrance or restraint",
-  "The absence of all laws and government",
-  "The ability to do anything without any consequences",
-  "A privilege only granted to citizens of democracies"
-], correct:0, exp:"Freedom also stands for securing everyone an equal opportunity for life, liberty, and the pursuit of happiness \u2014 not just unrestrained personal action."},
-
-{sec:"Freedom", q:"The text explains that freedom does NOT mean total license, because:", opts:[
-  "Freedom is only for adults",
-  "Your choices are limited once they start to infringe on another person's freedom (e.g., you can't shout \u201cFire!\u201d in a crowded theater)",
-  "Freedom only applies to speech, not action",
-  "Freedom must be earned through good behavior"
-], correct:1, exp:"Taken literally as \u201cdo whatever I want,\u201d freedom would produce anarchy \u2014 real freedom exists only up to the point it infringes on others."},
-
-{sec:"Freedom", q:"In his 1941 State of the Union Address, FDR outlined the \u201cFour Freedoms.\u201d Which of the following is NOT one of them?", opts:[
-  "Freedom of speech and expression",
-  "Freedom of worship",
-  "Freedom from want",
-  "Freedom of the press"
-], correct:3, exp:"The actual Four Freedoms are: freedom of speech/expression, freedom of worship, freedom from want, and freedom from fear. \u201cFreedom of the press\u201d is not one of the four listed."},
-
-{sec:"Freedom", q:"The distinction between \u201cfreedom of/to\u201d and \u201cfreedom from\u201d was illustrated by:", opts:[
-  "President Franklin Delano Roosevelt's Four Freedoms speech",
-  "Karen Allen's three conditions",
-  "Kohlberg's stages of moral development",
-  "Thomas Aquinas's concept of natural law"
-], correct:0, exp:"FDR's January 6, 1941 State of the Union Address (Four Freedoms speech) is the source of this distinction in the text."},
-
-{sec:"Freedom", q:"According to the text, securing \u201cfreedom from fear\u201d and \u201cfreedom from want\u201d is most likely to require:", opts:[
-  "No organized effort at all",
-  "Some form of collective, organized action, often carried out by government (e.g., liberal representative democracy)",
-  "Total elimination of all governments",
-  "Purely individual effort with no collective action"
-], correct:1, exp:"The text argues these freedoms need collective action, most effectively carried out by government, with liberal representative democracy doing this best so far."},
-
-// ---------------- Section C: Culture (9) ----------------
-{sec:"Culture", q:"According to the text, \u201cculture\u201d is defined as:", opts:[
-  "A way of life; the totality of the social environment in which we conduct our lives",
-  "A set of laws written by a government",
-  "Only the religious practices of a group",
-  "A person's individual personality traits"
-], correct:0, exp:"We don't choose the culture we're born into, but we can grow and adjust to it \u2014 it shapes who we become."},
-
-{sec:"Culture", q:"According to the text, our morality is affected by which of the following influences?", opts:[
-  "Home, school, community, church, and society, as well as friends, media, and social media",
-  "Only our genetics",
-  "Only our religion",
-  "Only our formal education"
-], correct:0, exp:"The text lists a broad range of influences on our moral behavior, not just one single source."},
-
-{sec:"Culture", q:"According to Holmes (1998), which of the following is one of his three theses about culture and morality?", opts:[
-  "Customs, practices, and moral beliefs vary from culture to culture",
-  "All cultures have identical moral beliefs",
-  "Morality is entirely independent of culture",
-  "Only Western cultures have valid moral systems"
-], correct:0, exp:"Holmes's three theses include that customs/practices/moral beliefs vary by culture, morality depends on human nature/condition/circumstances, and rightness/wrongness may vary culture to culture (relativism)."},
-
-{sec:"Culture", q:"\u201cCultural relativism\u201d is best defined as:", opts:[
-  "The view that particular behavior may be judged as morally right if one's own culture approves of it \u2014 morality is relative to culture",
-  "The belief that there is one single, universal morality for all cultures",
-  "A theory that rejects the existence of culture altogether",
-  "The idea that only law, not culture, determines morality"
-], correct:0, exp:"Cultural relativism ties moral rightness/wrongness directly to whether a person's own culture approves of the behavior."},
-
-{sec:"Culture", q:"According to the text, what is a key implication of cultural relativism?", opts:[
-  "Cultures cannot be \u201cwrong,\u201d and individuals who question their own culture's morality can never be considered morally right by that view",
-  "All cultures must adopt the same moral standards",
-  "Cultural relativism proves that objective morality exists",
-  "Cultural relativism eliminates the need for any moral reasoning"
-], correct:0, exp:"Under cultural relativism, cultures are treated as incapable of moral error, and cross-cultural criticism becomes illegitimate."},
-
-{sec:"Culture", q:"Why do many people oppose cultural relativism, according to the text?", opts:[
-  "Because it is too difficult to understand",
-  "Because acceptance of it could lead to an erosion of moral standards, since there would be no way to say any culture's practices are truly wrong",
-  "Because it was invented too recently to be trusted",
-  "Because it only applies to Filipino culture"
-], correct:1, exp:"Critics worry that if right/wrong are purely relative, people may abandon self-regulation and moral progress becomes impossible."},
-
-{sec:"Culture", q:"Fr. Jaime Bulatao (1960) coined which term to describe Filipinos who are pious and God-fearing at one moment but irresponsible or corrupt the next?", opts:[
-  "\u201cSplit-level\u201d Christians",
-  "\u201cHiya\u201d-driven Christians",
-  "Post-conventional Christians",
-  "Cultural relativists"
-], correct:0, exp:"\u201cSplit-level\u201d Christians describes the inconsistency between religious devotion and everyday moral behavior."},
-
-{sec:"Culture", q:"According to Fr. Vitaliano Gorospe, S.J. (1966), the Filipino conscience tends to be:", opts:[
-  "More internal than external, based purely on personal conviction",
-  "More external than internal \u2014 heavily influenced by how others may judge us (the concept of \u201chiya\u201d)",
-  "Completely unaffected by social pressure",
-  "Based entirely on legal requirements"
-], correct:1, exp:"Gorospe argued Filipino moral judgment is strongly shaped by the presence and opinions of others, captured in the concept of \u201chiya.\u201d"},
-
-{sec:"Culture", q:"According to Boylan (2000), as cited in the text, why is each person's view of morality unique?", opts:[
-  "Because of biological characteristics from our parents and the unique upbringing/historical circumstances each of us experienced",
-  "Because morality is randomly assigned at birth",
-  "Because only religious people have a moral view",
-  "Because government regulations differ by country"
-], correct:0, exp:"The combination of inherited biology and personal upbringing creates a unique, personal moral worldview for each individual."},
-
-// ---------------- Section D: Kohlberg (10) ----------------
-{sec:"Kohlberg's Stages", q:"In the Heinz Dilemma, what did Heinz ultimately do?", opts:[
-  "He paid the full price for the drug",
-  "He broke into the chemist's shop and stole the drug to save his dying wife",
-  "He let his wife die rather than break the law",
-  "He sued the chemist in court"
-], correct:1, exp:"After the chemist refused to lower the price or accept partial payment, Heinz broke in and stole the drug for his dying wife."},
-
-{sec:"Kohlberg's Stages", q:"Kohlberg identified how many distinct levels of moral reasoning, based on people's answers to the Heinz Dilemma?", opts:[
-  "Two: right and wrong",
-  "Three: pre-conventional, conventional, and post-conventional",
-  "Four: instinct, custom, law, and principle",
-  "Five levels, one for each stage"
-], correct:1, exp:"Kohlberg's theory has three levels, each containing two sub-stages, for six stages total."},
-
-{sec:"Kohlberg's Stages", q:"According to Kohlberg, how do people move through the levels of moral development, and does everyone reach every stage?", opts:[
-  "People pass through the levels in order, and the reasoning of an earlier stage is replaced by the new one; not everyone achieves all the stages",
-  "People can skip levels randomly",
-  "Everyone eventually reaches the highest stage",
-  "The levels have no fixed order"
-], correct:0, exp:"The stages occur in a fixed sequence, but Kohlberg claimed not everyone reaches the later, more advanced stages."},
-
-{sec:"Kohlberg's Stages", q:"At the Pre-conventional level (most nine-year-olds and younger), moral reasoning is based on:", opts:[
-  "Universal ethical principles chosen by the individual",
-  "The physical consequences of actions, with authority external to the individual",
-  "The approval of peer groups",
-  "Formal legal codes"
-], correct:1, exp:"A personal code of morality does not yet exist at this level; reasoning follows the physical consequences of actions and outside authority."},
-
-{sec:"Kohlberg's Stages", q:"Stage 1 of Kohlberg's theory, \u201cObedience and Punishment Orientation,\u201d means:", opts:[
-  "The individual is good in order to avoid being punished",
-  "The individual follows the law to gain social status",
-  "The individual acts based on universal human rights",
-  "The individual seeks approval from close friends"
-], correct:0, exp:"At Stage 1, if a person is punished, they assume they must have done something wrong \u2014 avoiding punishment is the motivator."},
-
-{sec:"Kohlberg's Stages", q:"Stage 2, \u201cIndividualism and Exchange,\u201d is characterized by:", opts:[
-  "Blind obedience to a single authority figure",
-  "Recognizing that there is not just one right view handed down by authorities \u2014 different individuals have different viewpoints",
-  "A focus on maintaining social order and law",
-  "Reasoning based on universal justice principles"
-], correct:1, exp:"At Stage 2, children begin to recognize that authority isn't the only source of a \u201ccorrect\u201d viewpoint."},
-
-{sec:"Kohlberg's Stages", q:"At the Conventional level (most adolescents and adults), moral reasoning is based on:", opts:[
-  "Avoiding physical punishment only",
-  "The norms of the group to which the person belongs; authority is internalized but not questioned",
-  "Individually chosen universal principles",
-  "Total rejection of societal rules"
-], correct:1, exp:"At this level, people internalize the moral standards of valued adult role models and group norms."},
-
-{sec:"Kohlberg's Stages", q:"What is the key difference between Stage 3 (\u201cGood Interpersonal Relationships\u201d) and Stage 4 (\u201cMaintaining the Social Order\u201d)?", opts:[
-  "Stage 3 is about being seen as good by others (approval-seeking); Stage 4 is about obeying the wider rules/laws of society to uphold order and avoid guilt",
-  "Stage 3 is for children only; Stage 4 is for adults only",
-  "They are identical stages with different names",
-  "Stage 3 involves legal reasoning; Stage 4 involves religious reasoning"
-], correct:0, exp:"Stage 3 centers on interpersonal approval, while Stage 4 shifts to a broader concern for societal rules and law."},
-
-{sec:"Kohlberg's Stages", q:"According to Kohlberg, what percentage of people are capable of reaching Post-conventional morality (Stages 5-6)?", opts:[
-  "Nearly 100%",
-  "Only about 10-15%",
-  "Exactly 50%",
-  "75-90%"
-], correct:1, exp:"Kohlberg believed only 10-15% of people are capable of the abstract thinking required for Stage 5 or 6 reasoning."},
-
-{sec:"Kohlberg's Stages", q:"What distinguishes Stage 6 (\u201cUniversal Principles\u201d) from Stage 5 (\u201cSocial Contract and Individual Rights\u201d)?", opts:[
-  "Stage 5 involves following personal, universal moral guidelines that may not fit existing law, even at the cost of imprisonment; Stage 6 is about laws working for the good of the majority",
-  "Stage 6 involves a person's own set of moral guidelines (e.g., human rights, justice, equality) that may not fit the law, and the person will defend these principles even against society; Stage 5 recognizes that laws/rules, while generally good, can sometimes work against particular individuals",
-  "They are exactly the same stage",
-  "Stage 5 is only about religion; Stage 6 is only about politics"
-], correct:1, exp:"Stage 5 acknowledges rules can conflict with individual interests; Stage 6 goes further \u2014 the person holds self-derived universal principles and will defend them even against society's disapproval."},
-
-// ---------------- Section E: Feelings & Moral Decision Making (6) ----------------
-{sec:"Feelings & Moral Decision Making", q:"According to the text (citing ethicsunwrapped.utexas.edu), can people make important moral judgments without emotions?", opts:[
-  "Yes, always \u2014 emotions should be entirely excluded from ethical decision-making",
-  "Experts think it is impossible to make any important moral judgments without emotions",
-  "Emotions are irrelevant to moral reasoning",
-  "Only religious people rely on emotions for moral judgments"
-], correct:1, exp:"The text states emotions/feelings and intuitions play a major role in ethical decisions, and experts consider them essential, not optional."},
-
-{sec:"Feelings & Moral Decision Making", q:"Inner-directed negative emotions like guilt, embarrassment, and shame tend to:", opts:[
-  "Motivate people to act ethically",
-  "Have no effect on behavior",
-  "Only affect children, not adults",
-  "Discipline or punish other people"
-], correct:0, exp:"Inner-directed negative emotions are self-focused and push the person toward more ethical behavior."},
-
-{sec:"Feelings & Moral Decision Making", q:"Outer-directed negative emotions like anger, disgust, or contempt are typically directed at:", opts:[
-  "Oneself, to induce guilt",
-  "Those who have acted unethically, aiming to discipline or punish and discourage others from behaving the same way",
-  "Random targets with no moral connection",
-  "Only political leaders"
-], correct:1, exp:"These emotions are aimed outward, at people who behaved unethically, functioning as informal discipline/punishment."},
-
-{sec:"Feelings & Moral Decision Making", q:"Positive emotions like gratitude and admiration, felt when observing someone act with compassion or kindness, tend to:", opts:[
-  "Prompt people to help others",
-  "Cause people to feel jealous",
-  "Have no influence on future behavior",
-  "Only occur in professional settings"
-], correct:0, exp:"Positive emotions triggered by witnessing kindness can inspire the observer to act helpfully as well."},
-
-{sec:"Feelings & Moral Decision Making", q:"Which emotion does the text identify as \u201cthe central moral emotion that most commonly motivates prosocial activity such as altruism, cooperation, and generosity\u201d?", opts:[
-  "Anger",
-  "Empathy",
-  "Pride",
-  "Fear"
-], correct:1, exp:"Empathy, evoked by others' suffering, is singled out as the central driver of prosocial, ethical behavior."},
-
-{sec:"Feelings & Moral Decision Making", q:"According to the text, what might surprise us about the source of our moral decisions?", opts:[
-  "That they are influenced only by philosophy or religious values",
-  "That, in truth, our emotions play a significant role in our ethical decision-making, more than we might assume",
-  "That moral decisions are completely random",
-  "That morality has nothing to do with feelings"
-], correct:1, exp:"Even though we tend to credit philosophy/religion for our moral choices, the text emphasizes emotions' significant, often underestimated, influence."},
-
-// ---------------- Section F: Aquinas (6) ----------------
-{sec:"Aquinas's Moral Psychology", q:"According to Thomas Aquinas, truly moral human actions result from three essential parts working together. What are they?", opts:[
-  "Intellect, Will, and Passions",
-  "Synderesis, Conscience, and Natural Law",
-  "Pre-conventional, Conventional, and Post-conventional reasoning",
-  "Epistemic, Ontological, and Self-imposed dilemmas"
-], correct:0, exp:"Intellect, Will, and Passions are the three parts of human action Aquinas identifies (Synderesis/Conscience/Natural Law form a separate framework for moral reasoning)."},
-
-{sec:"Aquinas's Moral Psychology", q:"According to Aquinas, the role of the \u201cIntellect\u201d in moral action is to:", opts:[
-  "Make the final free choice",
-  "Reason and understand \u2014 recognizing general truths and applying them to specific situations, evaluating options",
-  "Generate emotional/bodily responses like fear or compassion",
-  "Enforce legal consequences"
-], correct:1, exp:"The intellect is the reasoning power that identifies general moral truths and searches for what is truly good in a given situation."},
-
-{sec:"Aquinas's Moral Psychology", q:"According to Aquinas, the \u201cWill\u201d is:", opts:[
-  "Our power to reason abstractly",
-  "Our ability to make free choices; even if the intellect knows what's right, the will is what actually chooses it (sometimes choosing what merely seems good, not what is truly good)",
-  "A synonym for conscience",
-  "Purely an emotional response"
-], correct:1, exp:"The will is the faculty of free choice; it can choose correctly or can be misled into choosing what only appears good."},
-
-{sec:"Aquinas's Moral Psychology", q:"According to Aquinas, how does he view \u201cPassions\u201d (emotions and bodily responses like fear or compassion)?", opts:[
-  "As entirely bad and something to be suppressed",
-  "As irrelevant to moral action",
-  "As not inherently bad \u2014 when guided by reason, passions can actually support moral action",
-  "As the sole basis of all moral decisions"
-], correct:2, exp:"Aquinas sees passions as morally neutral in themselves; guided by reason, they can support genuinely moral action."},
-
-{sec:"Aquinas's Moral Psychology", q:"\u201cSynderesis,\u201d in Aquinas's framework, refers to:", opts:[
-  "The natural, innate grasp of basic moral truths (like \u201cdo good and avoid evil\u201d) \u2014 a built-in moral compass that operates automatically, before formal reasoning",
-  "The formal, deliberate process of weighing options in a specific situation",
-  "A legal code written by governments",
-  "A stage in Kohlberg's theory of moral development"
-], correct:0, exp:"Synderesis is the innate, automatic grasp of fundamental moral principles, distinct from the deliberate reasoning of conscience."},
-
-{sec:"Aquinas's Moral Psychology", q:"How does \u201cConscience\u201d differ from \u201cNatural Law\u201d in Aquinas's framework?", opts:[
-  "They are identical concepts",
-  "Conscience applies moral truths to specific situations through practical reasoning and weighing circumstances; Natural Law is the objective, rational moral order in human nature that grounds those truths in the first place",
-  "Conscience is only relevant to religious people; Natural Law is only relevant to scientists",
-  "Conscience is innate and automatic; Natural Law requires no reasoning at all"
-], correct:1, exp:"Conscience is the deliberative application of moral principles to a concrete case, while Natural Law is the objective foundation (rooted in human nature) that makes those principles more than subjective opinion."}
-];
-
-const total = questions.length;
-let answeredCount = 0;
-let correctCount = 0;
-
-function buildQuiz(){
-  const container = document.getElementById('quizContainer');
-  questions.forEach((item, idx) => {
-    const card = document.createElement('div');
-    card.className = 'qcard';
-    card.id = 'q'+idx;
-
-    const secEl = document.createElement('div');
-    secEl.className = 'qsection';
-    secEl.textContent = 'ITEM ' + (idx+1) + ' OF ' + total + ' \u00b7 ' + item.sec;
-    card.appendChild(secEl);
-
-    const qEl = document.createElement('div');
-    qEl.className = 'qtext';
-    qEl.textContent = item.q;
-    card.appendChild(qEl);
-
-    const optWrap = document.createElement('div');
-    item.opts.forEach((optText, oIdx) => {
-      const btn = document.createElement('button');
-      btn.className = 'opt';
-      btn.textContent = String.fromCharCode(65+oIdx) + ')  ' + optText;
-      btn.onclick = () => selectAnswer(idx, oIdx);
-      optWrap.appendChild(btn);
+  </header>
+
+  <main class="wrap">
+    <section id="reviewer" class="view active">
+      <div class="notice">
+        This reviewer paraphrases the assigned chapters into exam-ready study notes. It avoids long textbook copying while preserving the concepts, categories, names, and distinctions your professor is likely to test.
+      </div>
+
+      <article class="chapter" id="ch1">
+        <h2>Chapter 1 - Understanding the Manager's Job</h2>
+        <div class="grid">
+          <div class="box">
+            <h4>Core Definitions</h4>
+            <ul>
+              <li><b>Organization:</b> a coordinated group of people working toward goals.</li>
+              <li><b>Management:</b> activities directed at resources to achieve goals efficiently and effectively.</li>
+              <li><b>Manager:</b> person primarily responsible for carrying out the management process.</li>
+              <li><b>Efficient:</b> using resources wisely and cost-effectively.</li>
+              <li><b>Effective:</b> choosing and implementing the right actions.</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h4>Manager Types by Level</h4>
+            <ul>
+              <li><b>Top managers:</b> overall organization, strategy, policy, external representation.</li>
+              <li><b>Middle managers:</b> implement top plans and coordinate lower managers.</li>
+              <li><b>First-line managers:</b> supervise operating employees and daily work.</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h4>Manager Types by Area</h4>
+            <ul>
+              <li><b>Marketing:</b> product, promotion, distribution, customer demand.</li>
+              <li><b>Financial:</b> accounting, cash, investments, financial resources.</li>
+              <li><b>Operations:</b> production systems, inventory, quality, layout, site selection.</li>
+              <li><b>Human resources:</b> staffing, training, compensation, appraisal, separation.</li>
+              <li><b>Administrative/general:</b> broad familiarity across areas, no single specialty.</li>
+              <li><b>Specialized:</b> public relations, R&D, internal consulting, international operations, and similar roles.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>The Management Process</h3>
+        <div class="term"><b>Planning and decision making</b><span>Set goals and select courses of action from alternatives.</span></div>
+        <div class="term"><b>Organizing</b><span>Determine how activities and resources should be grouped.</span></div>
+        <div class="term"><b>Leading</b><span>Get people to work together in the organization's interest.</span></div>
+        <div class="term"><b>Controlling</b><span>Monitor progress and correct activities to reach goals.</span></div>
+        <p class="mini">Exam trap: the functions are presented in a logical order, but real managers move among them constantly.</p>
+
+        <h3>Fundamental Management Skills</h3>
+        <div class="grid">
+          <div class="box"><h4>Technical</h4><p>Know how to perform or understand specific work. Most critical for first-line managers.</p></div>
+          <div class="box"><h4>Interpersonal</h4><p>Communicate with, understand, and motivate individuals and groups inside and outside the firm.</p></div>
+          <div class="box"><h4>Conceptual</h4><p>Think abstractly, see the whole organization, and understand how parts fit together.</p></div>
+          <div class="box"><h4>Diagnostic</h4><p>Analyze symptoms, identify likely causes, and choose an appropriate response.</p></div>
+          <div class="box"><h4>Communication</h4><p>Send and receive ideas accurately through speech, writing, listening, and interpretation.</p></div>
+          <div class="box"><h4>Decision-making</h4><p>Recognize problems and opportunities, then choose a suitable course of action.</p></div>
+          <div class="box"><h4>Time management</h4><p>Prioritize, work efficiently, and delegate appropriately.</p></div>
+        </div>
+
+        <h3>Management as Science and Art</h3>
+        <ul>
+          <li><b>Science:</b> rational, objective, systematic, data-driven methods; especially useful for routine or measurable issues.</li>
+          <li><b>Art:</b> intuition, experience, insight, judgment; especially important when facts are incomplete or alternatives look equally attractive.</li>
+          <li><b>Best answer:</b> effective management blends both.</li>
+        </ul>
+
+        <h3>History and Theory</h3>
+        <ul>
+          <li><b>Theory:</b> a conceptual framework for organizing knowledge and guiding action.</li>
+          <li><b>Why theory matters:</b> helps managers interpret situations instead of improvising blindly.</li>
+          <li><b>Why history matters:</b> gives heritage, context, and warnings against repeating mistakes.</li>
+          <li><b>Early history:</b> Egyptians used planning, organizing, and controlling for pyramids; Greeks, Romans, and earlier thinkers discussed specialization, leadership, and structure.</li>
+          <li><b>Robert Owen:</b> stressed the importance and welfare of human resources.</li>
+          <li><b>Charles Babbage:</b> emphasized production efficiency, division of labor, and mathematical analysis.</li>
+        </ul>
+
+        <h3>Classical Management Perspective</h3>
+        <div class="grid">
+          <div class="box">
+            <h4>Scientific Management</h4>
+            <p>Focuses on improving individual worker efficiency. Key figure: Frederick W. Taylor.</p>
+            <ul>
+              <li>Taylor observed <b>soldiering</b>: workers deliberately working below capability.</li>
+              <li>Core steps: develop a science for each job element, scientifically select and train employees, supervise prescribed methods, and separate planning from doing.</li>
+              <li>Frank and Lillian Gilbreth studied motions and inefficiencies, including bricklaying; Lillian also influenced industrial psychology and personnel management.</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h4>Administrative Management</h4>
+            <p>Focuses on the total organization rather than individual jobs.</p>
+            <ul>
+              <li><b>Henri Fayol:</b> identified planning, organizing, leading, and controlling as core managerial functions.</li>
+              <li><b>Lyndall Urwick:</b> integrated and synthesized earlier administrative ideas.</li>
+              <li><b>Max Weber:</b> developed ideas about bureaucracy and rational structure.</li>
+            </ul>
+          </div>
+        </div>
+        <p><b>Classical strengths:</b> efficiency, job design, bureaucracy, management as a field of study. <b>Limits:</b> assumed stable/simple organizations, overused universal rules, and slighted the human side.</p>
+
+        <h3>Behavioral Management Perspective</h3>
+        <ul>
+          <li>Emphasizes individual attitudes, behaviors, group processes, and human needs.</li>
+          <li><b>Hugo Munsterberg:</b> father of industrial psychology; linked psychology to selection and motivation.</li>
+          <li><b>Mary Parker Follett:</b> anticipated the human side of management and the importance of behavior in organizations.</li>
+          <li><b>Hawthorne studies:</b> Mayo and associates found that attention, social acceptance, and group norms affected productivity.</li>
+          <li><b>Human relations movement:</b> argued that workers respond strongly to social context, group norms, and interpersonal dynamics.</li>
+          <li><b>Maslow:</b> hierarchy of needs influenced motivation theory.</li>
+          <li><b>McGregor's Theory X:</b> negative view; people avoid work, need control, avoid responsibility.</li>
+          <li><b>McGregor's Theory Y:</b> positive view; work can be natural, people seek responsibility, are creative, and can self-direct when committed.</li>
+          <li><b>Organizational behavior:</b> modern, interdisciplinary field studying individual, group, and organizational processes.</li>
+        </ul>
+
+        <h3>Quantitative Management Perspective</h3>
+        <ul>
+          <li>Emerged strongly during World War II to allocate military resources more efficiently.</li>
+          <li>Focuses on quantitative techniques, decision making, cost-effectiveness, mathematical models, and computers.</li>
+          <li><b>Management science:</b> develops mathematical models of systems, processes, or relationships.</li>
+          <li><b>Operations management:</b> applied management science aimed at producing products or services efficiently; includes inventory, scheduling, linear programming, queuing, break-even analysis, and simulation.</li>
+          <li><b>Limitation:</b> models rely on assumptions and cannot fully capture attitudes and individual behavior.</li>
+        </ul>
+
+        <h3>Contemporary Perspectives</h3>
+        <div class="grid">
+          <div class="box">
+            <h4>Systems Perspective</h4>
+            <ul>
+              <li>A system is an interrelated set of elements functioning as a whole.</li>
+              <li>Basic flow: inputs from environment, transformation process, outputs to environment, feedback.</li>
+              <li><b>Open system:</b> interacts with environment. Organizations are open systems.</li>
+              <li><b>Closed system:</b> does not interact with environment.</li>
+              <li><b>Subsystems:</b> systems within the larger system, such as marketing or finance.</li>
+              <li><b>Synergy:</b> units produce more together than separately.</li>
+              <li><b>Entropy:</b> system decline if the organization fails to renew and adjust.</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h4>Contingency Perspective</h4>
+            <ul>
+              <li>Rejects the idea of one universal best way.</li>
+              <li>The appropriate managerial action depends on the situation's unique elements.</li>
+              <li>Exam clue: if a question says "it depends," think contingency.</li>
+            </ul>
+          </div>
+        </div>
+        <h3>Modern Challenges</h3>
+        <ul>
+          <li>Globalization: different ownership patterns, infrastructure, cultures, work norms, and decision styles.</li>
+          <li>Ethics, social responsibility, and corporate governance.</li>
+          <li>Quality as a basis of competition and productivity improvement.</li>
+          <li>Service economy: intangible outputs and time/place utility; service firms still use many operations tools.</li>
+          <li>Economic downturns and recovery: cost reduction, restructuring, and strategy refinement.</li>
+          <li>New workplace: diversity, generational differences, flexibility, lifestyle preferences, and changing motivation patterns.</li>
+          <li>Technology and social media: faster communication, more information, privacy issues, and accelerated work pace.</li>
+        </ul>
+      </article>
+
+      <article class="chapter" id="ch3">
+        <h2>Chapter 3 - Planning and Strategic Management</h2>
+        <h3>Planning Process</h3>
+        <ul>
+          <li>Planning occurs inside an environmental context; managers must understand that context first.</li>
+          <li>The mission states purpose, premises, values, and direction.</li>
+          <li>Mission leads to strategic goals and strategic plans.</li>
+          <li>Strategic goals and plans shape tactical goals and tactical plans.</li>
+          <li>Tactical goals and plans shape operational goals and operational plans.</li>
+          <li>Goals and plans at each level feed future planning.</li>
+        </ul>
+        <div class="grid">
+          <div class="box">
+            <h4>Purposes of Goals</h4>
+            <ul>
+              <li>Provide guidance and unified direction.</li>
+              <li>Facilitate planning.</li>
+              <li>Motivate and build commitment.</li>
+              <li>Support evaluation and control.</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h4>Goal Levels</h4>
+            <ul>
+              <li><b>Mission:</b> fundamental purpose and scope.</li>
+              <li><b>Strategic goals:</b> broad top-management goals.</li>
+              <li><b>Tactical goals:</b> middle-management goals that operationalize strategy.</li>
+              <li><b>Operational goals:</b> lower-level, short-term goals tied to tactical goals.</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h4>Plan Levels</h4>
+            <ul>
+              <li><b>Strategic plans:</b> resource allocation, priorities, and action steps to reach strategic goals.</li>
+              <li><b>Tactical plans:</b> implement specific parts of strategic plans.</li>
+              <li><b>Operational plans:</b> carry out tactical plans for operational goals.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Strategic Management</h3>
+        <div class="term"><b>Strategy</b><span>A comprehensive plan for accomplishing organizational goals.</span></div>
+        <div class="term"><b>Strategic management</b><span>Ongoing process of formulating and implementing effective strategies.</span></div>
+        <div class="term"><b>Effective strategy</b><span>Aligns organization and environment while achieving strategic goals.</span></div>
+        <div class="term"><b>Distinctive competence</b><span>An organizational strength possessed by only a small number of competitors.</span></div>
+        <div class="term"><b>Scope</b><span>The markets in which the organization will compete.</span></div>
+        <div class="term"><b>Resource deployment</b><span>How the organization distributes resources across areas of competition.</span></div>
+        <ul>
+          <li><b>Business-level strategy:</b> how an organization competes in a particular industry or market.</li>
+          <li><b>Corporate-level strategy:</b> how an organization manages operations across several industries or markets.</li>
+          <li><b>Strategy formulation:</b> deciding the content of strategy, or what the strategy is.</li>
+          <li><b>Strategy implementation:</b> operationalizing and executing the strategy, or how it is achieved.</li>
+        </ul>
+
+        <h3>SWOT Analysis</h3>
+        <ul>
+          <li><b>Strengths:</b> internal skills and capabilities that enable strategy.</li>
+          <li><b>Weaknesses:</b> internal limitations that hinder strategy.</li>
+          <li><b>Opportunities:</b> external areas that may generate higher performance.</li>
+          <li><b>Threats:</b> external areas that make high performance harder.</li>
+          <li>Good strategy should support the mission, exploit strengths and opportunities, neutralize threats, and avoid or correct weaknesses.</li>
+        </ul>
+
+        <h3>Business-Level Strategy</h3>
+        <div class="grid">
+          <div class="box"><h4>Differentiation</h4><p>Distinguish products or services through quality, image, service, features, or value customers will pay extra for.</p></div>
+          <div class="box"><h4>Overall Cost Leadership</h4><p>Gain advantage by keeping costs below competitors and selling profitably at low prices.</p></div>
+          <div class="box"><h4>Focus</h4><p>Concentrate on a region, product line, or buyer group; can use either cost or differentiation within that niche.</p></div>
+        </div>
+        <h4>Product Life Cycle</h4>
+        <ul>
+          <li><b>Introduction:</b> new product or technology; priority is getting product out without sacrificing quality.</li>
+          <li><b>Growth:</b> more competitors enter; quality, delivery, differentiation, and barriers to entry matter.</li>
+          <li><b>Maturity:</b> demand growth slows; firms may exit; cost control and new product search become important.</li>
+          <li><b>Decline:</b> demand and number of producers fall; firms need differentiation, low costs, or new products to survive.</li>
+        </ul>
+
+        <h3>Corporate-Level Strategy</h3>
+        <ul>
+          <li><b>Strategic business unit (SBU):</b> a business or set of businesses within a larger organization.</li>
+          <li><b>Diversification:</b> number of businesses and the extent to which they are related.</li>
+          <li><b>Single-product strategy:</b> one product/service in one geographic market; focused but risky if the product fails.</li>
+          <li><b>Related diversification:</b> multiple linked businesses; reduces dependence, spreads overhead, and exploits synergy.</li>
+          <li><b>Unrelated diversification:</b> unrelated businesses; theoretically stabilizes performance and allocates resources, but often underperforms because managers lack deep knowledge and do not exploit synergy.</li>
+        </ul>
+        <div class="grid">
+          <div class="box">
+            <h4>BCG Matrix</h4>
+            <ul>
+              <li><b>Dogs:</b> low share, low growth; avoid investment or divest.</li>
+              <li><b>Cash cows:</b> high share, low growth; generate funds for other businesses.</li>
+              <li><b>Question marks:</b> low share, high growth; invest carefully or divest if performance disappoints.</li>
+              <li><b>Stars:</b> high share, high growth; invest to maintain strong position.</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h4>GE Business Screen</h4>
+            <ul>
+              <li>Uses industry attractiveness and competitive position.</li>
+              <li>Classifies businesses as winners, losers, question marks, average businesses, or profit producers.</li>
+              <li>Industry attractiveness includes market growth, market size, capital requirements, and competitive intensity.</li>
+              <li>Competitive position includes market share, technological know-how, product quality, service network, price competitiveness, and operating costs.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Tactical and Operational Planning</h3>
+        <ul>
+          <li>Tactical plans implement specific parts of strategy; strategy is about the war, tactics are about battles.</li>
+          <li>Tactical planning should flow from strategy, specify resources and time frames, and require human resource commitments.</li>
+          <li>Execution depends on evaluating actions against goals, giving decision makers information and resources, coordinating vertically and horizontally, and monitoring results.</li>
+          <li><b>Single-use plans:</b> for actions unlikely to recur. A program is large and complex; a project is narrower.</li>
+          <li><b>Standing plans:</b> for recurring activities. Policies are broad guides; SOPs list steps; rules and regulations specify exact behavior and can replace decision making.</li>
+          <li><b>Contingency planning:</b> alternative courses if intended plans are disrupted.</li>
+          <li><b>Crisis management:</b> procedures for disasters or unexpected calamities.</li>
+          <li>Contingency planning action points: develop plan and consider events; implement plan and identify events; set indicators and contingency plans; complete original or contingency plan.</li>
+        </ul>
+      </article>
+
+      <article class="chapter" id="ch8">
+        <h2>Chapter 8 - Managing Human Resources in Organizations</h2>
+        <h3>HRM Context and Strategic Importance</h3>
+        <ul>
+          <li><b>Human resource management (HRM):</b> activities directed at attracting, developing, and maintaining an effective workforce.</li>
+          <li>HRM matters strategically because people affect productivity, legal exposure, costs, morale, and performance.</li>
+          <li><b>Human capital:</b> the organization's investment in attracting, retaining, and motivating an effective workforce.</li>
+          <li>HR departments and line managers share responsibility: HR may design systems and screen applicants, while line managers often make final selection, appraisal, and coaching decisions.</li>
+        </ul>
+
+        <h3>Legal Environment of HRM</h3>
+        <div class="grid">
+          <div class="box">
+            <h4>Equal Employment Opportunity</h4>
+            <ul>
+              <li><b>Title VII:</b> forbids discrimination based on sex, race, color, religion, or national origin in the employment relationship.</li>
+              <li><b>Adverse impact:</b> protected groups pass a selection standard at less than 80 percent of the majority group's pass rate.</li>
+              <li><b>EEOC:</b> enforces Title VII and related employment laws.</li>
+              <li><b>Age Discrimination in Employment Act:</b> protects people older than 40.</li>
+              <li><b>Affirmative action:</b> intentionally seeking and hiring qualified or qualifiable underrepresented workers; required for certain government contractors.</li>
+              <li><b>Pregnancy Discrimination Act:</b> forbids pregnancy-based discrimination.</li>
+              <li><b>Americans with Disabilities Act:</b> forbids disability discrimination and requires reasonable accommodation.</li>
+              <li><b>Civil Rights Act of 1991:</b> makes discrimination suits easier while limiting punitive damages.</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h4>Compensation, Benefits, Labor, Safety</h4>
+            <ul>
+              <li><b>Fair Labor Standards Act:</b> minimum wage and overtime after 40 hours for covered workers.</li>
+              <li><b>Equal Pay Act:</b> men and women must receive equal pay for the same job.</li>
+              <li><b>ERISA:</b> regulates pension fund management and security.</li>
+              <li><b>Family and Medical Leave Act:</b> up to 12 weeks unpaid leave for family and medical emergencies.</li>
+              <li><b>National Labor Relations Act/Wagner Act:</b> union election procedures and collective bargaining requirements.</li>
+              <li><b>NLRB:</b> enforces Wagner Act provisions.</li>
+              <li><b>Taft-Hartley Act:</b> limits union power and defines management rights during organizing campaigns.</li>
+              <li><b>OSHA:</b> requires safe work conditions and compliance with safety and health standards.</li>
+            </ul>
+          </div>
+        </div>
+        <p><b>Emerging legal issues:</b> sexual harassment, alcohol and drug abuse, and AIDS/disability-related protections.</p>
+
+        <h3>Attracting Human Resources</h3>
+        <div class="grid">
+          <div class="box">
+            <h4>Human Resource Planning</h4>
+            <ul>
+              <li><b>Job analysis:</b> systematic collection of job information.</li>
+              <li><b>Job description:</b> duties, working conditions, tools, materials, equipment.</li>
+              <li><b>Job specification:</b> skills, abilities, and credentials needed.</li>
+              <li>Forecast demand using past HR use, future plans, sales forecasts, and economic trends.</li>
+              <li>Forecast internal and external labor supply.</li>
+              <li><b>Replacement chart:</b> key managerial jobs, incumbents, likely tenure, and possible successors.</li>
+              <li><b>Skills inventory:</b> employee education, skills, experience, and career goals.</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h4>Recruiting</h4>
+            <ul>
+              <li><b>Recruiting:</b> attracting qualified applicants.</li>
+              <li><b>Internal recruiting:</b> considers current employees; boosts morale and retention but creates ripple effects.</li>
+              <li><b>External recruiting:</b> ads, campus interviews, agencies, search firms, referrals, walk-ins, online postings.</li>
+              <li><b>Realistic job preview:</b> shows the job honestly so new hires are less likely to quit from unmet expectations.</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h4>Selection</h4>
+            <ul>
+              <li><b>Validation:</b> proving a selection device predicts future job performance.</li>
+              <li>Application blanks gather work history, education, and job-related data.</li>
+              <li>Tests can measure ability, skill, aptitude, knowledge, intelligence, or personality if job-related and validated.</li>
+              <li>Structured interviews improve consistency and validity.</li>
+              <li>Assessment centers simulate managerial work and use trained observers.</li>
+              <li>Other tools include physical exams, drug tests, credit checks, and limited use of polygraphs.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Developing Human Resources</h3>
+        <ul>
+          <li><b>Training:</b> teaches operational or technical employees how to do current jobs.</li>
+          <li><b>Development:</b> teaches managers and professionals skills for present and future jobs.</li>
+          <li>Training should begin with needs assessment; not every poor performance problem is a training problem.</li>
+          <li>Training goals should be specific and measurable; evaluation should focus on whether job performance improved, not only whether participants liked the program.</li>
+          <li>Methods depend on content: reading or lectures for facts, role play or cases for interpersonal skills, on-the-job or vestibule training for physical skills, web-based tools for flexible delivery.</li>
+        </ul>
+
+        <h3>Performance Appraisal and Feedback</h3>
+        <div class="grid">
+          <div class="box">
+            <h4>Why Appraise?</h4>
+            <ul>
+              <li>Validate selection devices.</li>
+              <li>Assess training impact.</li>
+              <li>Make administrative decisions on pay, promotion, and training.</li>
+              <li>Give feedback and support career planning.</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h4>Methods</h4>
+            <ul>
+              <li><b>Objective measures:</b> output, scrap rate, sales, claims processed.</li>
+              <li><b>Opportunity bias:</b> some employees have better chances to perform than others.</li>
+              <li><b>Special performance test:</b> standardized conditions to measure ability.</li>
+              <li><b>Ranking:</b> compares employees from best to worst.</li>
+              <li><b>Rating:</b> compares each employee with a fixed standard.</li>
+              <li><b>BARS:</b> rating scale with specific behavioral anchors.</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h4>Common Errors</h4>
+            <ul>
+              <li><b>Recency error:</b> overweights recent behavior.</li>
+              <li>Leniency, severity, or central tendency errors.</li>
+              <li><b>Halo error:</b> one strong dimension spills into other ratings.</li>
+              <li>Intentional or unintentional discrimination.</li>
+              <li><b>360-degree feedback:</b> boss, peers, and subordinates evaluate the manager.</li>
+            </ul>
+          </div>
+        </div>
+        <p>Feedback should be private, fact-focused, and aimed at improvement. Managers often need training to deliver negative feedback constructively.</p>
+
+        <h3>Maintaining Human Resources</h3>
+        <ul>
+          <li><b>Compensation:</b> financial remuneration for work.</li>
+          <li><b>Wages:</b> hourly pay for operating employees.</li>
+          <li><b>Salary:</b> pay for overall contributions rather than hours worked.</li>
+          <li><b>Incentives:</b> performance-linked compensation such as commissions or bonuses.</li>
+          <li><b>Wage-level decision:</b> whether to pay above, at, or below market rates.</li>
+          <li><b>Wage structure decision:</b> job evaluation establishes job worth relative to other jobs.</li>
+          <li><b>Individual wage decision:</b> pay for a particular person based on seniority, qualifications, merit, or a combination.</li>
+          <li><b>Benefits:</b> noncash or indirect compensation such as leave, insurance, pensions, workers' compensation, Social Security, tuition reimbursement, and recreation.</li>
+          <li><b>Cafeteria benefit plan:</b> basic coverage plus employee choice among additional benefits within a cost limit.</li>
+        </ul>
+
+        <h3>Workforce Diversity</h3>
+        <ul>
+          <li>Diversity exists when group members differ along important dimensions such as gender, age, ethnicity, ability, family status, and other demographic traits.</li>
+          <li><b>Competitive advantages:</b> higher productivity, lower turnover and absenteeism, better applicant attraction, better market understanding, more creativity and innovation.</li>
+          <li><b>Conflict sources:</b> perceptions of unfair advantage, misunderstanding, inappropriate interaction, fear, distrust, prejudice, or resistance to difference.</li>
+          <li><b>Individual strategies:</b> understanding, tolerance, empathy, and communication.</li>
+          <li><b>Organizational approaches:</b> fair policies, clear responses to problems, flexible practices, diversity and multicultural training, language support, and a tolerant culture.</li>
+        </ul>
+
+        <h3>Labor Relations and New Challenges</h3>
+        <div class="grid">
+          <div class="box">
+            <h4>Union Formation</h4>
+            <ul>
+              <li>Employees develop interest in unionization.</li>
+              <li>At least 30 percent of the bargaining unit signs authorization cards before the NLRB holds an election.</li>
+              <li>Bargaining unit: employees eligible to vote and be represented.</li>
+              <li>Secret ballot election; simple majority of those voting certifies the union.</li>
+              <li>After certification, the union signs up members, elects officers, and negotiates a first contract.</li>
+              <li>Decertification election can remove union representation.</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h4>Collective Bargaining</h4>
+            <ul>
+              <li>Management and union negotiate a labor contract.</li>
+              <li>Contract topics include wages, hours, security, promotion, layoffs, discipline, benefits, overtime, vacations, rest periods, and grievances.</li>
+              <li>A grievance procedure enforces the contract.</li>
+              <li>Final unresolved grievances go to binding arbitration by a labor law expert.</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h4>Changing Workplace</h4>
+            <ul>
+              <li><b>Knowledge workers:</b> add value through what they know; often identify strongly with a profession and need continual training.</li>
+              <li><b>Contingent workers:</b> work on something other than a permanent full-time basis, including contractors, on-call workers, temps, leased employees, and part-timers.</li>
+              <li>Managers must plan contingent work, understand real costs and limits, and integrate temporary workers consistently.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="quiz" class="view">
+      <div class="controls">
+        <label for="chapterFilter"><b>Chapter</b></label>
+        <select id="chapterFilter">
+          <option value="all">All chapters</option>
+          <option value="1">Chapter 1</option>
+          <option value="3">Chapter 3</option>
+          <option value="8">Chapter 8</option>
+        </select>
+        <button id="shuffleBtn">Shuffle</button>
+        <button id="resetBtn">Reset Answers</button>
+        <span class="score" id="scoreText">Score: 0 / 0</span>
+      </div>
+      <div class="notice">
+        Answer each item once. If you miss it, the app marks your answer, shows the correct answer, and explains the detail. Total bank: <b id="totalCount"></b> questions.
+      </div>
+      <div id="questions"></div>
+    </section>
+
+    <section id="cram" class="view">
+      <article class="chapter">
+        <h2>One-Pass Cram Sheet</h2>
+        <h3>Chapter 1</h3>
+        <ul>
+          <li>Management = planning/decision making, organizing, leading, controlling applied to resources for efficient and effective goal attainment.</li>
+          <li>Manager levels: top = strategy/policy; middle = implementation/coordination; first-line = operating employees.</li>
+          <li>Manager areas: marketing, financial, operations, HR, administrative/general, specialized.</li>
+          <li>Skills: technical, interpersonal, conceptual, diagnostic, communication, decision-making, time management.</li>
+          <li>Science uses data and logic; art uses intuition and judgment. Good management blends both.</li>
+          <li>Classical = scientific management plus administrative management. Taylor = individual efficiency and soldiering; Fayol = functions; Weber = bureaucracy.</li>
+          <li>Behavioral = people, attitudes, group processes. Hawthorne = attention/social factors matter. Theory X = negative worker assumptions; Theory Y = positive assumptions.</li>
+          <li>Quantitative = mathematical decision tools. Management science = models; operations management = applied efficiency in production/services.</li>
+          <li>Systems = inputs, transformation, outputs, feedback; open systems, subsystems, synergy, entropy.</li>
+          <li>Contingency = appropriate management depends on situation.</li>
+        </ul>
+        <h3>Chapter 3</h3>
+        <ul>
+          <li>Planning starts with environmental context and mission, then strategic, tactical, and operational goals/plans.</li>
+          <li>Goals provide direction, support planning, motivate, and enable control.</li>
+          <li>Strategy components: distinctive competence, scope, resource deployment.</li>
+          <li>Formulation = what strategy; implementation = how executed.</li>
+          <li>SWOT = internal strengths/weaknesses plus external opportunities/threats.</li>
+          <li>Porter: differentiation, overall cost leadership, focus.</li>
+          <li>Product life cycle: introduction, growth, maturity, decline.</li>
+          <li>Diversification: single-product, related, unrelated. Related is preferred when synergy exists.</li>
+          <li>BCG: dogs, cash cows, question marks, stars. GE screen: industry attractiveness and competitive position.</li>
+          <li>Operational plans: single-use programs/projects; standing policies/SOPs/rules. Contingency planning = backup courses; crisis management = disaster procedures.</li>
+        </ul>
+        <h3>Chapter 8</h3>
+        <ul>
+          <li>HRM = attracting, developing, maintaining an effective workforce. Human capital = investment in people.</li>
+          <li>Title VII forbids discrimination; adverse impact uses the 80 percent rule; EEOC enforces.</li>
+          <li>FLSA = minimum wage/overtime; Equal Pay = equal pay same job; ERISA = pensions; FMLA = 12 weeks unpaid leave; OSHA = safety.</li>
+          <li>Job analysis creates job description and job specification.</li>
+          <li>Recruiting: internal boosts morale but has ripple effects; external broadens applicant pool; RJP reduces surprise turnover.</li>
+          <li>Selection must be validated. Tools: applications, tests, interviews, assessment centers.</li>
+          <li>Training = current technical/operational job; development = managers/professionals present and future skills.</li>
+          <li>Appraisal methods: objective measures, special tests, ranking, rating, BARS. Errors: recency, leniency, severity, central tendency, halo, discrimination.</li>
+          <li>Compensation: wages, salary, incentives. Benefits may be flexible through cafeteria plans.</li>
+          <li>Diversity can be advantage or conflict source; manage through understanding, communication, fair policies, flexible practices, and training.</li>
+          <li>Unionization: interest, 30 percent authorization cards, NLRB election, simple majority of voters, collective bargaining, grievance, arbitration.</li>
+          <li>Knowledge workers need continual skill updates. Contingent workers need planning, cost analysis, and consistent integration.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const questions = [
+      {c:"1", q:"Which statement best captures the textbook definition of management?", a:["Activities directed at organizational resources to reach goals efficiently and effectively","The act of supervising employees only at the first-line level","A set of financial controls used to maximize profits","The legal authority to issue orders in a formal hierarchy"], correct:0, why:"Management includes planning/decision making, organizing, leading, and controlling resources to achieve goals with both efficiency and effectiveness."},
+      {c:"1", q:"A manager who uses resources wisely and in a cost-effective way is being:", a:["efficient","effective","diagnostic","contingent"], correct:0, why:"Efficiency is about resource use and cost-effectiveness. Effectiveness is about choosing and implementing the right actions."},
+      {c:"1", q:"Which manager level is mainly responsible for creating organization-wide goals, strategy, and policies?", a:["Top managers","Middle managers","First-line managers","Operations managers"], correct:0, why:"Top managers manage the overall organization and set broad goals, strategies, and policies."},
+      {c:"1", q:"A regional manager translating corporate plans into actions for store managers is most likely a:", a:["middle manager","top manager","first-line manager","specialized technical employee"], correct:0, why:"Middle managers implement policies and plans developed by top managers and coordinate lower-level managers."},
+      {c:"1", q:"Which management function is most directly about determining how activities and resources are grouped?", a:["Organizing","Leading","Controlling","Decision making"], correct:0, why:"Organizing groups activities and resources so plans can be carried out."},
+      {c:"1", q:"Which skill is especially important for first-line managers because they train and answer work-related questions from operating employees?", a:["Technical skill","Conceptual skill","Corporate governance skill","Portfolio skill"], correct:0, why:"Technical skill means knowing or understanding the specific work done in the organization."},
+      {c:"1", q:"The ability to see the big picture and understand how organization parts fit together is called:", a:["conceptual skill","diagnostic skill","technical skill","time management skill"], correct:0, why:"Conceptual skill is abstract thinking about the whole organization and its environment."},
+      {c:"1", q:"A manager studies symptoms of a recurring production problem, identifies its likely cause, and selects a remedy. Which skill is this?", a:["Diagnostic skill","Interpersonal skill","Scientific management","Administrative management"], correct:0, why:"Diagnostic skill is the ability to analyze a situation and visualize the appropriate response."},
+      {c:"1", q:"Management is both a science and an art because managers must:", a:["combine objective analysis with intuition and judgment","avoid data when decisions involve people","use only quantitative models for all problems","separate planning from implementation"], correct:0, why:"The science side uses rational, objective, systematic methods; the art side uses experience, intuition, and insight."},
+      {c:"1", q:"A theory is best described as:", a:["a conceptual framework for organizing knowledge and guiding action","a historical archive with no direct practical use","a mathematical equation used only in management science","a list of fixed rules that applies to every organization"], correct:0, why:"Theories organize knowledge and provide a blueprint for action, even when managers adapt them to real situations."},
+      {c:"1", q:"Who is most associated with recognizing the importance of human resources and worker welfare before modern HRM?", a:["Robert Owen","Charles Babbage","Frederick Taylor","Max Weber"], correct:0, why:"Robert Owen was an early industrialist who stressed worker welfare and the human side of organizations."},
+      {c:"1", q:"Charles Babbage is associated with:", a:["production efficiency, division of labor, and mathematical analysis","the Hawthorne illumination studies","Theory X and Theory Y","the GE Business Screen"], correct:0, why:"Babbage focused on production efficiency, division of labor, and applying mathematics to management problems."},
+      {c:"1", q:"Scientific management focuses primarily on:", a:["improving the performance of individual workers","managing total organizational structure","group norms and social acceptance","matching strategies to unique situations"], correct:0, why:"Scientific management, led by Taylor and others, studied individual work methods to improve efficiency."},
+      {c:"1", q:"Taylor used the term 'soldiering' to mean:", a:["employees deliberately working slower than their capabilities","workers volunteering for difficult assignments","military-style discipline in factories","managers delegating tasks to trained teams"], correct:0, why:"Soldiering refers to intentional underperformance or working below one's capability."},
+      {c:"1", q:"Which pair is most closely associated with motion studies and reducing bricklaying movements?", a:["Frank and Lillian Gilbreth","Henri Fayol and Max Weber","Elton Mayo and Abraham Maslow","Peter Senge and Michael Porter"], correct:0, why:"The Gilbreths developed techniques for eliminating inefficient motions, including the famous bricklaying example."},
+      {c:"1", q:"Administrative management differs from scientific management because it focuses on:", a:["managing the total organization","individual worker motions","informal social groups only","mathematical simulations only"], correct:0, why:"Administrative management looks at the whole organization and its structure, not just individual jobs."},
+      {c:"1", q:"Who first identified planning, organizing, leading, and controlling as core management functions?", a:["Henri Fayol","Frederick Taylor","Elton Mayo","Hugo Munsterberg"], correct:0, why:"Fayol's administrative management work identified the functions still used in many management texts."},
+      {c:"1", q:"Max Weber's major contribution was foundational work on:", a:["bureaucracy","Theory Y","operations management","the product life cycle"], correct:0, why:"Weber's work on bureaucracy shaped modern organization theory and rational structure."},
+      {c:"1", q:"The Hawthorne studies showed that:", a:["social processes and attention can influence productivity","workers are motivated only by piece-rate pay","lighting is the only factor that changes productivity","bureaucracy always increases morale"], correct:0, why:"Hawthorne results highlighted attention, social acceptance, group norms, and human behavior."},
+      {c:"1", q:"In the piecework Hawthorne study, workers who produced too much were labeled:", a:["rate busters","chiselers","soldiers","question marks"], correct:0, why:"The group informally punished overproducers as rate busters and underproducers as chiselers."},
+      {c:"1", q:"Theory X assumes that people:", a:["dislike work, avoid responsibility, and need control","naturally seek responsibility under favorable conditions","are always internally motivated by goals","have fully used potential in most organizations"], correct:0, why:"Theory X is the pessimistic view consistent with tight control assumptions."},
+      {c:"1", q:"Organizational behavior differs from the earlier human relations movement because it:", a:["takes a broader, more realistic, interdisciplinary view of behavior","rejects all psychology and sociology","assumes satisfaction always causes performance","focuses only on mathematical models"], correct:0, why:"Organizational behavior draws from multiple disciplines and studies individual, group, and organizational processes."},
+      {c:"1", q:"Management science is best distinguished from scientific management because management science:", a:["develops mathematical models for decision problems","focuses on timing individual workers with stopwatches","studies informal group pressure","creates broad organizational missions"], correct:0, why:"Despite similar names, management science belongs to the quantitative perspective and uses mathematical models."},
+      {c:"1", q:"Operations management is mainly concerned with:", a:["helping organizations produce goods or services efficiently","developing top-level corporate ethics policies","studying worker attitudes only","selecting applicants through assessment centers"], correct:0, why:"Operations management applies quantitative and practical tools to production and service efficiency."},
+      {c:"1", q:"In the systems perspective, which sequence is most accurate?", a:["Inputs, transformation, outputs, feedback","Goals, tactics, policies, rules","Recruiting, selection, training, appraisal","Differentiation, focus, cost leadership, decline"], correct:0, why:"Systems thinking views organizations as taking inputs, transforming them, producing outputs, and receiving feedback."},
+      {c:"1", q:"A system that interacts with its environment is called:", a:["an open system","a closed system","a contingency","a bureaucracy"], correct:0, why:"Organizations are open systems because they exchange resources, information, and feedback with their environments."},
+      {c:"1", q:"Synergy means:", a:["subsystems working together produce more than they could separately","a system declines because it ignores feedback","a firm uses one best management method everywhere","a worker deliberately slows output"], correct:0, why:"Synergy is the added value created when units cooperate and coordinate."},
+      {c:"1", q:"The contingency perspective says that:", a:["appropriate managerial behavior depends on the unique situation","there is always one best way to manage","formal bureaucracy solves all management problems","workers respond only to economic incentives"], correct:0, why:"Contingency thinking rejects universal answers and asks what fits the situation."},
+      {c:"3", q:"In the planning process, what must managers understand first?", a:["The environmental context","The grievance procedure","The BCG category of each worker","The exact rule for every activity"], correct:0, why:"Planning occurs within an environmental context; without understanding it, plans are less likely to work."},
+      {c:"3", q:"A mission statement primarily defines the organization's:", a:["fundamental purpose and direction","daily operating rules","individual wage levels","performance appraisal anchors"], correct:0, why:"The mission outlines purpose, premises, values, and direction."},
+      {c:"3", q:"Which is NOT one of the four basic purposes of goals?", a:["To eliminate the need for control","To provide guidance and direction","To motivate employees","To support evaluation"], correct:0, why:"Goals do not eliminate control; they provide a standard that makes evaluation and control possible."},
+      {c:"3", q:"Strategic goals are usually set by and for:", a:["top management","middle managers only","first-line managers only","temporary workers"], correct:0, why:"Strategic goals are broad goals set by and for top management."},
+      {c:"3", q:"Operational goals are most associated with:", a:["lower-level managers and shorter-term issues","the board of directors only","corporate diversification decisions","industry attractiveness ratings"], correct:0, why:"Operational goals are lower-level and tied to shorter-term actions that support tactical goals."},
+      {c:"3", q:"A strategic plan primarily outlines:", a:["resource allocation, priorities, and action steps for strategic goals","the exact steps for recurring routine tasks","which employees sign union authorization cards","how an interviewer scores each applicant"], correct:0, why:"Strategic plans are broad plans for reaching strategic goals through priorities, resources, and action steps."},
+      {c:"3", q:"An effective strategy is one that:", a:["aligns the organization with its environment and achieves strategic goals","maximizes unrelated diversification regardless of synergy","avoids implementation details forever","eliminates all external threats"], correct:0, why:"Effectiveness in strategy means strong alignment with the environment and strategic goal achievement."},
+      {c:"3", q:"The three components of strategy identified in the chapter are:", a:["distinctive competence, scope, and resource deployment","mission, rules, and grievances","training, development, and feedback","cash cows, stars, and dogs"], correct:0, why:"A well-conceived strategy addresses what the firm does exceptionally well, where it competes, and how resources are distributed."},
+      {c:"3", q:"A distinctive competence is:", a:["a strength possessed by only a small number of competing firms","a weakness shared by every firm in an industry","the geographic market a firm refuses to enter","a standing plan for repeated activities"], correct:0, why:"Distinctive competence is a rare strength that can support competitive advantage."},
+      {c:"3", q:"Business-level strategy concerns:", a:["how the organization competes in a particular industry or market","how several unrelated businesses are grouped under one corporation","how union grievances are arbitrated","how benefits are selected by employees"], correct:0, why:"Business-level strategy targets competition in a specific industry or market."},
+      {c:"3", q:"Strategy formulation focuses on the strategy's:", a:["content or what it is","execution process only","employee appraisal method","legal compliance test"], correct:0, why:"Formulation is deciding what the strategy is; implementation is carrying it out."},
+      {c:"3", q:"In SWOT analysis, strengths and weaknesses are usually:", a:["internal factors","external factors","always illegal factors","forms of operational plans"], correct:0, why:"Strengths and weaknesses are internal; opportunities and threats are external."},
+      {c:"3", q:"A good SWOT-based strategy should:", a:["exploit strengths and opportunities, neutralize threats, and avoid or correct weaknesses","ignore the mission to pursue any available opportunity","invest equally in all businesses","focus only on external threats"], correct:0, why:"SWOT connects internal and external analysis to mission-supporting strategy."},
+      {c:"3", q:"Porter's differentiation strategy seeks to:", a:["distinguish the product or service so customers perceive extra value","be the lowest cost producer in every market segment","sell only one product in one geographic market","classify SBUs by growth and market share"], correct:0, why:"Differentiation creates value through quality, features, service, image, or similar distinctions."},
+      {c:"3", q:"A firm using overall cost leadership tries to:", a:["reduce costs below competitors and sell profitably at low prices","charge premium prices through luxury image","compete only in one narrow buyer group","avoid all production efficiencies"], correct:0, why:"Cost leadership depends on lower costs that support low prices and profit."},
+      {c:"3", q:"A focus strategy is based on:", a:["a specific region, product line, or buyer group","all industries and all markets at once","the complete absence of competition","only recurring standing plans"], correct:0, why:"Focus narrows competition to a selected niche and may use cost or differentiation within it."},
+      {c:"3", q:"During the maturity stage of the product life cycle, managers should especially watch for:", a:["slowing demand growth, cost pressure, and need to seek new products","demand outpacing the firm's ability to supply","the first introduction of a new technology","the complete disappearance of all competitors"], correct:0, why:"Maturity brings slower growth, possible firm exits, cost concerns, and the need to prepare future offerings."},
+      {c:"3", q:"A single-product strategy's major weakness is:", a:["dependence on one product and market","inability to focus expertise","automatic lack of quality","too many synergies to manage"], correct:0, why:"Single-product focus can be strong, but the firm is vulnerable if that product is rejected or replaced."},
+      {c:"3", q:"Related diversification is attractive partly because it:", a:["reduces dependence, spreads overhead, and exploits synergy","prevents any need for corporate-level strategy","requires no managerial knowledge of the businesses","works only when businesses are completely unrelated"], correct:0, why:"Related diversification links businesses so they can share strengths, costs, and complementary effects."},
+      {c:"3", q:"Research in the chapter suggests unrelated diversification often underperforms because:", a:["corporate managers may lack deep knowledge and fail to exploit synergies","it always creates too much market growth","it makes every business a cash cow","it eliminates the need for resource allocation"], correct:0, why:"Unrelated businesses are harder for corporate managers to guide and do not benefit from logical synergies."},
+      {c:"3", q:"In the BCG matrix, a cash cow has:", a:["high market share in a low-growth market","low market share in a high-growth market","high market share in a high-growth market","low market share in a low-growth market"], correct:0, why:"Cash cows generate cash because they hold large share in mature or low-growth markets."},
+      {c:"3", q:"In the BCG matrix, question marks should be:", a:["invested in carefully, then kept or divested based on performance","automatically ignored because they have no growth","milked to support dogs","classified only by industry attractiveness"], correct:0, why:"Question marks are uncertain because they are low share but high growth; careful investment tests potential."},
+      {c:"3", q:"The GE Business Screen improves on the BCG matrix by considering:", a:["industry attractiveness and competitive position","only market share and market growth","only wage level and wage structure","only union status and grievance history"], correct:0, why:"GE's tool uses richer measures, including market, competitive, cost, product, service, and technology factors."},
+      {c:"3", q:"Tactical plans should:", a:["flow from strategy, specify resources and time, and commit people","replace the organization's mission","remain vague so managers can avoid accountability","be used only for one-time nonrecurring actions"], correct:0, why:"Tactical planning turns strategy into concrete middle-level actions with resources, timing, and people."},
+      {c:"3", q:"A program differs from a project because a program is generally:", a:["larger in scope and complexity","used for recurring activities","a policy with exact rules","a type of corporate-level diversification"], correct:0, why:"Both are single-use plans, but programs cover larger sets of activities; projects are narrower."},
+      {c:"3", q:"Which standing plan is the broadest general guide for action?", a:["Policy","SOP","Rule","Project"], correct:0, why:"Policies are broad standing guides; SOPs are step-by-step; rules are narrow and exact."},
+      {c:"3", q:"Contingency planning is:", a:["developing alternative courses if the intended plan is disrupted","responding only after a disaster with no preparation","ranking employees from best to worst","choosing the lowest-cost business-level strategy"], correct:0, why:"Contingency plans are backup courses for likely events with major impact."},
+      {c:"8", q:"HRM is defined as organizational activities directed at:", a:["attracting, developing, and maintaining an effective workforce","creating only compensation and benefits systems","preventing all unions from forming","writing only job descriptions"], correct:0, why:"The chapter frames HRM around attracting, developing, and maintaining human resources."},
+      {c:"8", q:"Human capital refers to:", a:["the organization's investment in attracting, retaining, and motivating its workforce","cash held for payroll emergencies","the legal minimum wage for human resource jobs","the number of workers in a union bargaining unit"], correct:0, why:"Human capital treats people as valuable organizational resources that require investment."},
+      {c:"8", q:"Under Title VII, employment decisions should be based on:", a:["qualifications rather than protected-class bias","seniority only in every case","the applicant's family status","whether the applicant has union experience"], correct:0, why:"Title VII forbids discrimination based on sex, race, color, religion, or national origin."},
+      {c:"8", q:"Adverse impact exists when a protected group passes a selection standard at less than what percent of the majority group's pass rate?", a:["80 percent","30 percent","50 percent","12 percent"], correct:0, why:"The adverse impact guideline uses the 80 percent rule."},
+      {c:"8", q:"Which law outlaws discrimination against people older than 40?", a:["Age Discrimination in Employment Act","Fair Labor Standards Act","ERISA","Taft-Hartley Act"], correct:0, why:"The Age Discrimination in Employment Act protects workers over 40."},
+      {c:"8", q:"The Fair Labor Standards Act primarily deals with:", a:["minimum wage and overtime pay","reasonable accommodation for disabilities","union election procedures","pension fund management"], correct:0, why:"FLSA sets minimum wage requirements and overtime for work over 40 hours for covered employees."},
+      {c:"8", q:"Which law requires up to 12 weeks of unpaid leave for family and medical emergencies?", a:["Family and Medical Leave Act","Equal Pay Act","OSHA","Civil Rights Act of 1991"], correct:0, why:"The FMLA provides eligible employees up to 12 weeks of unpaid family or medical leave."},
+      {c:"8", q:"OSHA focuses on:", a:["safe and healthy working conditions","equal pay for equal work","collective bargaining contracts","selection test validation"], correct:0, why:"The Occupational Safety and Health Act requires safe work conditions and compliance with safety and health standards."},
+      {c:"8", q:"Job analysis produces two key outputs:", a:["job description and job specification","wage level and cafeteria plan","ranking and halo error","authorization card and contract"], correct:0, why:"Job descriptions list duties and conditions; job specifications list required skills and credentials."},
+      {c:"8", q:"A replacement chart is used to:", a:["identify key managerial positions, incumbents, tenure, and possible successors","rank all employees from best to worst","measure adverse impact in selection tests","calculate overtime wages"], correct:0, why:"Replacement charts support internal labor supply forecasting and succession planning."},
+      {c:"8", q:"Internal recruiting can build morale but may cause:", a:["a ripple effect of openings when employees move","automatic adverse impact","a legal requirement to unionize","the loss of all external applicants forever"], correct:0, why:"When one internal employee moves, another vacancy often appears, creating further movements."},
+      {c:"8", q:"A realistic job preview is useful because it:", a:["reduces dissatisfaction by showing what the job is really like","guarantees the highest possible salary","removes the need for selection validation","prevents all employee turnover"], correct:0, why:"RJPs align expectations with reality, making later dissatisfaction and quitting less likely."},
+      {c:"8", q:"Validation in selection means determining whether a selection device:", a:["predicts future job performance","is liked by applicants","is cheaper than all alternatives","contains no structured questions"], correct:0, why:"Selection tools must be job-related and predictive of performance."},
+      {c:"8", q:"Which interview practice generally improves validity?", a:["Using structured questions for all candidates","Asking completely different questions each time","Avoiding interviewer training","Focusing on non-job-related personal details"], correct:0, why:"Structured interviews add consistency and make validation easier."},
+      {c:"8", q:"Assessment centers are especially useful for:", a:["selecting managers or current employees for promotion","calculating pension fund returns","measuring union authorization percentages","setting minimum wage laws"], correct:0, why:"Assessment centers simulate managerial work and are often used for promotion decisions."},
+      {c:"8", q:"In HRM, training differs from development because training usually teaches:", a:["operational or technical employees how to do their current jobs","only top managers future strategic skills","only legal compliance rules for unions","only wage survey procedures"], correct:0, why:"Training is current-job focused, while development prepares managers and professionals for present and future responsibilities."},
+      {c:"8", q:"The best test of whether training worked is usually:", a:["improved job performance after training","whether trainees enjoyed the session","how expensive the training room was","whether the trainer used lecture only"], correct:0, why:"Reactions are easy to collect, but performance improvement matters more."},
+      {c:"8", q:"Opportunity bias in performance appraisal means:", a:["some employees have better chances to perform than others","raters overemphasize recent events","one rating dimension spills into another","the scale has too many behavioral anchors"], correct:0, why:"Raw performance can be distorted by unequal opportunity, such as different sales territories."},
+      {c:"8", q:"BARS stands for a rating method that uses:", a:["behavioral anchors tied to performance levels","only overall employee ranking","unstructured peer comments","cash bonuses as rating points"], correct:0, why:"Behaviorally Anchored Rating Scales connect scale points to specific observable behaviors."},
+      {c:"8", q:"Recency error occurs when a rater:", a:["bases the appraisal too much on the most recent performance","lets one positive trait influence all ratings","rates everyone as average","uses too many objective measures"], correct:0, why:"Recency error overweights recent events instead of the full appraisal period."},
+      {c:"8", q:"Halo error occurs when:", a:["one performance dimension influences ratings on other dimensions","recent behavior receives too much weight","the supervisor rates everyone too harshly","employees are evaluated by peers and subordinates"], correct:0, why:"Halo error allows one strong or weak area to spread into unrelated ratings."},
+      {c:"8", q:"360-degree feedback evaluates managers through:", a:["bosses, peers, and subordinates","only objective output data","only customers outside the organization","only the HR department"], correct:0, why:"360 feedback gathers information from people around the manager, not just the boss."},
+      {c:"8", q:"Which is a form of compensation?", a:["Wages, salaries, and incentives","Policies, SOPs, and rules","Dogs, stars, and cash cows","Strengths, threats, and opportunities"], correct:0, why:"Compensation includes hourly wages, salaries, and performance-linked incentives."},
+      {c:"8", q:"The wage-level decision asks whether the organization should:", a:["pay above, at, or below the labor market","rank jobs from most to least complex only","use seniority or merit for each worker","offer cafeteria benefits"], correct:0, why:"Wage level is a policy choice about the firm's market pay position."},
+      {c:"8", q:"Job evaluation is used to:", a:["assess the worth of each job relative to other jobs","validate a selection test","measure training satisfaction","count authorization cards"], correct:0, why:"Job evaluation supports the wage structure by comparing jobs."},
+      {c:"8", q:"Cafeteria benefit plans allow employees to:", a:["choose additional benefits within limits after basic coverage","receive only cash instead of benefits","skip legally required benefits","avoid all payroll deductions"], correct:0, why:"Cafeteria plans provide flexibility in selecting benefits that fit employee needs."},
+      {c:"8", q:"A major potential advantage of workforce diversity is:", a:["greater creativity, market understanding, and applicant attraction","automatic absence of workplace conflict","elimination of all HR legal duties","a guarantee of lower compensation costs"], correct:0, why:"Diversity can support creativity, innovation, recruiting, and understanding diverse markets when managed well."},
+      {c:"8", q:"Individual strategies for managing diversity include:", a:["understanding, tolerance, and communication","rigid rules and silence","avoiding every difficult conversation","using only seniority for all decisions"], correct:0, why:"The chapter emphasizes understanding differences, tolerating what one may not enjoy, and communicating openly."},
+      {c:"8", q:"Before the NLRB holds a union election, what percentage of the bargaining unit must sign authorization cards?", a:["30 percent","80 percent","12 percent","51 percent"], correct:0, why:"The 30 percent threshold shows enough interest to justify an election."},
+      {c:"8", q:"A union is certified if it wins:", a:["a simple majority of those voting in the secret ballot election","80 percent of all eligible employees","30 percent of signed authorization cards","unanimous approval from management"], correct:0, why:"Certification requires a simple majority of those who actually vote."},
+      {c:"8", q:"Collective bargaining aims to produce:", a:["a labor contract satisfactory to management and the union","a replacement chart for managers","an individual performance appraisal","a product life cycle strategy"], correct:0, why:"Collective bargaining negotiates the employment contract between labor and management."},
+      {c:"8", q:"The final step in many grievance procedures is:", a:["binding arbitration","a realistic job preview","job analysis","a wage survey"], correct:0, why:"After internal appeals are exhausted, a labor law arbitrator can issue a binding decision."},
+      {c:"8", q:"Knowledge workers are difficult to manage partly because they:", a:["add value through specialized knowledge and need continual skill updating","perform only simple routine manual tasks","do not require training investments","are always temporary contractors"], correct:0, why:"Knowledge workers rely on expertise that can become obsolete unless refreshed."},
+      {c:"8", q:"A contingent worker is:", a:["someone working other than on a permanent full-time basis","a manager covered by a guaranteed pension only","an employee who has filed a grievance","a worker selected through an assessment center"], correct:0, why:"Contingent workers include independent contractors, on-call workers, temps, leased workers, and part-timers."}
+    ];
+
+    let order = questions.map((_, i) => i);
+    let answerOrders = questions.map(q => q.a.map((_, i) => i));
+    const answered = new Map();
+
+    const tabs = document.querySelectorAll(".tab");
+    const views = document.querySelectorAll(".view");
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        tabs.forEach(t => t.classList.remove("active"));
+        views.forEach(v => v.classList.remove("active"));
+        tab.classList.add("active");
+        document.getElementById(tab.dataset.view).classList.add("active");
+      });
     });
-    card.appendChild(optWrap);
 
-    const expEl = document.createElement('div');
-    expEl.className = 'explain';
-    expEl.id = 'exp'+idx;
-    card.appendChild(expEl);
+    const questionsEl = document.getElementById("questions");
+    const scoreText = document.getElementById("scoreText");
+    const totalCount = document.getElementById("totalCount");
+    const chapterFilter = document.getElementById("chapterFilter");
+    totalCount.textContent = questions.length;
 
-    container.appendChild(card);
-  });
-}
-
-function selectAnswer(qIdx, chosenIdx){
-  const item = questions[qIdx];
-  const card = document.getElementById('q'+qIdx);
-  const buttons = card.querySelectorAll('.opt');
-  if (card.dataset.answered === '1') return;
-
-  card.dataset.answered = '1';
-  answeredCount++;
-
-  const isCorrect = (chosenIdx === item.correct);
-  if (isCorrect) correctCount++;
-
-  buttons.forEach((btn, oIdx) => {
-    btn.disabled = true;
-    if (oIdx === item.correct){
-      btn.classList.add('correct');
-    } else if (oIdx === chosenIdx && !isCorrect){
-      btn.classList.add('incorrect');
-    } else {
-      btn.classList.add('dim');
+    function escapeHtml(text) {
+      return String(text).replace(/[&<>"']/g, ch => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+      }[ch]));
     }
-  });
 
-  const expEl = document.getElementById('exp'+qIdx);
-  expEl.classList.add('show');
-  expEl.classList.add(isCorrect ? 'right' : 'wrong');
-  
-  // Minimalist text-based feedback replacing emojis
-  const statusText = isCorrect ? 'CORRECT:' : 'INCORRECT \u2014 Right answer is ' + String.fromCharCode(65+item.correct) + ':';
-  expEl.innerHTML = '<b>' + statusText + '</b> ' + item.exp;
-
-  updateScoreboard();
-}
-
-function updateScoreboard(){
-  document.getElementById('statAnswered').textContent = answeredCount + '/' + total;
-  document.getElementById('statCorrect').textContent = correctCount;
-  document.getElementById('statWrong').textContent = answeredCount - correctCount;
-  const pct = answeredCount ? Math.round((correctCount/answeredCount)*100) : 0;
-  document.getElementById('statPct').textContent = pct + '%';
-  document.getElementById('progressFill').style.width = Math.round((answeredCount/total)*100) + '%';
-
-  if (answeredCount === total){
-    showFinalBanner();
-  } else {
-    document.getElementById('finalBanner').style.display = 'none';
-  }
-}
-
-function showFinalBanner(){
-  const banner = document.getElementById('finalBanner');
-  const finalPct = Math.round((correctCount/total)*100);
-  document.getElementById('finalScoreText').textContent = correctCount + ' / ' + total + '  (' + finalPct + '%)';
-  let msg = '';
-  if (finalPct >= 90) msg = "Excellent result. You have a solid grasp on the material.";
-  else if (finalPct >= 75) msg = "Good understanding. Review the incorrect items for full mastery.";
-  else if (finalPct >= 50) msg = "Average performance. Review the main text and retry.";
-  else msg = "Significant review needed. Please read the reviewer sections carefully before trying again.";
-  banner.querySelector('#finalMsg').textContent = msg;
-  banner.style.display = 'block';
-  banner.scrollIntoView({behavior:'smooth', block:'start'});
-}
-
-function scrollToNextUnanswered(){
-  for (let i=0;i<questions.length;i++){
-    const card = document.getElementById('q'+i);
-    if (card.dataset.answered !== '1'){
-      card.scrollIntoView({behavior:'smooth', block:'center'});
-      return;
+    function filteredOrder() {
+      const selected = chapterFilter.value;
+      return order.filter(i => selected === "all" || questions[i].c === selected);
     }
-  }
-  showFinalBanner();
-}
 
-function executeReset(){
-  answeredCount = 0;
-  correctCount = 0;
-  document.getElementById('quizContainer').innerHTML = '';
-  document.getElementById('finalBanner').style.display = 'none';
-  buildQuiz();
-  updateScoreboard();
-  window.scrollTo(0,0);
-}
+    function shuffleArray(items) {
+      for (let i = items.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [items[i], items[j]] = [items[j], items[i]];
+      }
+      return items;
+    }
 
-buildQuiz();
-</script>
+    function reshuffleAnswers() {
+      answerOrders = questions.map(q => shuffleArray(q.a.map((_, i) => i)));
+    }
 
+    function render() {
+      const ids = filteredOrder();
+      questionsEl.innerHTML = ids.map((idx, pos) => {
+        const item = questions[idx];
+        const chosen = answered.get(idx);
+        const isDone = chosen !== undefined;
+        const buttons = answerOrders[idx].map((answerIdx, shownIdx) => {
+          const answer = item.a[answerIdx];
+          let cls = "answer";
+          if (isDone && answerIdx === item.correct) cls += " correct";
+          if (isDone && answerIdx === chosen && chosen !== item.correct) cls += " wrong";
+          return `<button class="${cls}" data-q="${idx}" data-a="${answerIdx}" ${isDone ? "disabled" : ""}>${String.fromCharCode(65 + shownIdx)}. ${escapeHtml(answer)}</button>`;
+        }).join("");
+        const chosenText = isDone ? item.a[chosen] : "";
+        const status = isDone && chosen === item.correct ? "Correct" : "Incorrect";
+        const correction = isDone ? `<div class="explain show"><b>${status}.</b> Correct answer: <b>${escapeHtml(item.a[item.correct])}</b><br>${chosen !== item.correct ? `Your answer: ${escapeHtml(chosenText)}<br>` : ""}${escapeHtml(item.why)}</div>` : `<div class="explain"></div>`;
+        return `<article class="question">
+          <div class="qtop"><span>Question ${pos + 1}</span><span>Chapter ${item.c}</span></div>
+          <p class="prompt">${escapeHtml(item.q)}</p>
+          <div class="answers">${buttons}</div>
+          ${correction}
+        </article>`;
+      }).join("");
+      questionsEl.querySelectorAll(".answer:not(:disabled)").forEach(btn => {
+        btn.addEventListener("click", () => {
+          answered.set(Number(btn.dataset.q), Number(btn.dataset.a));
+          render();
+        });
+      });
+      updateScore();
+    }
+
+    function updateScore() {
+      const ids = filteredOrder();
+      let done = 0;
+      let correct = 0;
+      ids.forEach(idx => {
+        if (answered.has(idx)) {
+          done += 1;
+          if (answered.get(idx) === questions[idx].correct) correct += 1;
+        }
+      });
+      scoreText.textContent = `Score: ${correct} / ${done || ids.length}`;
+      if (!done) scoreText.textContent = `Score: 0 / ${ids.length}`;
+    }
+
+    function shuffle() {
+      shuffleArray(order);
+      answered.clear();
+      reshuffleAnswers();
+      render();
+    }
+
+    document.getElementById("shuffleBtn").addEventListener("click", shuffle);
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      answered.clear();
+      render();
+    });
+    chapterFilter.addEventListener("change", render);
+    reshuffleAnswers();
+    render();
+  </script>
 </body>
 </html>
