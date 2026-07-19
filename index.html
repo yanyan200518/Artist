@@ -1,867 +1,585 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Management Reviewer - Chapters 1, 2, and 3</title>
-  <style>
-    :root {
-      --bg: #fff;
-      --fg: #000;
-      --muted: #555;
-      --line: #000;
-      --soft: #f4f4f4;
-      --bad: #111;
-      --good: #000;
-      --max: 1120px;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--fg);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.45;
-    }
-    header {
-      border-bottom: 2px solid var(--line);
-      padding: 18px 20px 14px;
-      position: sticky;
-      top: 0;
-      background: #fff;
-      z-index: 10;
-    }
-    .wrap { max-width: var(--max); margin: 0 auto; }
-    h1 {
-      margin: 0 0 6px;
-      font-size: clamp(24px, 4vw, 42px);
-      letter-spacing: 0;
-      line-height: 1.02;
-      text-transform: uppercase;
-    }
-    .sub { margin: 0; color: var(--muted); font-size: 14px; }
-    nav {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 14px;
-    }
-    button, select {
-      appearance: none;
-      border: 1px solid #000;
-      background: #fff;
-      color: #000;
-      border-radius: 0;
-      padding: 9px 11px;
-      font: inherit;
-      min-height: 38px;
-    }
-    button { cursor: pointer; }
-    button:hover, button.active, select:focus, button:focus {
-      background: #000;
-      color: #fff;
-      outline: none;
-    }
-    main { padding: 22px 20px 48px; }
-    section.view { display: none; }
-    section.view.active { display: block; }
-    .chapter {
-      border: 2px solid #000;
-      margin: 0 0 18px;
-      padding: 18px;
-    }
-    h2 {
-      font-size: 22px;
-      margin: 0 0 12px;
-      text-transform: uppercase;
-      border-bottom: 1px solid #000;
-      padding-bottom: 8px;
-    }
-    h3 {
-      font-size: 17px;
-      margin: 18px 0 8px;
-      text-transform: uppercase;
-    }
-    h4 {
-      font-size: 15px;
-      margin: 14px 0 6px;
-      text-transform: uppercase;
-    }
-    ul { margin: 8px 0 12px 21px; padding: 0; }
-    li { margin: 5px 0; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 12px;
-    }
-    .box {
-      border: 1px solid #000;
-      padding: 12px;
-      background: #fff;
-    }
-    .box h4:first-child { margin-top: 0; }
-    .term {
-      display: grid;
-      grid-template-columns: 190px 1fr;
-      gap: 8px;
-      border-top: 1px solid #000;
-      padding: 8px 0;
-    }
-    .term b { text-transform: uppercase; font-size: 13px; }
-    .controls {
-      border: 2px solid #000;
-      padding: 14px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-    .score {
-      margin-left: auto;
-      font-weight: 700;
-      min-width: 160px;
-      text-align: right;
-    }
-    .question {
-      border: 2px solid #000;
-      padding: 16px;
-      margin-bottom: 14px;
-    }
-    .qtop {
-      display: flex;
-      gap: 8px;
-      justify-content: space-between;
-      color: var(--muted);
-      font-size: 13px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .prompt { font-weight: 700; font-size: 17px; margin: 0 0 12px; }
-    .answers { display: grid; gap: 8px; }
-    .answer {
-      width: 100%;
-      text-align: left;
-      border: 1px solid #000;
-      background: #fff;
-      color: #000;
-      padding: 10px;
-    }
-    .answer.correct {
-      background: #000;
-      color: #fff;
-      outline: 3px double #000;
-    }
-    .answer.wrong {
-      background: #fff;
-      color: #000;
-      text-decoration: line-through;
-    }
-    .answer:disabled { cursor: default; }
-    .explain {
-      display: none;
-      border-top: 1px solid #000;
-      margin-top: 12px;
-      padding-top: 10px;
-    }
-    .explain.show { display: block; }
-    .explain b { text-transform: uppercase; }
-    .notice {
-      border: 2px solid #000;
-      padding: 12px;
-      background: var(--soft);
-      margin-bottom: 16px;
-    }
-    .mini {
-      font-size: 13px;
-      color: var(--muted);
-    }
-    .kbd {
-      border: 1px solid #000;
-      padding: 1px 5px;
-      font-family: Consolas, Monaco, monospace;
-      font-size: 12px;
-    }
-    @media (max-width: 720px) {
-      header { position: static; }
-      .term { grid-template-columns: 1fr; }
-      .score { margin-left: 0; text-align: left; width: 100%; }
-      .chapter, .question { padding: 13px; }
-    }
-    @media print {
-      header { position: static; }
-      nav, .controls, #quiz { display: none !important; }
-      section.view { display: block !important; }
-      .chapter, .box { break-inside: avoid; }
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Chapter 2 Reviewer &amp; Quiz — Environments of Organizations and Managers</title>
+<style>
+  :root{
+    --black:#111;
+    --white:#fff;
+    --gray:#555;
+    --lightgray:#e8e8e8;
+    --border:#111;
+    --green:#1a7f37;
+    --greenbg:#e9f7ee;
+    --red:#c0392b;
+    --redbg:#fdecea;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:Georgia, 'Times New Roman', serif;
+    background:var(--white);
+    color:var(--black);
+    line-height:1.55;
+  }
+  header{
+    padding:22px 16px 16px;
+    border-bottom:3px solid var(--black);
+    text-align:center;
+  }
+  header h1{
+    margin:0 0 4px;
+    font-size:1.4rem;
+    letter-spacing:.5px;
+  }
+  header p{
+    margin:0;
+    font-size:.85rem;
+    color:var(--gray);
+    font-family:Arial, sans-serif;
+  }
+  nav.tabs{
+    display:flex;
+    justify-content:center;
+    border-bottom:2px solid var(--black);
+    position:sticky;
+    top:0;
+    background:var(--white);
+    z-index:10;
+  }
+  nav.tabs button{
+    font-family:Arial, sans-serif;
+    font-weight:bold;
+    font-size:.95rem;
+    padding:12px 22px;
+    border:none;
+    background:var(--white);
+    color:var(--black);
+    cursor:pointer;
+    border-right:1px solid var(--black);
+  }
+  nav.tabs button:last-child{border-right:none;}
+  nav.tabs button.active{
+    background:var(--black);
+    color:var(--white);
+  }
+  main{max-width:820px; margin:0 auto; padding:18px 16px 60px;}
+  .tabpanel{display:none;}
+  .tabpanel.active{display:block;}
+
+  /* ---------- Reviewer styles ---------- */
+  .rev-section{margin-bottom:30px;}
+  .rev-section h2{
+    font-family:Arial, sans-serif;
+    font-size:1.15rem;
+    background:var(--black);
+    color:var(--white);
+    padding:8px 12px;
+    margin:0 0 12px;
+  }
+  .rev-section h3{
+    font-family:Arial, sans-serif;
+    font-size:1rem;
+    border-bottom:2px solid var(--black);
+    padding-bottom:3px;
+    margin:20px 0 8px;
+  }
+  .rev-section h4{
+    font-size:.95rem;
+    margin:14px 0 4px;
+    font-style:italic;
+  }
+  .term{
+    border:1px solid var(--border);
+    padding:8px 12px;
+    margin:8px 0;
+    background:var(--lightgray);
+  }
+  .term b{font-family:Arial, sans-serif;}
+  .fact{
+    border-left:4px solid var(--black);
+    padding:6px 12px;
+    margin:8px 0;
+    background:var(--white);
+    font-size:.95rem;
+  }
+  .fact b{font-family:Arial, sans-serif; text-transform:uppercase; font-size:.75rem; letter-spacing:.5px;}
+  ul, ol{padding-left:22px;}
+  table.glossary{
+    width:100%;
+    border-collapse:collapse;
+    font-size:.9rem;
+    margin-top:8px;
+  }
+  table.glossary th, table.glossary td{
+    border:1px solid var(--black);
+    padding:6px 8px;
+    text-align:left;
+    vertical-align:top;
+  }
+  table.glossary th{background:var(--black); color:var(--white); font-family:Arial, sans-serif;}
+
+  /* ---------- Quiz styles ---------- */
+  #scorebar{
+    position:sticky;
+    top:45px;
+    background:var(--white);
+    border:2px solid var(--black);
+    padding:10px 14px;
+    margin-bottom:18px;
+    font-family:Arial, sans-serif;
+    z-index:9;
+  }
+  #scorebar .row{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    font-size:.85rem;
+    margin-bottom:6px;
+  }
+  #scorebar .row span b{font-size:1rem;}
+  .correct-count{color:var(--green);}
+  .incorrect-count{color:var(--red);}
+  #meterTrack{
+    width:100%;
+    height:14px;
+    background:var(--lightgray);
+    border:1px solid var(--black);
+    overflow:hidden;
+  }
+  #meterFill{
+    height:100%;
+    width:0%;
+    background:var(--black);
+    transition:width .25s ease;
+  }
+  #resetBtn{
+    margin-top:8px;
+    font-family:Arial, sans-serif;
+    font-size:.8rem;
+    padding:6px 12px;
+    border:1px solid var(--black);
+    background:var(--white);
+    cursor:pointer;
+  }
+  #resetBtn:hover{background:var(--black); color:var(--white);}
+
+  .qcard{
+    border:1px solid var(--black);
+    padding:12px 14px;
+    margin-bottom:14px;
+  }
+  .qcard .qnum{
+    font-family:Arial, sans-serif;
+    font-weight:bold;
+    font-size:.8rem;
+    color:var(--gray);
+  }
+  .qcard .qtext{
+    font-size:1rem;
+    margin:4px 0 10px;
+  }
+  .opt{
+    display:block;
+    width:100%;
+    text-align:left;
+    font-family:Arial, sans-serif;
+    font-size:.9rem;
+    padding:9px 10px;
+    margin-bottom:6px;
+    border:1px solid var(--black);
+    background:var(--white);
+    color:var(--black);
+    cursor:pointer;
+  }
+  .opt:hover:not(:disabled){background:var(--lightgray);}
+  .opt:disabled{cursor:default;}
+  .opt.correct{background:var(--greenbg); border-color:var(--green); color:var(--green); font-weight:bold;}
+  .opt.incorrect{background:var(--redbg); border-color:var(--red); color:var(--red); font-weight:bold;}
+  .feedback{
+    font-family:Arial, sans-serif;
+    font-size:.8rem;
+    margin-top:4px;
+  }
+  .feedback.right{color:var(--green);}
+  .feedback.wrong{color:var(--red);}
+
+  footer{
+    text-align:center;
+    font-family:Arial, sans-serif;
+    font-size:.75rem;
+    color:var(--gray);
+    padding:20px 10px;
+  }
+</style>
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <h1>Management Reviewer</h1>
-      <p class="sub">Fundamentals of Management, 8e - Chapters 1, 2, and 3. Built for detail-heavy exam prep.</p>
-      <nav>
-        <button class="tab active" data-view="reviewer">Reviewer</button>
-        <button class="tab" data-view="quiz">Quiz</button>
-        <button class="tab" data-view="cram">Cram Sheet</button>
-        <button onclick="window.print()">Print</button>
-      </nav>
+
+<header>
+  <h1>CHAPTER 2 — The Environments of Organizations and Managers</h1>
+  <p>Fundamentals of Management, 8th Edition — Griffin &nbsp;|&nbsp; Reviewer + 78-Item Quiz</p>
+</header>
+
+<nav class="tabs">
+  <button id="tabBtnReviewer" class="active" onclick="showTab('reviewer')">REVIEWER</button>
+  <button id="tabBtnQuiz" onclick="showTab('quiz')">QUIZ (78 ITEMS)</button>
+</nav>
+
+<main>
+
+<!-- ================= REVIEWER TAB ================= -->
+<section id="reviewer" class="tabpanel active">
+
+  <div class="rev-section">
+    <h2>Learning Outcomes</h2>
+    <ol>
+      <li>Discuss the nature of an organization's environments and identify the components of its general, task, and internal environments.</li>
+      <li>Describe the ethical and social environment of management, including individual ethics, the concept of social responsibility, and how organizations can manage social responsibility.</li>
+      <li>Discuss the international environment of management, including trends in international business, levels of international business activities, and the context of international business.</li>
+      <li>Describe the importance and determinants of an organization's culture, as well as how organizational culture can be managed.</li>
+    </ol>
+  </div>
+
+  <div class="rev-section">
+    <h2>I. The Organization's Environments</h2>
+    <div class="term"><b>External environment</b> — everything outside an organization's boundaries that might affect it. It has two separate parts: the <b>general environment</b> and the <b>task environment</b>.</div>
+    <div class="term"><b>Internal environment</b> — the conditions and forces within the organization.</div>
+
+    <h3>A. The General Environment</h3>
+    <p>The set of broad dimensions and forces in an organization's surroundings that determine its overall context. Three dimensions covered in this chapter:</p>
+    <div class="term"><b>Economic dimension</b> — the overall health and vitality of the economic system in which the organization operates (growth, inflation, interest rates, unemployment).</div>
+    <div class="term"><b>Technological dimension</b> — the methods available for converting resources into products or services.</div>
+    <div class="term"><b>Political–legal dimension</b> — the government regulation of business and the relationship between business and government.</div>
+    <div class="fact"><b>Key fact</b> — The chapter's "Tough Times, Tough Choices" feature ties the economic dimension to the business cycle: the U.S. economy fell into recession beginning in <b>2008</b> and only began to recover in <b>2012</b>, with the stock market hitting an all-time high by early 2013.</div>
+    <div class="fact"><b>Key fact</b> — Political–legal dimension is important for three reasons: (1) the legal system defines what an organization can/cannot do, (2) pro- or anti-business sentiment in government influences business activity, (3) political stability affects planning.</div>
+
+    <h3>B. The Task Environment</h3>
+    <p>Because the general environment's impact is often vague, imprecise, and long term, organizations focus more on the task environment — specific organizations or groups that affect the organization: <b>competitors, customers, suppliers, strategic partners, and regulators.</b></p>
+    <div class="term"><b>Competitor</b> — an organization that competes with other organizations for resources.</div>
+    <div class="term"><b>Customer</b> — whoever pays money to acquire an organization's products or services.</div>
+    <div class="term"><b>Supplier</b> — an organization that provides resources for other organizations.</div>
+    <div class="term"><b>Regulator</b> — a body that has the potential to control, legislate, or otherwise influence an organization's policies and practices. Two kinds: <b>regulatory agencies</b> (created by government, e.g., EPA, SEC, FDA, EEOC) and <b>interest groups</b> (organized by members to influence organizations, e.g., NOW, MADD, NRA, Sierra Club).</div>
+    <div class="term"><b>Strategic partners (strategic allies)</b> — an organization working together with one or more other organizations in a joint venture or similar arrangement.</div>
+    <div class="fact"><b>Key fact — Figure 2.1, McDonald's Task Environment</b>
+      <ul>
+        <li>Competitors: Burger King, Starbucks, Subway, Dairy Queen</li>
+        <li>Customers: individual consumers, institutional customers</li>
+        <li>Suppliers: Coca-Cola, wholesale food processors, packaging manufacturers</li>
+        <li>Regulators: FDA, SEC, EPA</li>
+        <li>Strategic partners: Walmart, Disney, foreign partners</li>
+      </ul>
     </div>
-  </header>
 
-  <main class="wrap">
-    <section id="reviewer" class="view active">
-      <div class="notice">
-        This reviewer paraphrases the assigned chapters into exam-ready study notes. It avoids long textbook copying while preserving the concepts, categories, names, and distinctions your professor is likely to test.
-      </div>
+    <h3>C. The Internal Environment</h3>
+    <div class="term"><b>Owners</b> — whoever can claim property rights to an organization.</div>
+    <div class="term"><b>Board of directors</b> — a governing body elected by a corporation's stockholders and charged with overseeing a firm's general management to ensure it is run to best serve the stockholders' interests.</div>
+    <p><b>Employees</b> — a major element of the internal environment; workforce is becoming more diverse. Increased reliance on <b>temporary workers ("temps")</b> — individuals hired for short periods with no expectation of permanent employment.</p>
+    <p><b>Physical work environment</b> — the actual physical environment and the work people do. Example: Pitney Bowes Credit Corporation redesigned its offices to resemble an indoor theme park.</p>
+    <div class="fact"><b>Key fact</b> — McDonald's has <b>1.02 billion shares</b> of stock outstanding. Its board of directors has <b>14 members</b>: <b>4 inside</b> members (full-time executives) and <b>10 outside</b> members.</div>
+  </div>
 
-      <article class="chapter" id="ch1">
-        <h2>Chapter 1 - Understanding the Manager's Job</h2>
-        <div class="grid">
-          <div class="box">
-            <h4>Core Definitions</h4>
-            <ul>
-              <li><b>Organization:</b> a coordinated group of people working toward goals.</li>
-              <li><b>Management:</b> activities directed at resources to achieve goals efficiently and effectively.</li>
-              <li><b>Manager:</b> person primarily responsible for carrying out the management process.</li>
-              <li><b>Efficient:</b> using resources wisely and cost-effectively.</li>
-              <li><b>Effective:</b> choosing and implementing the right actions.</li>
-            </ul>
-          </div>
-          <div class="box">
-            <h4>Manager Types by Level</h4>
-            <ul>
-              <li><b>Top managers:</b> overall organization, strategy, policy, external representation.</li>
-              <li><b>Middle managers:</b> implement top plans and coordinate lower managers.</li>
-              <li><b>First-line managers:</b> supervise operating employees and daily work.</li>
-            </ul>
-          </div>
-          <div class="box">
-            <h4>Manager Types by Area</h4>
-            <ul>
-              <li><b>Marketing:</b> product, promotion, distribution, customer demand.</li>
-              <li><b>Financial:</b> accounting, cash, investments, financial resources.</li>
-              <li><b>Operations:</b> production systems, inventory, quality, layout, site selection.</li>
-              <li><b>Human resources:</b> staffing, training, compensation, appraisal, separation.</li>
-              <li><b>Administrative/general:</b> broad familiarity across areas, no single specialty.</li>
-              <li><b>Specialized:</b> public relations, R&D, internal consulting, international operations, and similar roles.</li>
-            </ul>
-          </div>
-        </div>
+  <div class="rev-section">
+    <h2>II. The Ethical and Social Environment of Management</h2>
 
-        <h3>The Management Process</h3>
-        <div class="term"><b>Planning and decision making</b><span>Set goals and select courses of action from alternatives.</span></div>
-        <div class="term"><b>Organizing</b><span>Determine how activities and resources should be grouped.</span></div>
-        <div class="term"><b>Leading</b><span>Get people to work together in the organization's interest.</span></div>
-        <div class="term"><b>Controlling</b><span>Monitor progress and correct activities to reach goals.</span></div>
-        <p class="mini">Exam trap: the functions are presented in a logical order, but real managers move among them constantly.</p>
+    <h3>A. Individual Ethics in Organizations</h3>
+    <div class="term"><b>Ethics</b> — an individual's personal beliefs about whether a behavior, action, or decision is right or wrong. <i>Note: people have ethics; organizations do not.</i></div>
+    <div class="term"><b>Ethical behavior</b> — behavior that conforms to generally accepted social norms. <b>Unethical behavior</b> — behavior that does not conform to generally accepted social norms.</div>
+    <div class="term"><b>Managerial ethics</b> — standards of behavior that guide individual managers in their work.</div>
+    <p>Three areas of managerial ethics: (1) treatment of employees by the organization (hiring/firing, wages, privacy); (2) treatment of the organization by employees — <b>conflicts of interest</b> (an employee's decision benefits the individual to the possible detriment of the organization), secrecy/confidentiality, and honesty; (3) the relationship between the firm/employees and other economic agents (customers, competitors, stockholders, suppliers, dealers, unions).</p>
+    <div class="fact"><b>Key fact</b> — Of roughly 300 pharmacists serving on state pharmacy boards, <b>72</b> were also employees of major drugstore/supermarket pharmacy chains — a potential conflict of interest.</div>
+    <div class="fact"><b>Key fact</b> — Hilton hired two Starwood executives who took eight boxes of documents related to Starwood's <b>W hotels</b> brand; Hilton's planned brand was to be called <b>Denizen Hotels</b>. Starwood sued after the theft was discovered.</div>
 
-        <h3>Fundamental Management Skills</h3>
-        <div class="grid">
-          <div class="box"><h4>Technical</h4><p>Know how to perform or understand specific work. Most critical for first-line managers.</p></div>
-          <div class="box"><h4>Interpersonal</h4><p>Communicate with, understand, and motivate individuals and groups inside and outside the firm.</p></div>
-          <div class="box"><h4>Conceptual</h4><p>Think abstractly, see the whole organization, and understand how parts fit together.</p></div>
-          <div class="box"><h4>Diagnostic</h4><p>Analyze symptoms, identify likely causes, and choose an appropriate response.</p></div>
-          <div class="box"><h4>Communication</h4><p>Send and receive ideas accurately through speech, writing, listening, and interpretation.</p></div>
-          <div class="box"><h4>Decision-making</h4><p>Recognize problems and opportunities, then choose a suitable course of action.</p></div>
-          <div class="box"><h4>Time management</h4><p>Prioritize, work efficiently, and delegate appropriately.</p></div>
-        </div>
+    <h3>B. Managing Ethical Behavior</h3>
+    <p><b>Ethical leadership</b> — leaders serve as role models, so their actions are subject to scrutiny. High-profile deposed executives named in the chapter: <b>Mark Hurd (Hewlett-Packard)</b>, <b>Dennis Kozlowski (Tyco)</b>, <b>Kenneth Lay (Enron)</b>, <b>Allen Stanford (Stanford Financial Group)</b>. Positive examples cited: Kenneth Chenault (American Express), James Sinegal (Costco).</p>
+    <div class="term"><b>Sarbanes–Oxley Act of 2002</b> — a law requiring CEOs and CFOs to vouch personally for the truthfulness and fairness of their firms' financial disclosures; imposes tough measures to deter and punish corporate/accounting fraud.</div>
+    <p><b>Corporate governance</b> failures cited: WorldCom's board approved a personal loan of <b>$366 million</b> to CEO Bernard Ebbers despite little evidence he could repay it; Tyco's board approved a <b>$20 million</b> bonus for one of its own members.</p>
+    <div class="term"><b>Codes of ethics</b> — formal, written statements of the values and ethical standards that guide a firm's actions (e.g., Whirlpool, Texas Instruments, Hewlett-Packard). <i>Infamous case:</i> Enron's board voted to set aside the firm's code of ethics to implement a plan that violated it.</div>
+    <p><b>Ethics and information technology</b> — privacy is a hot topic; both Facebook and Google were criticized for tracking users' movements online. Companies can post privacy policies and let users opt out of data collection.</p>
 
-        <h3>Management as Science and Art</h3>
-        <ul>
-          <li><b>Science:</b> rational, objective, systematic, data-driven methods; especially useful for routine or measurable issues.</li>
-          <li><b>Art:</b> intuition, experience, insight, judgment; especially important when facts are incomplete or alternatives look equally attractive.</li>
-          <li><b>Best answer:</b> effective management blends both.</li>
-        </ul>
+    <h3>C. Social Responsibility in Organizations</h3>
+    <div class="term"><b>Social responsibility</b> — the set of obligations an organization has to protect and enhance the societal context in which it functions.</div>
+    <div class="fact"><b>Arguments FOR social responsibility (Figure 2.2)</b>
+      <ol>
+        <li>Business creates problems and should therefore help solve them.</li>
+        <li>Corporations are citizens in our society.</li>
+        <li>Business often has the resources necessary to solve problems.</li>
+        <li>Business is a partner in our society, along with government and the general population.</li>
+      </ol>
+    </div>
+    <div class="fact"><b>Arguments AGAINST social responsibility (Figure 2.2)</b>
+      <ol>
+        <li>The purpose of business in U.S. society is to generate profit for owners.</li>
+        <li>Involvement in social programs gives business too much power.</li>
+        <li>There is potential for conflicts of interest.</li>
+        <li>Business lacks the expertise to manage social programs.</li>
+      </ol>
+    </div>
+    <div class="fact"><b>Key fact</b> — Economist <b>Milton Friedman</b> is specifically named as arguing that widening social responsibility undermines business's basic mission of earning profits for owners.</div>
 
-        <h3>History and Theory</h3>
-        <ul>
-          <li><b>Theory:</b> a conceptual framework for organizing knowledge and guiding action.</li>
-          <li><b>Why theory matters:</b> helps managers interpret situations instead of improvising blindly.</li>
-          <li><b>Why history matters:</b> gives heritage, context, and warnings against repeating mistakes.</li>
-          <li><b>Early history:</b> Egyptians used planning, organizing, and controlling for pyramids; Greeks, Romans, and earlier thinkers discussed specialization, leadership, and structure.</li>
-          <li><b>Robert Owen:</b> stressed the importance and welfare of human resources.</li>
-          <li><b>Charles Babbage:</b> emphasized production efficiency, division of labor, and mathematical analysis.</li>
-        </ul>
+    <h3>D. Managing Social Responsibility</h3>
+    <p><b>Formal organizational dimensions:</b></p>
+    <div class="term"><b>Legal compliance</b> — the extent to which the organization conforms to local, state, federal, and international laws.</div>
+    <div class="term"><b>Ethical compliance</b> — the extent to which the organization's members follow basic ethical (and legal) standards of behavior.</div>
+    <div class="term"><b>Philanthropic giving</b> — the awarding of funds or gifts to charities or other worthy causes.</div>
+    <p><b>Informal organizational dimensions:</b> leadership, organizational culture, and how the organization responds to whistle-blowers.</p>
+    <div class="term"><b>Whistle-blowing</b> — the disclosure, by an employee, of illegal or unethical conduct on the part of others within the organization.</div>
+    <div class="fact"><b>Key fact</b> — <b>Harry Markopolos</b>, a portfolio manager at Rampart Investments, spent nine years trying to convince the SEC that Bernard Madoff's firm was falsifying results. <b>Bradley Birkenfeld</b> provided evidence that Swiss bank <b>UBS</b> was evading corporate taxes; UBS was fined <b>$780 million</b>.</div>
+    <div class="fact"><b>Key fact</b> — When poisoned Tylenol appeared on shelves, Johnson &amp; Johnson employees immediately pulled all packages without waiting for headquarters — reflecting a strong ethical/social-responsibility culture.</div>
+  </div>
 
-        <h3>Classical Management Perspective</h3>
-        <div class="grid">
-          <div class="box">
-            <h4>Scientific Management</h4>
-            <p>Focuses on improving individual worker efficiency. Key figure: Frederick W. Taylor.</p>
-            <ul>
-              <li>Taylor observed <b>soldiering</b>: workers deliberately working below capability.</li>
-              <li>Core steps: develop a science for each job element, scientifically select and train employees, supervise prescribed methods, and separate planning from doing.</li>
-              <li>Frank and Lillian Gilbreth studied motions and inefficiencies, including bricklaying; Lillian also influenced industrial psychology and personnel management.</li>
-            </ul>
-          </div>
-          <div class="box">
-            <h4>Administrative Management</h4>
-            <p>Focuses on the total organization rather than individual jobs.</p>
-            <ul>
-              <li><b>Henri Fayol:</b> identified planning, organizing, leading, and controlling as core managerial functions.</li>
-              <li><b>Lyndall Urwick:</b> integrated and synthesized earlier administrative ideas.</li>
-              <li><b>Max Weber:</b> developed ideas about bureaucracy and rational structure.</li>
-            </ul>
-          </div>
-        </div>
-        <p><b>Classical strengths:</b> efficiency, job design, bureaucracy, management as a field of study. <b>Limits:</b> assumed stable/simple organizations, overused universal rules, and slighted the human side.</p>
+  <div class="rev-section">
+    <h2>III. The International Environment of Management</h2>
 
-        <h3>Behavioral Management Perspective</h3>
-        <ul>
-          <li>Emphasizes individual attitudes, behaviors, group processes, and human needs.</li>
-          <li><b>Hugo Munsterberg:</b> father of industrial psychology; linked psychology to selection and motivation.</li>
-          <li><b>Mary Parker Follett:</b> anticipated the human side of management and the importance of behavior in organizations.</li>
-          <li><b>Hawthorne studies:</b> Mayo and associates found that attention, social acceptance, and group norms affected productivity.</li>
-          <li><b>Human relations movement:</b> argued that workers respond strongly to social context, group norms, and interpersonal dynamics.</li>
-          <li><b>Maslow:</b> hierarchy of needs influenced motivation theory.</li>
-          <li><b>McGregor's Theory X:</b> negative view; people avoid work, need control, avoid responsibility.</li>
-          <li><b>McGregor's Theory Y:</b> positive view; work can be natural, people seek responsibility, are creative, and can self-direct when committed.</li>
-          <li><b>Organizational behavior:</b> modern, interdisciplinary field studying individual, group, and organizational processes.</li>
-        </ul>
+    <h3>A. Trends in International Business</h3>
+    <div class="fact"><b>Key fact</b> — International trade volume increased more than <b>1,300 percent</b> between 1960 and 2013. 184 of the world's largest corporations are headquartered in the U.S., versus 34 in Japan, 24 in France, 23 in China, and 36 in Britain.</div>
+    <div class="fact"><b>Key fact</b> — In 2012, ExxonMobil earned <b>67%</b> of revenues and <b>61%</b> of profits abroad; Avon earned <b>73%</b> of revenues and <b>68%</b> of profits abroad.</div>
 
-        <h3>Quantitative Management Perspective</h3>
-        <ul>
-          <li>Emerged strongly during World War II to allocate military resources more efficiently.</li>
-          <li>Focuses on quantitative techniques, decision making, cost-effectiveness, mathematical models, and computers.</li>
-          <li><b>Management science:</b> develops mathematical models of systems, processes, or relationships.</li>
-          <li><b>Operations management:</b> applied management science aimed at producing products or services efficiently; includes inventory, scheduling, linear programming, queuing, break-even analysis, and simulation.</li>
-          <li><b>Limitation:</b> models rely on assumptions and cannot fully capture attitudes and individual behavior.</li>
-        </ul>
+    <h3>B. Levels of International Business Activity</h3>
+    <div class="term"><b>Exporting</b> — making a product in the firm's domestic marketplace and selling it in another country.</div>
+    <div class="term"><b>Importing</b> — bringing a good, service, or capital into the home country from abroad.</div>
+    <div class="term"><b>Licensing</b> — an arrangement whereby a firm allows another company to use its brand name, trademark, technology, patent, copyright, or other assets in exchange for a royalty based on sales. <i>Franchising is a special form of licensing.</i></div>
+    <div class="term"><b>Strategic alliance</b> — a cooperative arrangement between two or more firms for mutual gain. <b>Joint venture</b> — a special type of strategic alliance in which the partners actually share ownership of a new enterprise.</div>
+    <div class="term"><b>Direct investment</b> — occurs when a firm headquartered in one country builds or purchases operating facilities or subsidiaries in a foreign country (the foreign operation becomes a wholly owned subsidiary).</div>
+    <div class="term"><b>Maquiladoras</b> — light assembly plants built in Northern Mexico close to the U.S. border, given special tax breaks by the Mexican government.</div>
 
-        <h3>Contemporary Perspectives</h3>
-        <div class="grid">
-          <div class="box">
-            <h4>Systems Perspective</h4>
-            <ul>
-              <li>A system is an interrelated set of elements functioning as a whole.</li>
-              <li>Basic flow: inputs from environment, transformation process, outputs to environment, feedback.</li>
-              <li><b>Open system:</b> interacts with environment. Organizations are open systems.</li>
-              <li><b>Closed system:</b> does not interact with environment.</li>
-              <li><b>Subsystems:</b> systems within the larger system, such as marketing or finance.</li>
-              <li><b>Synergy:</b> units produce more together than separately.</li>
-              <li><b>Entropy:</b> system decline if the organization fails to renew and adjust.</li>
-            </ul>
-          </div>
-          <div class="box">
-            <h4>Contingency Perspective</h4>
-            <ul>
-              <li>Rejects the idea of one universal best way.</li>
-              <li>The appropriate managerial action depends on the situation's unique elements.</li>
-              <li>Exam clue: if a question says "it depends," think contingency.</li>
-            </ul>
-          </div>
-        </div>
-        <h3>Modern Challenges</h3>
-        <ul>
-          <li>Globalization: different ownership patterns, infrastructure, cultures, work norms, and decision styles.</li>
-          <li>Ethics, social responsibility, and corporate governance.</li>
-          <li>Quality as a basis of competition and productivity improvement.</li>
-          <li>Service economy: intangible outputs and time/place utility; service firms still use many operations tools.</li>
-          <li>Economic downturns and recovery: cost reduction, restructuring, and strategy refinement.</li>
-          <li>New workplace: diversity, generational differences, flexibility, lifestyle preferences, and changing motivation patterns.</li>
-          <li>Technology and social media: faster communication, more information, privacy issues, and accelerated work pace.</li>
-        </ul>
-      </article>
+    <h3>C. The Context of International Business</h3>
+    <p><b>Cultural environment</b> — a country's culture includes all the values, symbols, beliefs, and language that guide behavior.</p>
+    <div class="fact"><b>Key fact</b> — In Saudi Arabia, few businesses offer towing services because Islamic teaching holds that people should not profit from others' misfortune; in Sudan, banks cannot pay or charge interest. Chevrolet's "Nova" sold poorly in Latin America because <i>no va</i> means "it doesn't go" in Spanish. Esso means "stalled car" in Japanese.</div>
+    <p><b>Controls on international trade:</b></p>
+    <div class="term"><b>Tariff</b> — a tax collected on goods shipped across national boundaries.</div>
+    <div class="term"><b>Quota</b> — a limit on the number or value of goods that can be traded. <i>Example: Honda is allowed to import 425,000 autos per year into the U.S.</i></div>
+    <div class="term"><b>Export restraint agreements</b> — accords in which governments voluntarily limit the volume or value of goods they export to or import from one another.</div>
+    <p><b>"Buy national" legislation</b> — gives preference to domestic producers through content or price restrictions (e.g., Brazil requires Brazilian-made computers; Mexico requires 50% of car parts be made domestically).</p>
+    <div class="term"><b>Economic community</b> — a set of countries that agree to markedly reduce or eliminate trade barriers among member nations.</div>
+    <div class="term"><b>European Union (EU)</b> — traced to the <b>1957 Treaty of Rome</b> (Belgium, France, Luxembourg, Germany, Italy, Netherlands); grew to 27 countries; adopted the common currency, the <b>euro</b>, beginning <b>January 1, 2002</b>.</div>
+    <div class="term"><b>North American Free Trade Agreement (NAFTA)</b> — an agreement among the <b>United States, Canada, and Mexico</b> to promote trade with one another.</div>
+    <div class="term"><b>General Agreement on Tariffs and Trade (GATT)</b> — a trade agreement intended to promote international trade by reducing trade barriers; first ratified in <b>1948 by 23 countries</b>; by 1994, 117 countries had signed. Introduced the <b>most favored nation (MFN) principle</b> — preferential treatment given to one signatory must be extended to all signatories.</div>
+    <div class="term"><b>World Trade Organization (WTO)</b> — came into existence <b>January 1, 1995</b>, replacing the GATT; headquartered in <b>Geneva, Switzerland</b>; ~140 member nations and 32 observer countries. Three basic goals: (1) promote trade flows via nondiscriminatory, predictable trade policies; (2) reduce remaining trade barriers through multilateral negotiations; (3) establish impartial procedures for resolving trade disputes.</div>
+  </div>
 
-      <article class="chapter" id="ch3">
-        <h2>Chapter 3 - Planning and Strategic Management</h2>
-        <h3>Planning Process</h3>
-        <ul>
-          <li>Planning occurs inside an environmental context; managers must understand that context first.</li>
-          <li>The mission states purpose, premises, values, and direction.</li>
-          <li>Mission leads to strategic goals and strategic plans.</li>
-          <li>Strategic goals and plans shape tactical goals and tactical plans.</li>
-          <li>Tactical goals and plans shape operational goals and operational plans.</li>
-          <li>Goals and plans at each level feed future planning.</li>
-        </ul>
-        <div class="grid">
-          <div class="box">
-            <h4>Purposes of Goals</h4>
-            <ul>
-              <li>Provide guidance and unified direction.</li>
-              <li>Facilitate planning.</li>
-              <li>Motivate and build commitment.</li>
-              <li>Support evaluation and control.</li>
-            </ul>
-          </div>
-          <div class="box">
-            <h4>Goal Levels</h4>
-            <ul>
-              <li><b>Mission:</b> fundamental purpose and scope.</li>
-              <li><b>Strategic goals:</b> broad top-management goals.</li>
-              <li><b>Tactical goals:</b> middle-management goals that operationalize strategy.</li>
-              <li><b>Operational goals:</b> lower-level, short-term goals tied to tactical goals.</li>
-            </ul>
-          </div>
-          <div class="box">
-            <h4>Plan Levels</h4>
-            <ul>
-              <li><b>Strategic plans:</b> resource allocation, priorities, and action steps to reach strategic goals.</li>
-              <li><b>Tactical plans:</b> implement specific parts of strategic plans.</li>
-              <li><b>Operational plans:</b> carry out tactical plans for operational goals.</li>
-            </ul>
-          </div>
-        </div>
+  <div class="rev-section">
+    <h2>IV. The Organization's Culture</h2>
+    <div class="term"><b>Organizational culture</b> — the set of values, beliefs, behaviors, customs, and attitudes that helps the organization's members understand what it stands for, how it does things, and what it considers important.</div>
 
-        <h3>Strategic Management</h3>
-        <div class="term"><b>Strategy</b><span>A comprehensive plan for accomplishing organizational goals.</span></div>
-        <div class="term"><b>Strategic management</b><span>Ongoing process of formulating and implementing effective strategies.</span></div>
-        <div class="term"><b>Effective strategy</b><span>Aligns organization and environment while achieving strategic goals.</span></div>
-        <div class="term"><b>Distinctive competence</b><span>An organizational strength possessed by only a small number of competitors.</span></div>
-        <div class="term"><b>Scope</b><span>The markets in which the organization will compete.</span></div>
-        <div class="term"><b>Resource deployment</b><span>How the organization distributes resources across areas of competition.</span></div>
-        <ul>
-          <li><b>Business-level strategy:</b> how an organization competes in a particular industry or market.</li>
-          <li><b>Corporate-level strategy:</b> how an organization manages operations across several industries or markets.</li>
-          <li><b>Strategy formulation:</b> deciding the content of strategy, or what the strategy is.</li>
-          <li><b>Strategy implementation:</b> operationalizing and executing the strategy, or how it is achieved.</li>
-        </ul>
+    <h3>A. Importance of Organizational Culture</h3>
+    <p>Culture determines the organization's "feel." No single universal culture works for all organizations. Examples: Microsoft (casual, long hours — stereotype), Bank of America (formal, rigid), Texas Instruments ("shirtsleeve" culture — no ties/jackets), <b>Southwest Airlines (fun and excitement)</b>. Strong-culture companies (Starbucks, Procter &amp; Gamble) tend to outperform weak-culture companies (<b>Kmart</b>).</p>
 
-        <h3>SWOT Analysis</h3>
-        <ul>
-          <li><b>Strengths:</b> internal skills and capabilities that enable strategy.</li>
-          <li><b>Weaknesses:</b> internal limitations that hinder strategy.</li>
-          <li><b>Opportunities:</b> external areas that may generate higher performance.</li>
-          <li><b>Threats:</b> external areas that make high performance harder.</li>
-          <li>Good strategy should support the mission, exploit strengths and opportunities, neutralize threats, and avoid or correct weaknesses.</li>
-        </ul>
+    <h3>B. Determinants of Organizational Culture</h3>
+    <p>Culture typically develops over a long period, starting with the organization's <b>founder</b>. Example: James Cash Penney believed in treating employees/customers with respect — J.C. Penney employees are still called <b>"associates"</b> rather than employees. Corporate success and shared experiences also shape culture — e.g., Hallmark Cards' "Hallmark family" culture built from years of success; by contrast Kmart's culture is weak due to rapid management turnover.</p>
 
-        <h3>Business-Level Strategy</h3>
-        <div class="grid">
-          <div class="box"><h4>Differentiation</h4><p>Distinguish products or services through quality, image, service, features, or value customers will pay extra for.</p></div>
-          <div class="box"><h4>Overall Cost Leadership</h4><p>Gain advantage by keeping costs below competitors and selling profitably at low prices.</p></div>
-          <div class="box"><h4>Focus</h4><p>Concentrate on a region, product line, or buyer group; can use either cost or differentiation within that niche.</p></div>
-        </div>
-        <h4>Product Life Cycle</h4>
-        <ul>
-          <li><b>Introduction:</b> new product or technology; priority is getting product out without sacrificing quality.</li>
-          <li><b>Growth:</b> more competitors enter; quality, delivery, differentiation, and barriers to entry matter.</li>
-          <li><b>Maturity:</b> demand growth slows; firms may exit; cost control and new product search become important.</li>
-          <li><b>Decline:</b> demand and number of producers fall; firms need differentiation, low costs, or new products to survive.</li>
-        </ul>
+    <h3>C. Managing Organizational Culture</h3>
+    <p>Managers must understand the current culture, then decide whether to maintain or change it. Culture can be maintained by rewarding/promoting people whose behavior fits the culture and by articulating it through slogans and ceremonies (e.g., Shell Oil's historical lobby display in Houston). Some cultures become dysfunctional — critics argue <b>General Motors'</b> culture over-emphasized internal divisional competition, contributing to its 2009 business crisis. Mergers can create culture clashes: <b>Delta/Northwest</b> merger caused conflict from differing cultures; when <b>United and Continental</b> merged, management wanted the new firm to adopt Continental's employee-friendly culture rather than United's culture of hostility/mistrust.</p>
+  </div>
 
-        <h3>Corporate-Level Strategy</h3>
-        <ul>
-          <li><b>Strategic business unit (SBU):</b> a business or set of businesses within a larger organization.</li>
-          <li><b>Diversification:</b> number of businesses and the extent to which they are related.</li>
-          <li><b>Single-product strategy:</b> one product/service in one geographic market; focused but risky if the product fails.</li>
-          <li><b>Related diversification:</b> multiple linked businesses; reduces dependence, spreads overhead, and exploits synergy.</li>
-          <li><b>Unrelated diversification:</b> unrelated businesses; theoretically stabilizes performance and allocates resources, but often underperforms because managers lack deep knowledge and do not exploit synergy.</li>
-        </ul>
-        <div class="grid">
-          <div class="box">
-            <h4>BCG Matrix</h4>
-            <ul>
-              <li><b>Dogs:</b> low share, low growth; avoid investment or divest.</li>
-              <li><b>Cash cows:</b> high share, low growth; generate funds for other businesses.</li>
-              <li><b>Question marks:</b> low share, high growth; invest carefully or divest if performance disappoints.</li>
-              <li><b>Stars:</b> high share, high growth; invest to maintain strong position.</li>
-            </ul>
-          </div>
-          <div class="box">
-            <h4>GE Business Screen</h4>
-            <ul>
-              <li>Uses industry attractiveness and competitive position.</li>
-              <li>Classifies businesses as winners, losers, question marks, average businesses, or profit producers.</li>
-              <li>Industry attractiveness includes market growth, market size, capital requirements, and competitive intensity.</li>
-              <li>Competitive position includes market share, technological know-how, product quality, service network, price competitiveness, and operating costs.</li>
-            </ul>
-          </div>
-        </div>
+  <div class="rev-section">
+    <h2>Chapter-Opening Case &amp; Feature Boxes (may appear on exams)</h2>
+    <div class="fact"><b>Management in Action — Mercy Corps</b>: Founded in <b>1979</b> as the "Save the Refugees Fund" (helping victims of famine/genocide in Cambodia); expanded and became <b>Mercy Corps International</b> in <b>1982</b>. CEO quoted: <b>Neal Keny-Guyer</b> ("We function much as venture capitalists do... social VCs"). Has provided $2.2 billion in humanitarian aid across 114 countries, reaching ~19 million people in 36 nations annually. Three climate-program areas: alternative energy, sustainable resource management, and advocacy/outreach.</div>
+    <div class="fact"><b>Sustainability Matters — HP Planet Partners</b>: Began as companywide policy in <b>1991</b>. Cartridges are processed through HP's Closed Loop System for Plastics Recycling at facilities in Nashville and Germany; plastic is shipped to the <b>Lavergne Group</b> in <b>Montreal, Canada</b>. Since 2005, HP has produced 500+ million new cartridges containing 60% recycled materials.</div>
+    <div class="fact"><b>Tough Times, Tough Choices</b>: Illustrates the economic dimension/business cycle — global economy boomed around 2005, the U.S. entered recession beginning in <b>2008</b>, and the stock market/economy began recovering by 2012–2013.</div>
+  </div>
 
-        <h3>Tactical and Operational Planning</h3>
-        <ul>
-          <li>Tactical plans implement specific parts of strategy; strategy is about the war, tactics are about battles.</li>
-          <li>Tactical planning should flow from strategy, specify resources and time frames, and require human resource commitments.</li>
-          <li>Execution depends on evaluating actions against goals, giving decision makers information and resources, coordinating vertically and horizontally, and monitoring results.</li>
-          <li><b>Single-use plans:</b> for actions unlikely to recur. A program is large and complex; a project is narrower.</li>
-          <li><b>Standing plans:</b> for recurring activities. Policies are broad guides; SOPs list steps; rules and regulations specify exact behavior and can replace decision making.</li>
-          <li><b>Contingency planning:</b> alternative courses if intended plans are disrupted.</li>
-          <li><b>Crisis management:</b> procedures for disasters or unexpected calamities.</li>
-          <li>Contingency planning action points: develop plan and consider events; implement plan and identify events; set indicators and contingency plans; complete original or contingency plan.</li>
-        </ul>
-      </article>
+</section>
 
-      <article class="chapter" id="ch2">
-        <h2>Chapter 2 - The Environments of Organizations and Managers</h2>
-        <h3>Organization Environments</h3>
-        <ul>
-          <li><b>External environment:</b> everything outside an organization's boundaries that might affect it.</li>
-          <li><b>General environment:</b> broad forces that shape the overall context: economic, technological, and political-legal dimensions.</li>
-          <li><b>Task environment:</b> specific groups that directly affect the organization: competitors, customers, suppliers, regulators, and strategic partners.</li>
-          <li><b>Internal environment:</b> conditions and forces inside the organization, including owners, board of directors, employees, physical work environment, and culture.</li>
-        </ul>
-        <div class="grid">
-          <div class="box">
-            <h4>General Environment</h4>
-            <ul>
-              <li><b>Economic dimension:</b> overall health of the economy, including growth, inflation, interest rates, and unemployment.</li>
-              <li><b>Technological dimension:</b> methods available for turning resources into products or services.</li>
-              <li><b>Political-legal dimension:</b> government regulation, business-government relations, and political stability.</li>
-            </ul>
-          </div>
-          <div class="box">
-            <h4>Task Environment</h4>
-            <ul>
-              <li><b>Competitors:</b> organizations competing for resources and customer dollars, including substitute products.</li>
-              <li><b>Customers:</b> whoever pays to acquire products or services; can be individuals or institutions.</li>
-              <li><b>Suppliers:</b> organizations providing materials, information, labor, or capital.</li>
-              <li><b>Regulators:</b> agencies or groups that influence policy and practices.</li>
-              <li><b>Strategic partners:</b> firms cooperating through alliances, joint ventures, or similar arrangements.</li>
-            </ul>
-          </div>
-          <div class="box">
-            <h4>Internal Environment</h4>
-            <ul>
-              <li><b>Owners:</b> those with property rights to the organization.</li>
-              <li><b>Board of directors:</b> elected governing body overseeing top management for stockholder interests.</li>
-              <li><b>Employees:</b> workforce composition, expectations, diversity, temporary work, and job ownership concerns.</li>
-              <li><b>Physical work environment:</b> facilities, layout, safety, health, and work setting.</li>
-            </ul>
-          </div>
-        </div>
+<!-- ================= QUIZ TAB ================= -->
+<section id="quiz" class="tabpanel">
 
-        <h3>Ethics and Social Responsibility</h3>
-        <ul>
-          <li><b>Ethics:</b> an individual's personal beliefs about whether behavior, action, or decisions are right or wrong.</li>
-          <li><b>Ethical behavior:</b> behavior that conforms to generally accepted social norms.</li>
-          <li><b>Unethical behavior:</b> behavior that does not conform to generally accepted social norms.</li>
-          <li><b>Managerial ethics:</b> standards guiding managers at work, including treatment of employees, employee behavior toward the firm, and relationships with customers, suppliers, competitors, shareholders, unions, and other agents.</li>
-          <li><b>Conflict of interest:</b> when an employee's decision could benefit the employee while harming the organization.</li>
-          <li>Ethical behavior is shaped by top management, ethics training, ethics committees, codes of ethics, and personal judgment.</li>
-          <li><b>Sarbanes-Oxley Act:</b> requires CEOs and CFOs to personally vouch for the truthfulness and fairness of financial disclosures and strengthens penalties for fraud.</li>
-        </ul>
-        <div class="grid">
-          <div class="box">
-            <h4>Social Responsibility</h4>
-            <p>The obligations an organization has to protect and enhance the social context in which it functions.</p>
-            <ul>
-              <li><b>Arguments for:</b> business creates some problems, corporations are citizens, business has resources, and business is a partner in society.</li>
-              <li><b>Arguments against:</b> business exists to generate owner profit, social programs may give business too much power, conflicts of interest may arise, and firms may lack social-program expertise.</li>
-            </ul>
-          </div>
-          <div class="box">
-            <h4>Managing Social Responsibility</h4>
-            <ul>
-              <li><b>Legal compliance:</b> conforming to laws and regulations.</li>
-              <li><b>Ethical compliance:</b> members follow ethical and legal standards.</li>
-              <li><b>Philanthropic giving:</b> gifts or funds to charities and worthy causes.</li>
-              <li><b>Informal dimensions:</b> leadership, culture, and response to whistle-blowers.</li>
-              <li><b>Whistle-blowing:</b> employee disclosure of illegal or unethical conduct by others in the organization.</li>
-            </ul>
-          </div>
-        </div>
+  <div id="scorebar">
+    <div class="row">
+      <span>Answered: <b id="answeredCount">0</b>/<span id="totalCount">78</span></span>
+      <span class="correct-count">Correct: <b id="correctCount">0</b></span>
+      <span class="incorrect-count">Incorrect: <b id="incorrectCount">0</b></span>
+    </div>
+    <div id="meterTrack"><div id="meterFill"></div></div>
+    <button id="resetBtn" onclick="resetQuiz()">Reset Quiz</button>
+  </div>
 
-        <h3>International Environment</h3>
-        <ul>
-          <li>International business expanded sharply after World War II; global competition now affects even domestic firms.</li>
-          <li><b>Exporting:</b> making a product domestically and selling it abroad.</li>
-          <li><b>Importing:</b> bringing a good, service, or capital into the home country from abroad.</li>
-          <li><b>Licensing:</b> allowing another firm to use brand, trademark, technology, patent, copyright, or other assets for royalties.</li>
-          <li><b>Franchising:</b> a special form of licensing.</li>
-          <li><b>Strategic alliance:</b> cooperative arrangement between firms for mutual gain.</li>
-          <li><b>Joint venture:</b> strategic alliance where partners share ownership of a new operation.</li>
-          <li><b>Direct investment:</b> building or buying facilities or subsidiaries in another country.</li>
-          <li><b>Maquiladoras:</b> light assembly plants in northern Mexico near the U.S. border, given special tax treatment.</li>
-        </ul>
-        <div class="grid">
-          <div class="box">
-            <h4>International Context</h4>
-            <ul>
-              <li><b>Culture:</b> values, symbols, beliefs, language, religion, time orientation, color meanings, and family assumptions affect business.</li>
-              <li><b>Tariff:</b> tax on goods crossing national boundaries.</li>
-              <li><b>Quota:</b> limit on number or value of goods traded.</li>
-              <li><b>Export restraint agreement:</b> voluntary limits on exported or imported goods.</li>
-              <li><b>Buy national laws:</b> preference for domestic producers through content or price rules.</li>
-            </ul>
-          </div>
-          <div class="box">
-            <h4>Trade Systems</h4>
-            <ul>
-              <li><b>Economic community:</b> countries reducing or eliminating trade barriers among members.</li>
-              <li><b>European Union:</b> major international market system with reduced barriers and, for many members, the euro.</li>
-              <li><b>NAFTA:</b> U.S., Canada, and Mexico agreement reducing trade barriers.</li>
-              <li><b>GATT:</b> trade agreement reducing barriers and promoting international trade.</li>
-              <li><b>Most favored nation principle:</b> preferential treatment for one signatory must extend to all signatories.</li>
-              <li><b>WTO:</b> replaced GATT, promotes trade flows, reduces barriers, and resolves disputes.</li>
-            </ul>
-          </div>
-        </div>
+  <div id="quizContainer"></div>
 
-        <h3>Organizational Culture</h3>
-        <ul>
-          <li><b>Organizational culture:</b> values, beliefs, behaviors, customs, and attitudes that help members understand what the organization stands for, how it does things, and what matters.</li>
-          <li>Culture determines an organization's feel and can shape effectiveness and competitiveness.</li>
-          <li>No single culture fits every organization; the right culture depends on the organization and environment.</li>
-          <li>Culture often begins with the founder and develops through shared experiences, success, symbols, stories, heroes, slogans, and ceremonies.</li>
-          <li>Managers maintain culture by rewarding and promoting people who fit it and by articulating it through rituals and symbols.</li>
-          <li>Managers must change culture when it becomes dysfunctional, especially after mergers or when old assumptions stop fitting the environment.</li>
-        </ul>
-      </article>
-    </section>
+</section>
 
-    <section id="quiz" class="view">
-      <div class="controls">
-        <label for="chapterFilter"><b>Chapter</b></label>
-        <select id="chapterFilter">
-          <option value="all">All chapters</option>
-          <option value="1">Chapter 1</option>
-          <option value="2">Chapter 2</option>
-          <option value="3">Chapter 3</option>
-        </select>
-        <button id="shuffleBtn">Shuffle</button>
-        <button id="resetBtn">Reset Answers</button>
-        <span class="score" id="scoreText">Score: 0 / 0</span>
-      </div>
-      <div class="notice">
-        Answer each item once. If you miss it, the app marks your answer, shows the correct answer, and explains the detail. Total bank: <b id="totalCount"></b> questions.
-      </div>
-      <div id="questions"></div>
-    </section>
+</main>
 
-    <section id="cram" class="view">
-      <article class="chapter">
-        <h2>One-Pass Cram Sheet</h2>
-        <h3>Chapter 1</h3>
-        <ul>
-          <li>Management = planning/decision making, organizing, leading, controlling applied to resources for efficient and effective goal attainment.</li>
-          <li>Manager levels: top = strategy/policy; middle = implementation/coordination; first-line = operating employees.</li>
-          <li>Manager areas: marketing, financial, operations, HR, administrative/general, specialized.</li>
-          <li>Skills: technical, interpersonal, conceptual, diagnostic, communication, decision-making, time management.</li>
-          <li>Science uses data and logic; art uses intuition and judgment. Good management blends both.</li>
-          <li>Classical = scientific management plus administrative management. Taylor = individual efficiency and soldiering; Fayol = functions; Weber = bureaucracy.</li>
-          <li>Behavioral = people, attitudes, group processes. Hawthorne = attention/social factors matter. Theory X = negative worker assumptions; Theory Y = positive assumptions.</li>
-          <li>Quantitative = mathematical decision tools. Management science = models; operations management = applied efficiency in production/services.</li>
-          <li>Systems = inputs, transformation, outputs, feedback; open systems, subsystems, synergy, entropy.</li>
-          <li>Contingency = appropriate management depends on situation.</li>
-        </ul>
-        <h3>Chapter 2</h3>
-        <ul>
-          <li>External environment = everything outside the organization that might affect it; internal environment = conditions and forces inside.</li>
-          <li>General environment: economic, technological, political-legal.</li>
-          <li>Task environment: competitors, customers, suppliers, regulators, strategic partners.</li>
-          <li>Internal environment: owners, board, employees, physical work environment, and culture.</li>
-          <li>Ethics belong to individuals; organizations face social responsibility obligations.</li>
-          <li>Managerial ethics covers employee treatment, employee behavior toward the firm, and relationships with other economic agents.</li>
-          <li>Social responsibility arguments for: business creates problems, corporations are citizens, business has resources, business is a partner in society.</li>
-          <li>Arguments against: business exists for owner profit, social action gives business too much power, conflicts of interest, lack of expertise.</li>
-          <li>Formal social responsibility tools: legal compliance, ethical compliance, philanthropic giving. Informal tools: leadership, culture, whistle-blowing response.</li>
-          <li>Internationalization levels: importing/exporting, licensing/franchising, strategic alliances/joint ventures, direct investment.</li>
-          <li>Trade barriers: tariffs, quotas, export restraint agreements, buy national laws. Trade institutions: EU, NAFTA, GATT, WTO.</li>
-          <li>Culture = shared values, beliefs, behaviors, customs, and attitudes; shaped by founders, success, stories, heroes, slogans, ceremonies, and shared experience.</li>
-        </ul>
-        <h3>Chapter 3</h3>
-        <ul>
-          <li>Planning starts with environmental context and mission, then strategic, tactical, and operational goals/plans.</li>
-          <li>Goals provide direction, support planning, motivate, and enable control.</li>
-          <li>Strategy components: distinctive competence, scope, resource deployment.</li>
-          <li>Formulation = what strategy; implementation = how executed.</li>
-          <li>SWOT = internal strengths/weaknesses plus external opportunities/threats.</li>
-          <li>Porter: differentiation, overall cost leadership, focus.</li>
-          <li>Product life cycle: introduction, growth, maturity, decline.</li>
-          <li>Diversification: single-product, related, unrelated. Related is preferred when synergy exists.</li>
-          <li>BCG: dogs, cash cows, question marks, stars. GE screen: industry attractiveness and competitive position.</li>
-          <li>Operational plans: single-use programs/projects; standing policies/SOPs/rules. Contingency planning = backup courses; crisis management = disaster procedures.</li>
-        </ul>
-      </article>
-    </section>
-  </main>
+<footer>Chapter 2 — The Environments of Organizations and Managers &nbsp;|&nbsp; Fundamentals of Management, 8e, Griffin</footer>
 
-  <script>
-    const questions = [
-      {c:"1", q:"Which statement best captures the textbook definition of management?", a:["Activities directed at organizational resources to reach goals efficiently and effectively","The act of supervising employees only at the first-line level","A set of financial controls used to maximize profits","The legal authority to issue orders in a formal hierarchy"], correct:0, why:"Management includes planning/decision making, organizing, leading, and controlling resources to achieve goals with both efficiency and effectiveness."},
-      {c:"1", q:"A manager who uses resources wisely and in a cost-effective way is being:", a:["efficient","effective","diagnostic","contingent"], correct:0, why:"Efficiency is about resource use and cost-effectiveness. Effectiveness is about choosing and implementing the right actions."},
-      {c:"1", q:"Which manager level is mainly responsible for creating organization-wide goals, strategy, and policies?", a:["Top managers","Middle managers","First-line managers","Operations managers"], correct:0, why:"Top managers manage the overall organization and set broad goals, strategies, and policies."},
-      {c:"1", q:"A regional manager translating corporate plans into actions for store managers is most likely a:", a:["middle manager","top manager","first-line manager","specialized technical employee"], correct:0, why:"Middle managers implement policies and plans developed by top managers and coordinate lower-level managers."},
-      {c:"1", q:"Which management function is most directly about determining how activities and resources are grouped?", a:["Organizing","Leading","Controlling","Decision making"], correct:0, why:"Organizing groups activities and resources so plans can be carried out."},
-      {c:"1", q:"Which skill is especially important for first-line managers because they train and answer work-related questions from operating employees?", a:["Technical skill","Conceptual skill","Corporate governance skill","Portfolio skill"], correct:0, why:"Technical skill means knowing or understanding the specific work done in the organization."},
-      {c:"1", q:"The ability to see the big picture and understand how organization parts fit together is called:", a:["conceptual skill","diagnostic skill","technical skill","time management skill"], correct:0, why:"Conceptual skill is abstract thinking about the whole organization and its environment."},
-      {c:"1", q:"A manager studies symptoms of a recurring production problem, identifies its likely cause, and selects a remedy. Which skill is this?", a:["Diagnostic skill","Interpersonal skill","Scientific management","Administrative management"], correct:0, why:"Diagnostic skill is the ability to analyze a situation and visualize the appropriate response."},
-      {c:"1", q:"Management is both a science and an art because managers must:", a:["combine objective analysis with intuition and judgment","avoid data when decisions involve people","use only quantitative models for all problems","separate planning from implementation"], correct:0, why:"The science side uses rational, objective, systematic methods; the art side uses experience, intuition, and insight."},
-      {c:"1", q:"A theory is best described as:", a:["a conceptual framework for organizing knowledge and guiding action","a historical archive with no direct practical use","a mathematical equation used only in management science","a list of fixed rules that applies to every organization"], correct:0, why:"Theories organize knowledge and provide a blueprint for action, even when managers adapt them to real situations."},
-      {c:"1", q:"Who is most associated with recognizing the importance of human resources and worker welfare before modern HRM?", a:["Robert Owen","Charles Babbage","Frederick Taylor","Max Weber"], correct:0, why:"Robert Owen was an early industrialist who stressed worker welfare and the human side of organizations."},
-      {c:"1", q:"Charles Babbage is associated with:", a:["production efficiency, division of labor, and mathematical analysis","the Hawthorne illumination studies","Theory X and Theory Y","the GE Business Screen"], correct:0, why:"Babbage focused on production efficiency, division of labor, and applying mathematics to management problems."},
-      {c:"1", q:"Scientific management focuses primarily on:", a:["improving the performance of individual workers","managing total organizational structure","group norms and social acceptance","matching strategies to unique situations"], correct:0, why:"Scientific management, led by Taylor and others, studied individual work methods to improve efficiency."},
-      {c:"1", q:"Taylor used the term 'soldiering' to mean:", a:["employees deliberately working slower than their capabilities","workers volunteering for difficult assignments","military-style discipline in factories","managers delegating tasks to trained teams"], correct:0, why:"Soldiering refers to intentional underperformance or working below one's capability."},
-      {c:"1", q:"Which pair is most closely associated with motion studies and reducing bricklaying movements?", a:["Frank and Lillian Gilbreth","Henri Fayol and Max Weber","Elton Mayo and Abraham Maslow","Peter Senge and Michael Porter"], correct:0, why:"The Gilbreths developed techniques for eliminating inefficient motions, including the famous bricklaying example."},
-      {c:"1", q:"Administrative management differs from scientific management because it focuses on:", a:["managing the total organization","individual worker motions","informal social groups only","mathematical simulations only"], correct:0, why:"Administrative management looks at the whole organization and its structure, not just individual jobs."},
-      {c:"1", q:"Who first identified planning, organizing, leading, and controlling as core management functions?", a:["Henri Fayol","Frederick Taylor","Elton Mayo","Hugo Munsterberg"], correct:0, why:"Fayol's administrative management work identified the functions still used in many management texts."},
-      {c:"1", q:"Max Weber's major contribution was foundational work on:", a:["bureaucracy","Theory Y","operations management","the product life cycle"], correct:0, why:"Weber's work on bureaucracy shaped modern organization theory and rational structure."},
-      {c:"1", q:"The Hawthorne studies showed that:", a:["social processes and attention can influence productivity","workers are motivated only by piece-rate pay","lighting is the only factor that changes productivity","bureaucracy always increases morale"], correct:0, why:"Hawthorne results highlighted attention, social acceptance, group norms, and human behavior."},
-      {c:"1", q:"In the piecework Hawthorne study, workers who produced too much were labeled:", a:["rate busters","chiselers","soldiers","question marks"], correct:0, why:"The group informally punished overproducers as rate busters and underproducers as chiselers."},
-      {c:"1", q:"Theory X assumes that people:", a:["dislike work, avoid responsibility, and need control","naturally seek responsibility under favorable conditions","are always internally motivated by goals","have fully used potential in most organizations"], correct:0, why:"Theory X is the pessimistic view consistent with tight control assumptions."},
-      {c:"1", q:"Organizational behavior differs from the earlier human relations movement because it:", a:["takes a broader, more realistic, interdisciplinary view of behavior","rejects all psychology and sociology","assumes satisfaction always causes performance","focuses only on mathematical models"], correct:0, why:"Organizational behavior draws from multiple disciplines and studies individual, group, and organizational processes."},
-      {c:"1", q:"Management science is best distinguished from scientific management because management science:", a:["develops mathematical models for decision problems","focuses on timing individual workers with stopwatches","studies informal group pressure","creates broad organizational missions"], correct:0, why:"Despite similar names, management science belongs to the quantitative perspective and uses mathematical models."},
-      {c:"1", q:"Operations management is mainly concerned with:", a:["helping organizations produce goods or services efficiently","developing top-level corporate ethics policies","studying worker attitudes only","selecting applicants through assessment centers"], correct:0, why:"Operations management applies quantitative and practical tools to production and service efficiency."},
-      {c:"1", q:"In the systems perspective, which sequence is most accurate?", a:["Inputs, transformation, outputs, feedback","Goals, tactics, policies, rules","Recruiting, selection, training, appraisal","Differentiation, focus, cost leadership, decline"], correct:0, why:"Systems thinking views organizations as taking inputs, transforming them, producing outputs, and receiving feedback."},
-      {c:"1", q:"A system that interacts with its environment is called:", a:["an open system","a closed system","a contingency","a bureaucracy"], correct:0, why:"Organizations are open systems because they exchange resources, information, and feedback with their environments."},
-      {c:"1", q:"Synergy means:", a:["subsystems working together produce more than they could separately","a system declines because it ignores feedback","a firm uses one best management method everywhere","a worker deliberately slows output"], correct:0, why:"Synergy is the added value created when units cooperate and coordinate."},
-      {c:"1", q:"The contingency perspective says that:", a:["appropriate managerial behavior depends on the unique situation","there is always one best way to manage","formal bureaucracy solves all management problems","workers respond only to economic incentives"], correct:0, why:"Contingency thinking rejects universal answers and asks what fits the situation."},
+<script>
+function showTab(name){
+  document.getElementById('reviewer').classList.toggle('active', name==='reviewer');
+  document.getElementById('quiz').classList.toggle('active', name==='quiz');
+  document.getElementById('tabBtnReviewer').classList.toggle('active', name==='reviewer');
+  document.getElementById('tabBtnQuiz').classList.toggle('active', name==='quiz');
+  window.scrollTo(0,0);
+}
 
-      {c:"2", q:"The external environment is best defined as:", a:["everything outside an organization's boundaries that might affect it","only the firm's employees and owners","the values and customs inside the firm","only competitors in the same industry"], correct:0, why:"The external environment includes all outside forces that may affect the organization, including both general and task environments."},
-      {c:"2", q:"Which set correctly lists the general environment dimensions emphasized in Chapter 2?", a:["Economic, technological, and political-legal","Competitors, customers, and suppliers","Owners, board, and employees","Policies, procedures, and rules"], correct:0, why:"The general environment is made of broad forces: economic, technological, and political-legal dimensions."},
-      {c:"2", q:"Inflation, interest rates, unemployment, and economic growth belong to which dimension?", a:["Economic dimension","Technological dimension","Task environment","Internal environment"], correct:0, why:"These factors describe the health and vitality of the economic system in which the organization operates."},
-      {c:"2", q:"The technological dimension refers to:", a:["methods available for converting resources into products or services","the legal property rights of owners","the moral standards of individual managers","the number of firms in a strategic alliance"], correct:0, why:"Technology is about the methods and tools used to transform resources into outputs."},
-      {c:"2", q:"The political-legal dimension matters because it includes:", a:["government regulation, business-government relations, and political stability","customer buying behavior only","organizational heroes and stories","employee job descriptions"], correct:0, why:"Political-legal forces define what firms can do, government sentiment toward business, and stability for planning."},
-      {c:"2", q:"Which item is part of the task environment rather than the general environment?", a:["Suppliers","Interest rates","Inflation","Political stability"], correct:0, why:"Suppliers directly provide resources to the organization, making them part of the task environment."},
-      {c:"2", q:"Organizations that compete for customer dollars or other resources are called:", a:["competitors","regulators","owners","strategic partners"], correct:0, why:"Competitors vie with the organization for resources, especially customer spending."},
-      {c:"2", q:"A hospital buying food in bulk from a restaurant supplier is an example of which task-environment element?", a:["Customer","Regulator","Owner","Interest group"], correct:0, why:"Customers can be organizations, not just individual consumers, as long as they pay for goods or services."},
-      {c:"2", q:"Which statement best distinguishes regulatory agencies from interest groups?", a:["Regulatory agencies have official government power; interest groups influence mainly through pressure and publicity","Interest groups can pass binding laws while agencies cannot","Regulatory agencies are internal; interest groups are external","Interest groups supply labor and capital"], correct:0, why:"Regulatory agencies are created by government; interest groups lack official power but can influence organizations."},
-      {c:"2", q:"Strategic partners are organizations that:", a:["work together in alliances, joint ventures, or similar arrangements","compete for the same customers at all times","own all shares of another organization","enforce government rules"], correct:0, why:"Strategic partners cooperate for mutual benefit, often sharing expertise, risk, or market access."},
-      {c:"2", q:"The board of directors is primarily responsible for:", a:["overseeing top management in the interests of stockholders","setting all employee daily schedules","selling products to final customers","writing every government regulation"], correct:0, why:"A corporate board is elected by stockholders and oversees the firm's general management."},
-      {c:"2", q:"Ethics are defined in the chapter as:", a:["an individual's beliefs about whether behavior is right or wrong","an organization's legal ownership structure","a firm's total advertising budget","a formal international trade agreement"], correct:0, why:"The chapter stresses that people have ethics; organizations relate to society through responsibility and decisions."},
-      {c:"2", q:"A conflict of interest occurs when:", a:["an employee's decision may personally benefit the employee while harming the organization","a firm sells in more than one country","a culture has both stories and slogans","a supplier provides both labor and capital"], correct:0, why:"Conflict of interest is an ethical issue where personal benefit can conflict with organizational welfare."},
-      {c:"2", q:"Which tool is a formal written statement of values and ethical standards?", a:["Code of ethics","Tariff","Quota","Replacement chart"], correct:0, why:"A code of ethics formally states the values and ethical standards that should guide actions."},
-      {c:"2", q:"The Sarbanes-Oxley Act requires CEOs and CFOs to:", a:["personally vouch for the truthfulness and fairness of financial disclosures","eliminate all tariffs on international trade","create a union election procedure","sell only domestically produced goods"], correct:0, why:"Sarbanes-Oxley was passed to strengthen accountability for financial reporting and deter fraud."},
-      {c:"2", q:"Social responsibility refers to:", a:["an organization's obligations to protect and enhance the society in which it functions","an individual's private moral beliefs only","a firm's method for converting resources into services","a tax on imported goods"], correct:0, why:"Social responsibility is about the organization's obligations to its broader social context."},
-      {c:"2", q:"Which is an argument against broad social responsibility for business?", a:["Business may lack expertise to manage social programs","Business creates some problems and should solve them","Corporations are citizens in society","Business has resources that can help society"], correct:0, why:"Critics argue firms may lack the expertise, may gain too much power, may face conflicts, and should focus on owner profit."},
-      {c:"2", q:"Legal compliance means:", a:["conforming to local, state, federal, and international laws","giving money to charities","disclosing misconduct by coworkers","building a common currency"], correct:0, why:"Legal compliance is the formal social-responsibility dimension concerned with following laws."},
-      {c:"2", q:"Whistle-blowing is:", a:["an employee's disclosure of illegal or unethical conduct by others in the organization","a strategic alliance with a foreign company","a voluntary limit on exports","a company's slogan about its culture"], correct:0, why:"Whistle-blowing reports wrongdoing, often through internal channels and sometimes outside the firm."},
-      {c:"2", q:"Exporting means:", a:["making a product domestically and selling it in another country","bringing a good or service into the home country","sharing ownership of a new foreign enterprise","taxing goods crossing borders"], correct:0, why:"Exporting sends domestically produced goods or services to foreign markets."},
-      {c:"2", q:"Licensing allows another company to use assets such as a brand or patent in exchange for:", a:["royalties","authorization cards","tariffs","stockholder votes"], correct:0, why:"In licensing, the licensee pays royalties, usually based on sales, for use of the asset."},
-      {c:"2", q:"A joint venture is a special kind of strategic alliance in which partners:", a:["share ownership of an operation on an equity basis","only exchange goods through import tariffs","agree never to enter foreign markets","sell to the same customer independently"], correct:0, why:"Joint ventures go beyond cooperation because the partners share ownership of the new operation."},
-      {c:"2", q:"A tariff is:", a:["a tax on goods shipped across national boundaries","a limit on the quantity or value of goods traded","a group of countries eliminating trade barriers","a disclosure of unethical conduct"], correct:0, why:"Tariffs are taxes on cross-border goods. Quotas are limits."},
-      {c:"2", q:"The most favored nation principle is associated with:", a:["GATT","OSHA","Theory X","BCG matrix"], correct:0, why:"GATT included the most favored nation principle, extending preferential treatment to all signatories."},
-      {c:"2", q:"Organizational culture is:", a:["shared values, beliefs, behaviors, customs, and attitudes that explain what the organization stands for","the economic health of the country","a formal tax on imports","the set of customers who buy products"], correct:0, why:"Culture helps members understand what matters, how work is done, and what the organization stands for."},
-      {c:"2", q:"Which factor often provides the starting point for an organization's culture?", a:["The founder","The tariff schedule","The quota limit","The external labor market only"], correct:0, why:"Culture often begins with the founder, then develops through stories, symbols, heroes, slogans, ceremonies, and shared experiences."},
-      {c:"2", q:"Managers should change organizational culture when:", a:["it becomes dysfunctional or no longer fits the environment","it is strong and clearly supports performance","it has any symbols or ceremonies","it was influenced by the founder"], correct:0, why:"Strong culture is useful only when it supports current effectiveness; dysfunctional culture needs deliberate change."},
-      {c:"3", q:"In the planning process, what must managers understand first?", a:["The environmental context","The grievance procedure","The BCG category of each worker","The exact rule for every activity"], correct:0, why:"Planning occurs within an environmental context; without understanding it, plans are less likely to work."},
-      {c:"3", q:"A mission statement primarily defines the organization's:", a:["fundamental purpose and direction","daily operating rules","individual wage levels","performance appraisal anchors"], correct:0, why:"The mission outlines purpose, premises, values, and direction."},
-      {c:"3", q:"Which is NOT one of the four basic purposes of goals?", a:["To eliminate the need for control","To provide guidance and direction","To motivate employees","To support evaluation"], correct:0, why:"Goals do not eliminate control; they provide a standard that makes evaluation and control possible."},
-      {c:"3", q:"Strategic goals are usually set by and for:", a:["top management","middle managers only","first-line managers only","temporary workers"], correct:0, why:"Strategic goals are broad goals set by and for top management."},
-      {c:"3", q:"Operational goals are most associated with:", a:["lower-level managers and shorter-term issues","the board of directors only","corporate diversification decisions","industry attractiveness ratings"], correct:0, why:"Operational goals are lower-level and tied to shorter-term actions that support tactical goals."},
-      {c:"3", q:"A strategic plan primarily outlines:", a:["resource allocation, priorities, and action steps for strategic goals","the exact steps for recurring routine tasks","which employees sign union authorization cards","how an interviewer scores each applicant"], correct:0, why:"Strategic plans are broad plans for reaching strategic goals through priorities, resources, and action steps."},
-      {c:"3", q:"An effective strategy is one that:", a:["aligns the organization with its environment and achieves strategic goals","maximizes unrelated diversification regardless of synergy","avoids implementation details forever","eliminates all external threats"], correct:0, why:"Effectiveness in strategy means strong alignment with the environment and strategic goal achievement."},
-      {c:"3", q:"The three components of strategy identified in the chapter are:", a:["distinctive competence, scope, and resource deployment","mission, rules, and grievances","training, development, and feedback","cash cows, stars, and dogs"], correct:0, why:"A well-conceived strategy addresses what the firm does exceptionally well, where it competes, and how resources are distributed."},
-      {c:"3", q:"A distinctive competence is:", a:["a strength possessed by only a small number of competing firms","a weakness shared by every firm in an industry","the geographic market a firm refuses to enter","a standing plan for repeated activities"], correct:0, why:"Distinctive competence is a rare strength that can support competitive advantage."},
-      {c:"3", q:"Business-level strategy concerns:", a:["how the organization competes in a particular industry or market","how several unrelated businesses are grouped under one corporation","how union grievances are arbitrated","how benefits are selected by employees"], correct:0, why:"Business-level strategy targets competition in a specific industry or market."},
-      {c:"3", q:"Strategy formulation focuses on the strategy's:", a:["content or what it is","execution process only","employee appraisal method","legal compliance test"], correct:0, why:"Formulation is deciding what the strategy is; implementation is carrying it out."},
-      {c:"3", q:"In SWOT analysis, strengths and weaknesses are usually:", a:["internal factors","external factors","always illegal factors","forms of operational plans"], correct:0, why:"Strengths and weaknesses are internal; opportunities and threats are external."},
-      {c:"3", q:"A good SWOT-based strategy should:", a:["exploit strengths and opportunities, neutralize threats, and avoid or correct weaknesses","ignore the mission to pursue any available opportunity","invest equally in all businesses","focus only on external threats"], correct:0, why:"SWOT connects internal and external analysis to mission-supporting strategy."},
-      {c:"3", q:"Porter's differentiation strategy seeks to:", a:["distinguish the product or service so customers perceive extra value","be the lowest cost producer in every market segment","sell only one product in one geographic market","classify SBUs by growth and market share"], correct:0, why:"Differentiation creates value through quality, features, service, image, or similar distinctions."},
-      {c:"3", q:"A firm using overall cost leadership tries to:", a:["reduce costs below competitors and sell profitably at low prices","charge premium prices through luxury image","compete only in one narrow buyer group","avoid all production efficiencies"], correct:0, why:"Cost leadership depends on lower costs that support low prices and profit."},
-      {c:"3", q:"A focus strategy is based on:", a:["a specific region, product line, or buyer group","all industries and all markets at once","the complete absence of competition","only recurring standing plans"], correct:0, why:"Focus narrows competition to a selected niche and may use cost or differentiation within it."},
-      {c:"3", q:"During the maturity stage of the product life cycle, managers should especially watch for:", a:["slowing demand growth, cost pressure, and need to seek new products","demand outpacing the firm's ability to supply","the first introduction of a new technology","the complete disappearance of all competitors"], correct:0, why:"Maturity brings slower growth, possible firm exits, cost concerns, and the need to prepare future offerings."},
-      {c:"3", q:"A single-product strategy's major weakness is:", a:["dependence on one product and market","inability to focus expertise","automatic lack of quality","too many synergies to manage"], correct:0, why:"Single-product focus can be strong, but the firm is vulnerable if that product is rejected or replaced."},
-      {c:"3", q:"Related diversification is attractive partly because it:", a:["reduces dependence, spreads overhead, and exploits synergy","prevents any need for corporate-level strategy","requires no managerial knowledge of the businesses","works only when businesses are completely unrelated"], correct:0, why:"Related diversification links businesses so they can share strengths, costs, and complementary effects."},
-      {c:"3", q:"Research in the chapter suggests unrelated diversification often underperforms because:", a:["corporate managers may lack deep knowledge and fail to exploit synergies","it always creates too much market growth","it makes every business a cash cow","it eliminates the need for resource allocation"], correct:0, why:"Unrelated businesses are harder for corporate managers to guide and do not benefit from logical synergies."},
-      {c:"3", q:"In the BCG matrix, a cash cow has:", a:["high market share in a low-growth market","low market share in a high-growth market","high market share in a high-growth market","low market share in a low-growth market"], correct:0, why:"Cash cows generate cash because they hold large share in mature or low-growth markets."},
-      {c:"3", q:"In the BCG matrix, question marks should be:", a:["invested in carefully, then kept or divested based on performance","automatically ignored because they have no growth","milked to support dogs","classified only by industry attractiveness"], correct:0, why:"Question marks are uncertain because they are low share but high growth; careful investment tests potential."},
-      {c:"3", q:"The GE Business Screen improves on the BCG matrix by considering:", a:["industry attractiveness and competitive position","only market share and market growth","only wage level and wage structure","only union status and grievance history"], correct:0, why:"GE's tool uses richer measures, including market, competitive, cost, product, service, and technology factors."},
-      {c:"3", q:"Tactical plans should:", a:["flow from strategy, specify resources and time, and commit people","replace the organization's mission","remain vague so managers can avoid accountability","be used only for one-time nonrecurring actions"], correct:0, why:"Tactical planning turns strategy into concrete middle-level actions with resources, timing, and people."},
-      {c:"3", q:"A program differs from a project because a program is generally:", a:["larger in scope and complexity","used for recurring activities","a policy with exact rules","a type of corporate-level diversification"], correct:0, why:"Both are single-use plans, but programs cover larger sets of activities; projects are narrower."},
-      {c:"3", q:"Which standing plan is the broadest general guide for action?", a:["Policy","SOP","Rule","Project"], correct:0, why:"Policies are broad standing guides; SOPs are step-by-step; rules are narrow and exact."},
-      {c:"3", q:"Contingency planning is:", a:["developing alternative courses if the intended plan is disrupted","responding only after a disaster with no preparation","ranking employees from best to worst","choosing the lowest-cost business-level strategy"], correct:0, why:"Contingency plans are backup courses for likely events with major impact."},
-    ];
+const quizData = [
+{q:"What are the two separate parts of an organization's external environment?",options:["General environment and task environment","Internal environment and task environment","Economic environment and political environment","Task environment and cultural environment"],correct:0},
+{q:"The set of broad dimensions and forces in an organization's surroundings that determines its overall context is called the:",options:["Task environment","General environment","Internal environment","Competitive environment"],correct:1},
+{q:"Which of the following is NOT one of the three dimensions of the general environment discussed in this chapter?",options:["Economic dimension","Technological dimension","Political–legal dimension","Sociocultural dimension"],correct:3},
+{q:"The overall health and vitality of the economic system in which an organization operates defines the:",options:["Economic dimension","Technological dimension","Task environment","Internal environment"],correct:0},
+{q:"The methods available for converting resources into products or services describes the:",options:["Political–legal dimension","Technological dimension","Economic dimension","General environment (as a whole)"],correct:1},
+{q:"The government regulation of business and the relationship between business and government describes the:",options:["Economic dimension","Technological dimension","Political–legal dimension","Task environment"],correct:2},
+{q:"Because the general environment's impact is often vague, imprecise, and long term, most organizations focus more attention on the:",options:["Internal environment","Task environment","Cultural environment","Economic dimension"],correct:1},
+{q:"Which set of elements makes up an organization's task environment?",options:["Owners, board of directors, employees, physical environment","Economy, technology, and political–legal climate","Competitors, customers, suppliers, strategic partners, and regulators","Culture, ethics, and social responsibility"],correct:2},
+{q:"In Figure 2.1 (McDonald's Task Environment), which company is listed as a competitor?",options:["Coca-Cola","Walmart","Burger King","Environmental Protection Agency"],correct:2},
+{q:"Whoever pays money to acquire an organization's products or services is referred to as a:",options:["Supplier","Customer","Regulator","Strategic partner"],correct:1},
+{q:"An organization that provides resources for other organizations is called a:",options:["Supplier","Competitor","Regulator","Interest group"],correct:0},
+{q:"A body that has the potential to control, legislate, or otherwise influence an organization's policies and practices is a:",options:["Supplier","Regulator","Strategic partner","Owner"],correct:1},
+{q:"Which of the following is an example of a regulatory agency mentioned in the chapter?",options:["MADD","the NRA","the Environmental Protection Agency (EPA)","the Sierra Club"],correct:2},
+{q:"A group organized by its members to attempt to influence organizations, such as MADD or the Sierra Club, is called a(n):",options:["Regulatory agency","Interest group","Strategic partner","Task force"],correct:1},
+{q:"Two or more companies that work together in joint ventures or other partnerships are called:",options:["Regulators","Interest groups","Strategic partners (strategic allies)","Competitors"],correct:2},
+{q:"McDonald's strategic partnership that places small restaurants inside big-box stores involves which company?",options:["Disney","Walmart","Coca-Cola","Burger King"],correct:1},
+{q:"Which of the following is part of an organization's internal environment?",options:["Regulators","Suppliers","Owners","Competitors"],correct:2},
+{q:"According to the chapter, how many shares of stock does McDonald's have outstanding?",options:["1.02 billion","102 million","14 billion","500 million"],correct:0},
+{q:"A governing body elected by a corporation's stockholders and charged with overseeing a firm's general management is the:",options:["Board of directors","Regulatory agency","Ethics committee","Task force"],correct:0},
+{q:"McDonald's board of directors has 14 total members. How many of those are 'inside' members (full-time executives)?",options:["2","4","10","14"],correct:1},
+{q:"Individuals hired for short periods of time with no expectation of permanent employment are known as:",options:["Outside directors","Temporary workers ('temps')","Strategic partners","Whistle-blowers"],correct:1},
+{q:"Which company is cited as an example of redesigning its offices to resemble an indoor theme park, illustrating the physical work environment?",options:["Pitney Bowes Credit Corporation","McDonald's","Hallmark","Kmart"],correct:0},
+{q:"An individual's personal beliefs about whether a behavior, action, or decision is right or wrong is the definition of:",options:["Social responsibility","Ethics","Legal compliance","Organizational culture"],correct:1},
+{q:"According to the chapter, which statement about ethics is accurate?",options:["Organizations have ethics, but individuals do not.","Individuals have ethics; organizations do not.","Ethics and law are always identical.","Ethics apply only to senior executives."],correct:1},
+{q:"The standards of behavior that guide individual managers in their work is the definition of:",options:["Managerial ethics","Corporate governance","Legal compliance","Whistle-blowing"],correct:0},
+{q:"A conflict of interest occurs when:",options:["An employee's decision potentially benefits the individual to the possible detriment of the organization","A company donates surplus computers to schools","A board approves a merger","An employee reports wrongdoing to a regulator"],correct:0},
+{q:"The law that requires CEOs and CFOs to personally vouch for the truthfulness and fairness of their firm's financial disclosures is the:",options:["Sherman Antitrust Act","Sarbanes–Oxley Act of 2002","Clean Air Act","NAFTA agreement"],correct:1},
+{q:"A formal, written statement of the values and ethical standards that guide a firm's actions is known as a:",options:["Code of ethics","Mission statement","Whistle-blower policy","Corporate charter"],correct:0},
+{q:"In the infamous case discussed in the chapter, which company's board of directors voted to set aside its own code of ethics to implement a business plan that violated it?",options:["WorldCom","Tyco","Enron","Diamond Foods"],correct:2},
+{q:"WorldCom's board approved a personal loan to then-CEO Bernard Ebbers in what amount, despite little evidence he could repay it?",options:["$20 million","$80 million","$366 million","$780 million"],correct:2},
+{q:"Which of the following executives is NOT among the high-profile deposed executives named in the chapter's discussion of ethical leadership?",options:["Mark Hurd","Dennis Kozlowski","Kenneth Lay","Bill Gates"],correct:3},
+{q:"Only how many of McDonald's 14 board directors are also members of the firm's top management team, according to the chapter?",options:["2","4","6","10"],correct:1},
+{q:"Which two companies were criticized for looking into ways to track people's online movement, raising ethics-and-IT concerns?",options:["Amazon and Apple","Facebook and Google","Microsoft and IBM","Twitter and Yahoo"],correct:1},
+{q:"Of roughly 300 pharmacists who serve on state pharmacy boards, how many were reported to also be employees of major drugstore or supermarket pharmacy chains?",options:["14","36","72","117"],correct:2},
+{q:"Two executives hired away from Starwood Hotels by Hilton took documents related to which hotel brand, leading to a lawsuit?",options:["W hotels","Ritz-Carlton","Marriott","Sheraton"],correct:0},
+{q:"The set of obligations an organization has to protect and enhance the societal context in which it functions defines:",options:["Ethics","Social responsibility","Legal compliance","Corporate governance"],correct:1},
+{q:"Which economist is specifically named in the chapter as arguing that widening social responsibility would undermine business's basic mission of earning profits for owners?",options:["Adam Smith","Milton Friedman","John Maynard Keynes","Peter Drucker"],correct:1},
+{q:"Which of the following is listed as an argument FOR social responsibility (Figure 2.2)?",options:["The purpose of business is to generate profit for owners.","Involvement in social programs gives business too much power.","Business creates problems and should therefore help solve them.","Business lacks the expertise to manage social programs."],correct:2},
+{q:"The extent to which an organization conforms to local, state, federal, and international laws is called:",options:["Ethical compliance","Legal compliance","Philanthropic giving","Whistle-blowing"],correct:1},
+{q:"The awarding of funds or gifts to charities or other worthy causes is known as:",options:["Legal compliance","Ethical compliance","Philanthropic giving","Corporate governance"],correct:2},
+{q:"Which three are named as the FORMAL organizational dimensions of managing social responsibility?",options:["Leadership, culture, and whistle-blowing","Legal compliance, ethical compliance, and philanthropic giving","Ethics training, codes of conduct, and ethics committees","Tariffs, quotas, and trade agreements"],correct:1},
+{q:"Leadership, organizational culture, and how an organization responds to whistle-blowers are examples of:",options:["Formal dimensions of managing social responsibility","Informal dimensions of managing social responsibility","Levels of international business","Determinants of ethics"],correct:1},
+{q:"The disclosure by an employee of illegal or unethical conduct by others within the organization is called:",options:["Corporate governance","Whistle-blowing","Ethical compliance","Social entrepreneurship"],correct:1},
+{q:"Which whistle-blower spent nine years trying to convince the SEC that Bernard Madoff's firm was falsifying its results?",options:["Bradley Birkenfeld","Harry Markopolos","Kenneth Chenault","James Sinegal"],correct:1},
+{q:"UBS was eventually fined how much after Bradley Birkenfeld provided evidence it was evading corporate taxes?",options:["$80 million","$150 million","$366 million","$780 million"],correct:3},
+{q:"According to the chapter, the volume of international trade increased by approximately what percentage between 1960 and 2013?",options:["300 percent","700 percent","1,300 percent","2,000 percent"],correct:2},
+{q:"Making a product in a firm's domestic marketplace and selling it in another country is the definition of:",options:["Importing","Exporting","Licensing","Direct investment"],correct:1},
+{q:"Bringing a good, service, or capital into the home country from abroad is the definition of:",options:["Exporting","Importing","Licensing","Direct investment"],correct:1},
+{q:"An arrangement whereby a firm allows another company to use its brand name, trademark, technology, patent, copyright, or other assets for a royalty based on sales is called:",options:["A strategic alliance","Licensing","Direct investment","A quota"],correct:1},
+{q:"Franchising is described in the chapter as a special form of which internationalization strategy?",options:["Direct investment","Strategic alliance","Licensing","Export restraint agreement"],correct:2},
+{q:"A special type of strategic alliance in which the partners actually share ownership of a new enterprise is a:",options:["Joint venture","Maquiladora","License","Export restraint agreement"],correct:0},
+{q:"When a firm headquartered in one country builds or purchases operating facilities or subsidiaries in a foreign country, this is called:",options:["Licensing","Direct investment","Exporting","A strategic alliance"],correct:1},
+{q:"Light assembly plants built in Northern Mexico close to the U.S. border, given special tax breaks by the Mexican government, are called:",options:["Maquiladoras","Economic communities","Strategic alliances","Regulatory agencies"],correct:0},
+{q:"A tax collected on goods shipped across national boundaries is called a:",options:["Quota","Tariff","Export restraint agreement","Maquiladora"],correct:1},
+{q:"A limit on the number or value of goods that can be traded is called a:",options:["Tariff","Quota","Buy national law","Economic community"],correct:1},
+{q:"Honda is allowed to import how many autos each year into the United States under the quota mentioned in the chapter?",options:["100,000","250,000","425,000","1 million"],correct:2},
+{q:"Accords in which governments voluntarily agree to limit the volume or value of goods they export to or import from one another are called:",options:["Tariffs","Quotas","Export restraint agreements","Buy national laws"],correct:2},
+{q:"A set of countries that agree to markedly reduce or eliminate trade barriers among member nations is called a(n):",options:["Economic community","Strategic alliance","Regulatory bloc","Trade union"],correct:0},
+{q:"The European Union can be traced back to which treaty, signed in 1957?",options:["Treaty of Versailles","Treaty of Rome","Maastricht Treaty","Treaty of Paris"],correct:1},
+{q:"The common currency adopted by most EU members beginning January 1, 2002, is the:",options:["Pound","Franc","Euro","Mark"],correct:2},
+{q:"NAFTA is an agreement among which three countries?",options:["United States, Canada, and Mexico","United States, Mexico, and Brazil","United States, Canada, and the United Kingdom","Mexico, Canada, and Brazil"],correct:0},
+{q:"The GATT was first ratified in 1948 by how many countries?",options:["6","23","117","140"],correct:1},
+{q:"The GATT provision stating that preferential treatment extended to one signatory nation must be extended to all signatories is called the:",options:["Most favored nation (MFN) principle","Free trade principle","Reciprocity clause","Equal access rule"],correct:0},
+{q:"The World Trade Organization (WTO) came into existence on what date, replacing the GATT?",options:["January 1, 1994","January 1, 1995","January 1, 2002","January 1, 1948"],correct:1},
+{q:"According to the chapter, the WTO is headquartered in which city?",options:["Brussels","New York","Geneva, Switzerland","Washington, D.C."],correct:2},
+{q:"Which of the following is NOT one of the WTO's three basic goals?",options:["Promote trade flows through nondiscriminatory, predictable trade policies","Reduce remaining trade barriers through multilateral negotiations","Establish impartial procedures for resolving trade disputes","Set a single global minimum wage"],correct:3},
+{q:"In Saudi Arabia, few businesses provide towing services for stalled cars because, per the chapter, this practice conflicts with:",options:["Islamic teaching against profiting from others' misfortune","A local tariff restriction","A government import quota","A 'buy national' law"],correct:0},
+{q:"When Chevrolet introduced the Nova in Latin America, sales suffered partly because, in Spanish, 'no va' means:",options:["'New car'","'It doesn't go'","'Too expensive'","'Not for sale'"],correct:1},
+{q:"The set of values, beliefs, behaviors, customs, and attitudes that helps an organization's members understand what it stands for, how it does things, and what it considers important defines:",options:["Social responsibility","Organizational culture","Managerial ethics","The task environment"],correct:1},
+{q:"According to the chapter, the starting point of an organization's culture is most often:",options:["Government regulation","The organization's founder","Its board of directors","Its largest shareholder"],correct:1},
+{q:"Which retailer is used in the chapter as an example of a notably weak culture, rapidly changing management, and little sense of direction?",options:["Hallmark","Starbucks","Kmart","Procter & Gamble"],correct:2},
+{q:"J.C. Penney employees are traditionally referred to as:",options:["Team members","Associates","Partners","Crew"],correct:1},
+{q:"Which airline is specifically cited in the chapter as maintaining a culture that stresses fun and excitement?",options:["Delta","United","Southwest Airlines","Continental"],correct:2},
+{q:"Which company is used as an example of a strong culture built from years of shared corporate success, with employees describing 'the Hallmark family'?",options:["Kmart","Hallmark Cards","Bank of America","Texas Instruments"],correct:1},
+{q:"Critics argue that General Motors' culture placed too much emphasis on which of the following, contributing to its 2009 business crisis?",options:["Marketing and outside competition","Product development and internal competition among divisions","Customer service training","International expansion"],correct:1},
+{q:"When United and Continental Airlines merged, top managers wanted the new firm to adopt:",options:["United's culture of hostility and mistrust","Continental's employee-friendly culture","A completely new outside culture","Delta's culture"],correct:1},
+{q:"In the chapter-opening case, Mercy Corps was founded in 1979 under what original name?",options:["Global Aid Fund","Save the Refugees Fund","Mercy Corps International","World Relief Alliance"],correct:1},
+{q:"HP's Planet Partners recycling program became a matter of sustained companywide policy starting in what year?",options:["1979","1991","2002","2009"],correct:1}
+];
 
-    let order = questions.map((_, i) => i);
-    let answerOrders = questions.map(q => q.a.map((_, i) => i));
-    const answered = new Map();
+let userAnswers = new Array(quizData.length).fill(null);
 
-    const tabs = document.querySelectorAll(".tab");
-    const views = document.querySelectorAll(".view");
-    tabs.forEach(tab => {
-      tab.addEventListener("click", () => {
-        tabs.forEach(t => t.classList.remove("active"));
-        views.forEach(v => v.classList.remove("active"));
-        tab.classList.add("active");
-        document.getElementById(tab.dataset.view).classList.add("active");
-      });
+function buildQuiz(){
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  document.getElementById('totalCount').textContent = quizData.length;
+  quizData.forEach((item, idx) => {
+    const card = document.createElement('div');
+    card.className = 'qcard';
+    card.id = 'q'+idx;
+
+    const num = document.createElement('div');
+    num.className = 'qnum';
+    num.textContent = 'Question ' + (idx+1) + ' of ' + quizData.length;
+    card.appendChild(num);
+
+    const qtext = document.createElement('div');
+    qtext.className = 'qtext';
+    qtext.textContent = item.q;
+    card.appendChild(qtext);
+
+    item.options.forEach((optText, optIdx) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.textContent = String.fromCharCode(65+optIdx) + ') ' + optText;
+      btn.onclick = () => selectAnswer(idx, optIdx);
+      card.appendChild(btn);
     });
 
-    const questionsEl = document.getElementById("questions");
-    const scoreText = document.getElementById("scoreText");
-    const totalCount = document.getElementById("totalCount");
-    const chapterFilter = document.getElementById("chapterFilter");
-    totalCount.textContent = questions.length;
+    const fb = document.createElement('div');
+    fb.className = 'feedback';
+    fb.id = 'fb'+idx;
+    card.appendChild(fb);
 
-    function escapeHtml(text) {
-      return String(text).replace(/[&<>"']/g, ch => ({
-        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-      }[ch]));
+    container.appendChild(card);
+  });
+}
+
+function selectAnswer(qIdx, optIdx){
+  if(userAnswers[qIdx] !== null) return; // already answered
+  userAnswers[qIdx] = optIdx;
+  const card = document.getElementById('q'+qIdx);
+  const buttons = card.querySelectorAll('.opt');
+  const correctIdx = quizData[qIdx].correct;
+
+  buttons.forEach((b, i) => {
+    b.disabled = true;
+    if(i === correctIdx) b.classList.add('correct');
+    if(i === optIdx && optIdx !== correctIdx) b.classList.add('incorrect');
+  });
+
+  const fb = document.getElementById('fb'+qIdx);
+  if(optIdx === correctIdx){
+    fb.textContent = 'Correct!';
+    fb.className = 'feedback right';
+  } else {
+    fb.textContent = 'Incorrect — correct answer: ' + String.fromCharCode(65+correctIdx) + ') ' + quizData[qIdx].options[correctIdx];
+    fb.className = 'feedback wrong';
+  }
+
+  updateScorebar();
+}
+
+function updateScorebar(){
+  let correct = 0, incorrect = 0, answered = 0;
+  userAnswers.forEach((ans, idx) => {
+    if(ans !== null){
+      answered++;
+      if(ans === quizData[idx].correct) correct++; else incorrect++;
     }
+  });
+  document.getElementById('answeredCount').textContent = answered;
+  document.getElementById('correctCount').textContent = correct;
+  document.getElementById('incorrectCount').textContent = incorrect;
+  const pct = quizData.length ? (answered/quizData.length*100) : 0;
+  document.getElementById('meterFill').style.width = pct + '%';
+}
 
-    function filteredOrder() {
-      const selected = chapterFilter.value;
-      return order.filter(i => selected === "all" || questions[i].c === selected);
-    }
+function resetQuiz(){
+  userAnswers = new Array(quizData.length).fill(null);
+  buildQuiz();
+  updateScorebar();
+  document.getElementById('quiz').scrollIntoView();
+}
 
-    function shuffleArray(items) {
-      for (let i = items.length - 1; i > 0; i -= 1) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [items[i], items[j]] = [items[j], items[i]];
-      }
-      return items;
-    }
+buildQuiz();
+updateScorebar();
+</script>
 
-    function reshuffleAnswers() {
-      answerOrders = questions.map(q => shuffleArray(q.a.map((_, i) => i)));
-    }
-
-    function render() {
-      const ids = filteredOrder();
-      questionsEl.innerHTML = ids.map((idx, pos) => {
-        const item = questions[idx];
-        const chosen = answered.get(idx);
-        const isDone = chosen !== undefined;
-        const buttons = answerOrders[idx].map((answerIdx, shownIdx) => {
-          const answer = item.a[answerIdx];
-          let cls = "answer";
-          if (isDone && answerIdx === item.correct) cls += " correct";
-          if (isDone && answerIdx === chosen && chosen !== item.correct) cls += " wrong";
-          return `<button class="${cls}" data-q="${idx}" data-a="${answerIdx}" ${isDone ? "disabled" : ""}>${String.fromCharCode(65 + shownIdx)}. ${escapeHtml(answer)}</button>`;
-        }).join("");
-        const chosenText = isDone ? item.a[chosen] : "";
-        const status = isDone && chosen === item.correct ? "Correct" : "Incorrect";
-        const correction = isDone ? `<div class="explain show"><b>${status}.</b> Correct answer: <b>${escapeHtml(item.a[item.correct])}</b><br>${chosen !== item.correct ? `Your answer: ${escapeHtml(chosenText)}<br>` : ""}${escapeHtml(item.why)}</div>` : `<div class="explain"></div>`;
-        return `<article class="question">
-          <div class="qtop"><span>Question ${pos + 1}</span><span>Chapter ${item.c}</span></div>
-          <p class="prompt">${escapeHtml(item.q)}</p>
-          <div class="answers">${buttons}</div>
-          ${correction}
-        </article>`;
-      }).join("");
-      questionsEl.querySelectorAll(".answer:not(:disabled)").forEach(btn => {
-        btn.addEventListener("click", () => {
-          answered.set(Number(btn.dataset.q), Number(btn.dataset.a));
-          render();
-        });
-      });
-      updateScore();
-    }
-
-    function updateScore() {
-      const ids = filteredOrder();
-      let done = 0;
-      let correct = 0;
-      ids.forEach(idx => {
-        if (answered.has(idx)) {
-          done += 1;
-          if (answered.get(idx) === questions[idx].correct) correct += 1;
-        }
-      });
-      scoreText.textContent = `Score: ${correct} / ${done || ids.length}`;
-      if (!done) scoreText.textContent = `Score: 0 / ${ids.length}`;
-    }
-
-    function shuffle() {
-      shuffleArray(order);
-      answered.clear();
-      reshuffleAnswers();
-      render();
-    }
-
-    document.getElementById("shuffleBtn").addEventListener("click", shuffle);
-    document.getElementById("resetBtn").addEventListener("click", () => {
-      answered.clear();
-      render();
-    });
-    chapterFilter.addEventListener("change", render);
-    reshuffleAnswers();
-    render();
-  </script>
 </body>
 </html>
